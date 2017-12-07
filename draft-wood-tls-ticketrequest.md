@@ -51,11 +51,45 @@ request multiple TLS session tickets from the server so as to enable such featur
 
 # Introduction
 
-XXX
+TLS servers send clients session tickets at their own discretion in NewSessionTicket messages. 
+In contrast, clients are in complete control of how many tickets they may use when establishing 
+future connections. For example, clients may open multiple TLS connections to the same server
+for HTTP, or may race TLS connections across different network interfaces. Thus, since connection 
+concurrency and resumption is controlled by clients, a mechanism to request tickets on demand
+is desirable. In this document, we describe a new TLS extension and handshake message that permits
+clients to request new session tickets at will from the server.
+
+# TLS Extension
+
+TLS tickets may be requested via a SessionTicketRequest handshake 
+message, session_ticket_request(25). Its structure is shown below.
+
+~~~
+struct {
+    uint8 ticket_count;
+    opaque request_context<0..255>;
+    Extension extensions<0..2^16-2>;
+} SessionTicketRequest;
+~~~
+
+- ticket_count: The number of tickets requested from the client.
+
+- request_context: An opaque context to be used when generating each ticket for the request
+
+- extensions: A set of extension values for the ticket.  The
+      "Extension" format is defined in Section 4.2.  Clients MUST ignore
+      unrecognized extensions.
+
+Upon receipt of a SessionTicketRequest message, servers MAY reply with up to ticket_count
+NewSessionTicket messages. Servers may choose to limit the number of tickets provided to clients
+based on local or administrative policy.
+
+SessionTicketRequest MAY be sent in the Client Hello, if desired by clients, or after handshake 
+completion. As any other handshake message, these messages MUST be added to handshake transcripts.
 
 # IANA Considerations
 
-XXX
+((TODO: codepoint for handshake message type))
 
 # Security Considerations
 
