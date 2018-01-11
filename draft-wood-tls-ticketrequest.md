@@ -31,11 +31,8 @@ author:
 
 normative:
   RFC2104:
-  RFC4493:
-  RFC6126:
-  RFC6347:
-  RFC7788:
-  RFC8032:
+  RFC5077:
+  I-D.ietf-tls-tls13:
 
 --- abstract
 
@@ -51,6 +48,7 @@ request multiple TLS session tickets from the server so as to enable such featur
 
 # Introduction
 
+As per {{RFC5077}}, and as described in {{I-D.ietf-tls-tls13}}, 
 TLS servers send clients session tickets at their own discretion in NewSessionTicket messages. 
 In contrast, clients are in complete control of how many tickets they may use when establishing 
 future connections. For example, clients may open multiple TLS connections to the same server
@@ -59,7 +57,7 @@ concurrency and resumption is controlled by clients, a mechanism to request tick
 is desirable. In this document, we describe a new TLS extension and handshake message that permits
 clients to request new session tickets at will from the server.
 
-# TLS Extension
+# Ticket Request Message
 
 TLS tickets may be requested via a SessionTicketRequest handshake 
 message, session_ticket_request(25). Its structure is shown below.
@@ -74,15 +72,16 @@ struct {
 
 - ticket_count: The number of tickets requested from the client.
 
-- request_context: An opaque context to be used when generating each ticket for the request
+- request_context: An opaque context to be used when generating each ticket for the request.
+Clients and servers may use this context to implement or exchange data to be included in the
+ticket computation.
 
-- extensions: A set of extension values for the ticket.  The
-      "Extension" format is defined in Section 4.2.  Clients MUST ignore
-      unrecognized extensions.
+- extensions: A set of extension values for the ticket. The "Extension" format is defined in 
+Section 4.2. of {{I-D.ietf-tls-tls13}}. Clients and servers MUST ignore unrecognized extensions.
 
 Upon receipt of a SessionTicketRequest message, servers MAY reply with up to ticket_count
 NewSessionTicket messages. Servers may choose to limit the number of tickets provided to clients
-based on local or administrative policy.
+based on local or administrative policy. 
 
 SessionTicketRequest MAY be sent in the Client Hello, if desired by clients, or after handshake 
 completion. As any other handshake message, these messages MUST be added to handshake transcripts.
@@ -93,7 +92,7 @@ completion. As any other handshake message, these messages MUST be added to hand
 
 # Security Considerations
 
-XXX
+TODO
 
 # Acknowledgments
 
