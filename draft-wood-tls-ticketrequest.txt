@@ -2,10 +2,10 @@
 
 
 
-Network Working Group                                           T. Pauly
-Internet-Draft                                                   C. Wood
-Intended status: Informational                                Apple Inc.
-Expires: September 27, 2018                               March 26, 2018
+Network Working Group                                            C. Wood
+Internet-Draft                                                Apple Inc.
+Intended status: Informational                            March 26, 2018
+Expires: September 27, 2018
 
 
                            TLS Ticket Request
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pauly & Wood           Expires September 27, 2018               [Page 1]
+Wood                   Expires September 27, 2018               [Page 1]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -76,7 +76,7 @@ Table of Contents
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
    8.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
    9.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pauly & Wood           Expires September 27, 2018               [Page 2]
+Wood                   Expires September 27, 2018               [Page 2]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -165,7 +165,7 @@ Internet-Draft             TLS Ticket Request                 March 2018
 
 
 
-Pauly & Wood           Expires September 27, 2018               [Page 3]
+Wood                   Expires September 27, 2018               [Page 3]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -221,7 +221,7 @@ Internet-Draft             TLS Ticket Request                 March 2018
 
 
 
-Pauly & Wood           Expires September 27, 2018               [Page 4]
+Wood                   Expires September 27, 2018               [Page 4]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -263,24 +263,7 @@ Internet-Draft             TLS Ticket Request                 March 2018
               DOI 10.17487/RFC8305, December 2017,
               <https://www.rfc-editor.org/info/rfc8305>.
 
-Authors' Addresses
-
-   Tommy Pauly
-   Apple Inc.
-   1 Infinite Loop
-   Cupertino, California 95014
-   United States of America
-
-   Email: tfpauly@apple.com
-
-
-
-
-
-Pauly & Wood           Expires September 27, 2018               [Page 5]
-
-Internet-Draft             TLS Ticket Request                 March 2018
-
+Author's Address
 
    Christopher A. Wood
    Apple Inc.
@@ -294,43 +277,4 @@ Internet-Draft             TLS Ticket Request                 March 2018
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pauly & Wood           Expires September 27, 2018               [Page 6]
+Wood                   Expires September 27, 2018               [Page 5]

@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>TLS Ticket Request</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+@media screen and (min-width: 1024px) {
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 550px);
+    width: 300px;
+    z-index: 1;
+  }
+  #rfc\.toc {
+    top: 55px;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  ul.toc, #rfc\.toc {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  ul.toc li, #rfc\.toc li {
+    font-size: 15px;
+    line-height: 20px;
+    text-indent: 0;
+    padding-left: 1em;
+  }
+  body>ul.toc {
+    top: 140px;
+  }
+
+  body {
+    padding-right: 350px;
+  }
+}
+
+body {
+  font: 16px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 724px;
+}
+
+.title, .filename, h1, h2, h3, h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: 500;
+  color: #333;
+  line-height: 100%;
+  margin: 0.8em 0 0.3em;
+}
+.title { font-size: 36px; }
+h1 { font-size: 36px; }
+h2 { font-size: 24px; }
+h3, h4 { font-size: 18px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+ul.toc li {
+  list-style: none;
+  text-indent: -2.5em;
+  padding-left: 2.5em;
+  padding-bottom: 5px;
+  margin: 0;
+}
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
+  margin: 0 0 0 1.5em;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header {
+  width: 100%;
+}
+table.header td {
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+.filename {
+  color: rgb(119, 119, 119);
+  font-size: 23px;
+  font-weight: normal;
+  height: auto;
+  line-height: 100%;
+}
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 18px;
+  line-height: 27px%;
+}
+
+samp, tt, code, pre {
+  font: 11pt consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure {
+  font-style: italic;
+  margin: 0 1.5em;
+}
+
+address {
+  margin: 10px 0 0;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn {
+  font-weight: bold;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+ol, ul, li, p {
+  padding: 0;
+  margin: 0.5em 0 0.5em 2em;
+}
+li, p {
+  margin-left: 0;
+}
+address {
+  font-style: normal;
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 Requirements">
+<link href="#rfc.section.3" rel="Chapter" title="3 Use Cases">
+<link href="#rfc.section.4" rel="Chapter" title="4 Ticket Requests">
+<link href="#rfc.section.5" rel="Chapter" title="5 Negotiation">
+<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations">
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations">
+<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgments">
+<link href="#rfc.references" rel="Chapter" title="9 Normative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.9.6 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Wood, C." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequest-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-03-26" />
+  <meta name="dct.abstract" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
+  <meta name="description" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">Network Working Group</td>
+<td class="right">C. Wood</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">Apple Inc.</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">March 26, 2018</td>
+</tr>
+<tr>
+<td class="left">Expires: September 27, 2018</td>
+<td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">TLS Ticket Request<br />
+  <span class="filename">draft-wood-tls-ticketrequest-latest</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on September 27, 2018.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Requirements</a>
+</li>
+<li>3.   <a href="#rfc.section.3">Use Cases</a>
+</li>
+<li>4.   <a href="#rfc.section.4">Ticket Requests</a>
+</li>
+<li>5.   <a href="#rfc.section.5">Negotiation</a>
+</li>
+<li>6.   <a href="#rfc.section.6">IANA Considerations</a>
+</li>
+<li>7.   <a href="#rfc.section.7">Security Considerations</a>
+</li>
+<li>8.   <a href="#rfc.section.8">Acknowledgments</a>
+</li>
+<li>9.   <a href="#rfc.references">Normative References</a>
+</li>
+<li><a href="#rfc.authors">Author's Address</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">As per <a href="#RFC5077" class="xref">[RFC5077]</a>, and as described in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>, TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.  In contrast, clients are in complete control of how many tickets they may use when establishing future connections. For example, clients may open multiple TLS connections to the same server for HTTP, or may race TLS connections across different network interfaces.  The latter is especially useful in transport systems that implement Happy Eyeballs <a href="#RFC8305" class="xref">[RFC8305]</a>.  Thus, since connection concurrency and resumption is controlled by clients, a mechanism to request tickets on demand is desirable. In this document, we describe a new TLS extension and handshake message that permits clients to request new session tickets at will from the server.</p>
+<p id="rfc.section.1.p.2">This document specifies two new  TLS handshake messages &#8211; TicketRequest and TicketResponse &#8211; that may be used to request tickets and receive TLS tickets. Ticket requests may carry optional application contexts to limit the ways in which tickets may be used.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a>
+</h1>
+<p id="rfc.section.2.p.1">TODO</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#use-cases" id="use-cases">Use Cases</a>
+</h1>
+<p id="rfc.section.3.p.1">The ability to request one or more tickets is useful for a variety of purposes:</p>
+<p></p>
+
+<ul>
+<li>Parallel HTTP connections: To minimize ticket reuse while still improving performance, it may be useful to use multiple separate tickets when opening parallel connections. If servers do not vend more than one ticket, clients are forced to restrict the number of parallel connections or re-use tickets.</li>
+<li>Connection racing: Happy Eyeballs V2 <a href="#RFC8305" class="xref">[RFC8305]</a> describes techniques for performing connection racing. The Transport Services Architecture implementation from <a href="#I-D.brunstrom-taps-impl" class="xref">[I-D.brunstrom-taps-impl]</a> also describes how connections may race across interfaces and address families. In cases where clients have early data to send and want to minimize or avoid ticket re-use, unique tickets for each unique connection attempt are useful.</li>
+<li>Connection priming: In some systems, connections may be primed or bootstrapped by a centralized service or daemon for faster connection establishment. Requesting tickets on demand allows such services to vend tickets to clients for improved performance.</li>
+<li>Less ticket waste: Currently, TLS servers use application-specific, and often implementation-specific, logic to determine how many tickets are issued. By moving the burden of ticket deliverance to clients, servers do not need custom logic to determine how many tickets are issued to clients.</li>
+</ul>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#ticket-requests" id="ticket-requests">Ticket Requests</a>
+</h1>
+<p id="rfc.section.4.p.1">TLS tickets may be requested via a TicketRequest handshake message, ticket_request(25).  Its structure is shown below.</p>
+<pre>
+struct {
+    opaque identifier&lt;0..255&gt;;
+    opaque request_context&lt;0..255&gt;;
+} TicketRequest;
+</pre>
+<p></p>
+
+<ul>
+<li>identifier: A unique value for this ticket request. Clients SHOULD fill this in with a monotonically increasing counter.</li>
+<li>request_context: An opaque context to be used when generating the ticket request.  Clients and servers may use this context to implement or exchange data to be included in the ticket computation. Clients SHOULD make this field empty if it is not needed.</li>
+</ul>
+<p id="rfc.section.4.p.3">Upon receipt of a TicketRequest message, servers MAY reply with a TicketResponse message, ticket_response(26). Its structure is shown below.</p>
+<pre>
+struct {
+    opaque identifier&lt;0..255&gt;;
+    opaque response_context&lt;0..255&gt;;
+    NewSessionTicket ticket;
+} TicketResponse;
+</pre>
+<p></p>
+
+<ul>
+<li>identifier: A unique value for the response that MUST match the corresponding client TicketRequest.</li>
+<li>response_context: An opaque context to be used when generating each ticket for the request.  Servers MUST make this field empty if the corresponding TicketRequest request_context is empty.</li>
+<li>ticket: A NewSessionTicket message, encoded as detailed in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>.</li>
+</ul>
+<p id="rfc.section.4.p.5">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. TicketRequest messages MUST NOT be sent until after the TLS handshake is complete. As handshake messages, these MUST be added to the handshake transcript.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#negotiation" id="negotiation">Negotiation</a>
+</h1>
+<p id="rfc.section.5.p.1">Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(50).  The extension_data for this extension MUST be empty (have a 0 length). Servers that support ticket requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate responses to TicketRequests issued by the client.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.6.p.1">((TODO: codepoint for handshake message type))</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+</h1>
+<p id="rfc.section.7.p.1">Ticket re-use is a privacy and security concern. Moreover, pre-fetching as a means of avoiding or amortizing the cost of handshakes must also be used carefully. If servers do not rotate session ticket encryption keys frequently, clients may be encouraged to obtain and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime hints provided by servers, clients SHOULD dispose of pre-fetched tickets after some reasonable amount of time that mimics the ticket rotation period.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
+</h1>
+<p id="rfc.section.8.p.1">The authors would like to thank Nick Sullivan and Eric Rescorla for discussions on earlier versions of this draft.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">9.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="I-D.brunstrom-taps-impl">[I-D.brunstrom-taps-impl]</b></td>
+<td class="top">
+<a>Brunstrom, A.</a>, <a>Pauly, T.</a>, <a>Enghardt, T.</a>, <a>Grinnemo, K.</a>, <a>Jones, T.</a>, <a>Tiesel, P.</a>, <a>Perkins, C.</a> and <a>M. Welzl</a>, "<a href="https://tools.ietf.org/html/draft-brunstrom-taps-impl-00">Implementing Interfaces to Transport Services</a>", Internet-Draft draft-brunstrom-taps-impl-00, March 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-tls-tls13">[I-D.ietf-tls-tls13]</b></td>
+<td class="top">
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tls-tls13-28">The Transport Layer Security (TLS) Protocol Version 1.3</a>", Internet-Draft draft-ietf-tls-tls13-28, March 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2104">[RFC2104]</b></td>
+<td class="top">
+<a>Krawczyk, H.</a>, <a>Bellare, M.</a> and <a>R. Canetti</a>, "<a href="https://tools.ietf.org/html/rfc2104">HMAC: Keyed-Hashing for Message Authentication</a>", RFC 2104, DOI 10.17487/RFC2104, February 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5077">[RFC5077]</b></td>
+<td class="top">
+<a>Salowey, J.</a>, <a>Zhou, H.</a>, <a>Eronen, P.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/rfc5077">Transport Layer Security (TLS) Session Resumption without Server-Side State</a>", RFC 5077, DOI 10.17487/RFC5077, January 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8305">[RFC8305]</b></td>
+<td class="top">
+<a>Schinazi, D.</a> and <a>T. Pauly</a>, "<a href="https://tools.ietf.org/html/rfc8305">Happy Eyeballs Version 2: Better Connectivity Using Concurrency</a>", RFC 8305, DOI 10.17487/RFC8305, December 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Christopher A. Wood</span> 
+	  <span class="n hidden">
+		<span class="family-name">Wood</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Apple Inc.</span>
+	<span class="adr">
+	  <span class="vcardline">1 Infinite Loop</span>
+
+	  <span class="vcardline">
+		<span class="locality">Cupertino, California 95014</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">United States of America</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:cawood@apple.com">cawood@apple.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
