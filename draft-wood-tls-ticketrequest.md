@@ -13,14 +13,6 @@ pi: [toc, sortrefs, symrefs]
 
 author:
   -
-    ins: T. Pauly
-    name: Tommy Pauly
-    org: Apple Inc.
-    street: 1 Infinite Loop
-    city: Cupertino, California 95014
-    country: United States of America
-    email: tfpauly@apple.com
-  -
     ins: C. A. Wood
     name: Christopher A. Wood
     org: Apple Inc.
