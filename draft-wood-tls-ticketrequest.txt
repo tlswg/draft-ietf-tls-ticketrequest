@@ -4,8 +4,8 @@
 
 Network Working Group                                            C. Wood
 Internet-Draft                                                Apple Inc.
-Intended status: Informational                            March 26, 2018
-Expires: September 27, 2018
+Intended status: Informational                            March 27, 2018
+Expires: September 28, 2018
 
 
                            TLS Ticket Request
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 27, 2018.
+   This Internet-Draft will expire on September 28, 2018.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Wood                   Expires September 27, 2018               [Page 1]
+Wood                   Expires September 28, 2018               [Page 1]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -68,15 +68,15 @@ Internet-Draft             TLS Ticket Request                 March 2018
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Requirements  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   4.  Ticket Requests . . . . . . . . . . . . . . . . . . . . . . .   3
-   5.  Negotiation . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
-   8.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
-   9.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   2
+   2.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Ticket Requests . . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  Negotiation . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
 
@@ -99,22 +99,22 @@ Table of Contents
    tickets and receive TLS tickets.  Ticket requests may carry optional
    application contexts to limit the ways in which tickets may be used.
 
-2.  Requirements
+1.1.  Requirements Language
 
-   TODO
-
-
-
-
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
 
 
 
-Wood                   Expires September 27, 2018               [Page 2]
+
+
+Wood                   Expires September 28, 2018               [Page 2]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
 
-3.  Use Cases
+2.  Use Cases
 
    The ability to request one or more tickets is useful for a variety of
    purposes:
@@ -136,22 +136,24 @@ Internet-Draft             TLS Ticket Request                 March 2018
    o  Connection priming: In some systems, connections may be primed or
       bootstrapped by a centralized service or daemon for faster
       connection establishment.  Requesting tickets on demand allows
-      such services to vend tickets to clients for improved performance.
+      such services to vend tickets to clients to use for accelerated
+      handshakes with early data.  (Note that if early data is not
+      needed by these connections, this method SHOULD NOT be used.
+      Fresh handshakes SHOULD be performed instead.)
 
    o  Less ticket waste: Currently, TLS servers use application-
       specific, and often implementation-specific, logic to determine
-      how many tickets are issued.  By moving the burden of ticket
-      deliverance to clients, servers do not need custom logic to
-      determine how many tickets are issued to clients.
+      how many tickets to issue.  By moving the burden of ticket count
+      to clients, servers do not generate wasteful tickets for clients.
 
-4.  Ticket Requests
+3.  Ticket Requests
 
    TLS tickets may be requested via a TicketRequest handshake message,
-   ticket_request(25).  Its structure is shown below.
+   ticket_request(TBD).  Its structure is shown below.
 
    struct {
        opaque identifier<0..255>;
-       opaque request_context<0..255>;
+       opaque request_context<0..2^16-1>;
    } TicketRequest;
 
    o  identifier: A unique value for this ticket request.  Clients
@@ -160,23 +162,24 @@ Internet-Draft             TLS Ticket Request                 March 2018
    o  request_context: An opaque context to be used when generating the
       ticket request.  Clients and servers may use this context to
       implement or exchange data to be included in the ticket
-      computation.  Clients SHOULD make this field empty if it is not
-      needed.
 
 
 
-Wood                   Expires September 27, 2018               [Page 3]
+Wood                   Expires September 28, 2018               [Page 3]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
 
+      computation.  Clients SHOULD make this field empty if it is not
+      needed.
+
    Upon receipt of a TicketRequest message, servers MAY reply with a
-   TicketResponse message, ticket_response(26).  Its structure is shown
+   TicketResponse message, ticket_response(TBD).  Its structure is shown
    below.
 
    struct {
        opaque identifier<0..255>;
-       opaque response_context<0..255>;
+       opaque response_context<0..2^16-1>;
        NewSessionTicket ticket;
    } TicketResponse;
 
@@ -190,6 +193,16 @@ Internet-Draft             TLS Ticket Request                 March 2018
    o  ticket: A NewSessionTicket message, encoded as detailed in
       [I-D.ietf-tls-tls13].
 
+   When a server S receives a TicketRequest with new identifier N it
+   SHOULD generate a new ticket and cache it locally for some period of
+   time T.  If S receives a TicketRequest with identifier N within time
+   period T, S MUST reply with the same ticket previously generated.
+   (This is to help deal with request retransmissions from the client.)
+   If S receives a TicketRequest with identifier N outside time period
+   T, S SHOULD reply with an empty TicketResponse, i.e., a
+   TicketResponse with identifier N, appropriate response_context, and
+   empty ticket field.
+
    Servers SHOULD place a limit on the number of tickets they are
    willing to vend to clients.  Servers MUST NOT send more than 255
    tickets to clients, as this is the limit imposed by the request and
@@ -197,45 +210,46 @@ Internet-Draft             TLS Ticket Request                 March 2018
    until after the TLS handshake is complete.  As handshake messages,
    these MUST be added to the handshake transcript.
 
-5.  Negotiation
+4.  Negotiation
 
    Clients negotiate use of ticket requests via a new ExtensionType,
-   ticket_request(50).  The extension_data for this extension MUST be
+   ticket_request(TBD).  The extension_data for this extension MUST be
    empty (have a 0 length).  Servers that support ticket requests MAY
    echo this extension in the EncryptedExtensions.  Clients MUST NOT
    send ticket requests to servers that do not signal support for this
+
+
+
+
+Wood                   Expires September 28, 2018               [Page 4]
+
+Internet-Draft             TLS Ticket Request                 March 2018
+
+
    message.  If absent from a ClientHello, servers MUST NOT generate
    responses to TicketRequests issued by the client.
 
-6.  IANA Considerations
+5.  IANA Considerations
 
    ((TODO: codepoint for handshake message type))
 
-7.  Security Considerations
+6.  Security Considerations
 
    Ticket re-use is a privacy and security concern.  Moreover, pre-
    fetching as a means of avoiding or amortizing the cost of handshakes
    must also be used carefully.  If servers do not rotate session ticket
    encryption keys frequently, clients may be encouraged to obtain and
    use tickets beyond common lifetime windows of, e.g., 24 hours.
-
-
-
-Wood                   Expires September 27, 2018               [Page 4]
-
-Internet-Draft             TLS Ticket Request                 March 2018
-
-
    Despite ticket lifetime hints provided by servers, clients SHOULD
    dispose of pre-fetched tickets after some reasonable amount of time
    that mimics the ticket rotation period.
 
-8.  Acknowledgments
+7.  Acknowledgments
 
-   The authors would like to thank Nick Sullivan and Eric Rescorla for
+   The authors would like to thank Eric Rescorla and Nick Sullivan for
    discussions on earlier versions of this draft.
 
-9.  Normative References
+8.  Normative References
 
    [I-D.brunstrom-taps-impl]
               Brunstrom, A., Pauly, T., Enghardt, T., Grinnemo, K.,
@@ -248,15 +262,25 @@ Internet-Draft             TLS Ticket Request                 March 2018
               Version 1.3", draft-ietf-tls-tls13-28 (work in progress),
               March 2018.
 
-   [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
-              Hashing for Message Authentication", RFC 2104,
-              DOI 10.17487/RFC2104, February 1997,
-              <https://www.rfc-editor.org/info/rfc2104>.
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC5077]  Salowey, J., Zhou, H., Eronen, P., and H. Tschofenig,
               "Transport Layer Security (TLS) Session Resumption without
               Server-Side State", RFC 5077, DOI 10.17487/RFC5077,
               January 2008, <https://www.rfc-editor.org/info/rfc5077>.
+
+
+
+
+
+
+Wood                   Expires September 28, 2018               [Page 5]
+
+Internet-Draft             TLS Ticket Request                 March 2018
+
 
    [RFC8305]  Schinazi, D. and T. Pauly, "Happy Eyeballs Version 2:
               Better Connectivity Using Concurrency", RFC 8305,
@@ -277,4 +301,36 @@ Author's Address
 
 
 
-Wood                   Expires September 27, 2018               [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wood                   Expires September 28, 2018               [Page 6]
