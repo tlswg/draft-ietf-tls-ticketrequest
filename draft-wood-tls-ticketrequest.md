@@ -22,7 +22,7 @@ author:
     email: cawood@apple.com
 
 normative:
-  RFC2104:
+  RFC2119:
   RFC5077:
   RFC8305:
   I-D.brunstrom-taps-impl:
@@ -57,9 +57,11 @@ This document specifies two new  TLS handshake messages -- TicketRequest and Tic
 that may be used to request tickets and receive TLS tickets. Ticket requests may carry optional 
 application contexts to limit the ways in which tickets may be used.
 
-# Requirements
+## Requirements Language
 
-TODO
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 {{RFC2119}}.
 
 # Use Cases
 
@@ -76,20 +78,22 @@ data to send and want to minimize or avoid ticket re-use, unique tickets for eac
 connection attempt are useful.
 - Connection priming: In some systems, connections may be primed or bootstrapped by a centralized
 service or daemon for faster connection establishment. Requesting tickets on demand allows such
-services to vend tickets to clients for improved performance.
+services to vend tickets to clients to use for accelerated handshakes with early data. (Note that
+if early data is not needed by these connections, this method SHOULD NOT be used. Fresh handshakes
+SHOULD be performed instead.)
 - Less ticket waste: Currently, TLS servers use application-specific, and often implementation-specific,
-logic to determine how many tickets are issued. By moving the burden of ticket deliverance to clients,
-servers do not need custom logic to determine how many tickets are issued to clients.
+logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
+servers do not generate wasteful tickets for clients.
 
 # Ticket Requests
 
-TLS tickets may be requested via a TicketRequest handshake message, ticket_request(25). 
+TLS tickets may be requested via a TicketRequest handshake message, ticket_request(TBD). 
 Its structure is shown below.
 
 ~~~
 struct {
     opaque identifier<0..255>;
-    opaque request_context<0..255>;
+    opaque request_context<0..2^16-1>;
 } TicketRequest;
 ~~~
 
@@ -101,12 +105,12 @@ Clients and servers may use this context to implement or exchange data to be inc
 ticket computation. Clients SHOULD make this field empty if it is not needed.
 
 Upon receipt of a TicketRequest message, servers MAY reply with a TicketResponse message,
-ticket_response(26). Its structure is shown below.
+ticket_response(TBD). Its structure is shown below.
 
 ~~~
 struct {
     opaque identifier<0..255>;
-    opaque response_context<0..255>;
+    opaque response_context<0..2^16-1>;
     NewSessionTicket ticket;
 } TicketResponse;
 ~~~
@@ -119,6 +123,13 @@ Servers MUST make this field empty if the corresponding TicketRequest request_co
 
 - ticket: A NewSessionTicket message, encoded as detailed in {{I-D.ietf-tls-tls13}}. 
 
+When a server S receives a TicketRequest with new identifier N it SHOULD generate a new ticket and 
+cache it locally for some period of time T. If S receives a TicketRequest with identifier N
+within time period T, S MUST reply with the same ticket previously generated. (This is to help deal
+with request retransmissions from the client.) If S receives a TicketRequest with identifier N
+outside time period T, S SHOULD reply with an empty TicketResponse, i.e., a TicketResponse with
+identifier N, appropriate response_context, and empty ticket field.
+
 Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
 MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
 response identifier size. TicketRequest messages MUST NOT be sent until after the TLS handshake 
@@ -126,7 +137,7 @@ is complete. As handshake messages, these MUST be added to the handshake transcr
 
 # Negotiation 
 
-Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(50). 
+Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD). 
 The extension_data for this extension MUST be empty (have a 0 length). Servers that support ticket 
 requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers
 that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate 
@@ -147,5 +158,5 @@ amount of time that mimics the ticket rotation period.
 
 # Acknowledgments
 
-The authors would like to thank Nick Sullivan and Eric Rescorla for discussions on earlier 
+The authors would like to thank Eric Rescorla and Nick Sullivan for discussions on earlier 
 versions of this draft.
