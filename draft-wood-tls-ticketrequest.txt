@@ -4,8 +4,8 @@
 
 Network Working Group                                            C. Wood
 Internet-Draft                                                Apple Inc.
-Intended status: Informational                            March 27, 2018
-Expires: September 28, 2018
+Intended status: Informational                            March 31, 2018
+Expires: October 2, 2018
 
 
                            TLS Ticket Request
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 28, 2018.
+   This Internet-Draft will expire on October 2, 2018.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Wood                   Expires September 28, 2018               [Page 1]
+Wood                     Expires October 2, 2018                [Page 1]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -94,10 +94,11 @@ Table of Contents
    permits clients to request new session tickets at will from the
    server.
 
-   This document specifies two new TLS handshake messages -
-   TicketRequest and TicketResponse - that may be used to request
-   tickets and receive TLS tickets.  Ticket requests may carry optional
-   application contexts to limit the ways in which tickets may be used.
+   This document specifies a new TLS handshake message - TicketRequest -
+   that may be used to request tickets via NewSessionTicket messages.
+   Ticket requests may carry optional application contexts to limit the
+   ways in which tickets may be used.  NewSessionTicket responses MUST
+   echo this application context in as an extension in response.
 
 1.1.  Requirements Language
 
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Wood                   Expires September 28, 2018               [Page 2]
+Wood                     Expires October 2, 2018                [Page 2]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
@@ -153,45 +153,41 @@ Internet-Draft             TLS Ticket Request                 March 2018
 
    struct {
        opaque identifier<0..255>;
-       opaque request_context<0..2^16-1>;
+       opaque context<0..2^16-1>;
    } TicketRequest;
 
    o  identifier: A unique value for this ticket request.  Clients
       SHOULD fill this in with a monotonically increasing counter.
 
-   o  request_context: An opaque context to be used when generating the
-      ticket request.  Clients and servers may use this context to
-      implement or exchange data to be included in the ticket
+   o  context: An opaque context to be used when generating the ticket
+      request.  Clients and servers may use this context to implement or
 
 
 
-Wood                   Expires September 28, 2018               [Page 3]
+
+Wood                     Expires October 2, 2018                [Page 3]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
 
-      computation.  Clients SHOULD make this field empty if it is not
-      needed.
+      exchange data to be included in the ticket computation.  Clients
+      SHOULD make this field empty if it is not needed.
 
    Upon receipt of a TicketRequest message, servers MAY reply with a
-   TicketResponse message, ticket_response(TBD).  Its structure is shown
-   below.
+   NewSessionTicket message.  This message MUST carry two extensions,
+   ticket_identifer and ticket_context, defined below.
 
-   struct {
-       opaque identifier<0..255>;
-       opaque response_context<0..2^16-1>;
-       NewSessionTicket ticket;
-   } TicketResponse;
+   enum {
+       ...
+       ticket_identifier(TBD),
+       ticket_context(TBD+1),
+       (65535)
+   } ExtensionType;
 
-   o  identifier: A unique value for the response that MUST match the
-      corresponding client TicketRequest.
-
-   o  response_context: An opaque context to be used when generating
-      each ticket for the request.  Servers MUST make this field empty
-      if the corresponding TicketRequest request_context is empty.
-
-   o  ticket: A NewSessionTicket message, encoded as detailed in
-      [I-D.ietf-tls-tls13].
+   The value of ticket_identifier MUST match that of the corresponding
+   TicketRequest identifier field.  The value of ticket_context MAY be
+   used by servers to convey ticket context to clients.  Its value MUST
+   be empty if the corresponding TicketRequest context field is empty.
 
    When a server S receives a TicketRequest with new identifier N it
    SHOULD generate a new ticket and cache it locally for some period of
@@ -199,9 +195,9 @@ Internet-Draft             TLS Ticket Request                 March 2018
    period T, S MUST reply with the same ticket previously generated.
    (This is to help deal with request retransmissions from the client.)
    If S receives a TicketRequest with identifier N outside time period
-   T, S SHOULD reply with an empty TicketResponse, i.e., a
-   TicketResponse with identifier N, appropriate response_context, and
-   empty ticket field.
+   T, S SHOULD reply with an empty NewSessionTicket, i.e., a
+   NewSessionTicket with extension ticket_identifier carrying N,
+   appropriate ticket_context extension, and empty ticket field.
 
    Servers SHOULD place a limit on the number of tickets they are
    willing to vend to clients.  Servers MUST NOT send more than 255
@@ -217,21 +213,23 @@ Internet-Draft             TLS Ticket Request                 March 2018
    empty (have a 0 length).  Servers that support ticket requests MAY
    echo this extension in the EncryptedExtensions.  Clients MUST NOT
    send ticket requests to servers that do not signal support for this
+   message.  If absent from a ClientHello, servers MUST NOT generate
+   responses to TicketRequests issued by the client.
 
 
 
 
-Wood                   Expires September 28, 2018               [Page 4]
+
+
+Wood                     Expires October 2, 2018                [Page 4]
 
 Internet-Draft             TLS Ticket Request                 March 2018
 
 
-   message.  If absent from a ClientHello, servers MUST NOT generate
-   responses to TicketRequests issued by the client.
-
 5.  IANA Considerations
 
-   ((TODO: codepoint for handshake message type))
+   ((TODO: codepoint for handshake message type, ticket_identifier
+   extension, and ticket_context extension))
 
 6.  Security Considerations
 
@@ -272,20 +270,17 @@ Internet-Draft             TLS Ticket Request                 March 2018
               Server-Side State", RFC 5077, DOI 10.17487/RFC5077,
               January 2008, <https://www.rfc-editor.org/info/rfc5077>.
 
-
-
-
-
-
-Wood                   Expires September 28, 2018               [Page 5]
-
-Internet-Draft             TLS Ticket Request                 March 2018
-
-
    [RFC8305]  Schinazi, D. and T. Pauly, "Happy Eyeballs Version 2:
               Better Connectivity Using Concurrency", RFC 8305,
               DOI 10.17487/RFC8305, December 2017,
               <https://www.rfc-editor.org/info/rfc8305>.
+
+
+
+Wood                     Expires October 2, 2018                [Page 5]
+
+Internet-Draft             TLS Ticket Request                 March 2018
+
 
 Author's Address
 
@@ -333,4 +328,9 @@ Author's Address
 
 
 
-Wood                   Expires September 28, 2018               [Page 6]
+
+
+
+
+
+Wood                     Expires October 2, 2018                [Page 6]
