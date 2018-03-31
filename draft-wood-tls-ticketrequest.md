@@ -53,9 +53,11 @@ Thus, since connection concurrency and resumption is controlled by clients, a me
 tickets on demand is desirable. In this document, we describe a new TLS extension and handshake 
 message that permits clients to request new session tickets at will from the server.
 
-This document specifies two new  TLS handshake messages -- TicketRequest and TicketResponse -- 
-that may be used to request tickets and receive TLS tickets. Ticket requests may carry optional 
-application contexts to limit the ways in which tickets may be used.
+This document specifies a new TLS handshake message -- TicketRequest -- 
+that may be used to request tickets via NewSessionTicket messages. Ticket requests 
+may carry optional application contexts to limit the ways in which tickets may be used.
+NewSessionTicket responses MUST echo this application context in as an extension
+in response.
 
 ## Requirements Language
 
@@ -93,42 +95,41 @@ Its structure is shown below.
 ~~~
 struct {
     opaque identifier<0..255>;
-    opaque request_context<0..2^16-1>;
+    opaque context<0..2^16-1>;
 } TicketRequest;
 ~~~
 
 - identifier: A unique value for this ticket request. Clients SHOULD fill this in with
 a monotonically increasing counter.
 
-- request_context: An opaque context to be used when generating the ticket request.
+- context: An opaque context to be used when generating the ticket request.
 Clients and servers may use this context to implement or exchange data to be included in the
 ticket computation. Clients SHOULD make this field empty if it is not needed.
 
-Upon receipt of a TicketRequest message, servers MAY reply with a TicketResponse message,
-ticket_response(TBD). Its structure is shown below.
+Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.
+This message MUST carry two extensions, ticket_identifer and ticket_context, defined
+below.
 
 ~~~
-struct {
-    opaque identifier<0..255>;
-    opaque response_context<0..2^16-1>;
-    NewSessionTicket ticket;
-} TicketResponse;
+enum {
+    ...
+    ticket_identifier(TBD),
+    ticket_context(TBD+1),
+    (65535)
+} ExtensionType;
 ~~~
 
-- identifier: A unique value for the response that MUST match the corresponding client
-TicketRequest.
-
-- response_context: An opaque context to be used when generating each ticket for the request.
-Servers MUST make this field empty if the corresponding TicketRequest request_context is empty.
-
-- ticket: A NewSessionTicket message, encoded as detailed in {{I-D.ietf-tls-tls13}}. 
+The value of ticket_identifier MUST match that of the corresponding TicketRequest identifier
+field. The value of ticket_context MAY be used by servers to convey ticket context
+to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.
 
 When a server S receives a TicketRequest with new identifier N it SHOULD generate a new ticket and 
 cache it locally for some period of time T. If S receives a TicketRequest with identifier N
 within time period T, S MUST reply with the same ticket previously generated. (This is to help deal
 with request retransmissions from the client.) If S receives a TicketRequest with identifier N
-outside time period T, S SHOULD reply with an empty TicketResponse, i.e., a TicketResponse with
-identifier N, appropriate response_context, and empty ticket field.
+outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket 
+with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket 
+field.
 
 Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
 MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
@@ -145,7 +146,7 @@ responses to TicketRequests issued by the client.
 
 # IANA Considerations
 
-((TODO: codepoint for handshake message type))
+((TODO: codepoint for handshake message type, ticket_identifier extension, and ticket_context extension))
 
 # Security Considerations
 
