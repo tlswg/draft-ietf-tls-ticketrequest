@@ -54,10 +54,10 @@ tickets on demand is desirable. In this document, we describe a new TLS extensio
 message that permits clients to request new session tickets at will from the server.
 
 This document specifies a new TLS handshake message -- TicketRequest -- 
-that may be used to request tickets via NewSessionTicket messages. Ticket requests 
-may carry optional application contexts to limit the ways in which tickets may be used.
-NewSessionTicket responses MUST echo this application context in as an extension
-in response.
+that may be used to request tickets via NewSessionTicket messages in TLS 1.3. 
+Ticket requests may carry optional application-specific contexts to define the ways in 
+which tickets may be used. NewSessionTicket responses reciprocate this application 
+context in an extension. 
 
 ## Requirements Language
 
@@ -107,7 +107,7 @@ Clients and servers may use this context to implement or exchange data to be inc
 ticket computation. Clients SHOULD make this field empty if it is not needed.
 
 Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.
-This message MUST carry two extensions, ticket_identifer and ticket_context, defined
+The latter message MUST carry two extensions, ticket_identifer and ticket_context, defined
 below.
 
 ~~~
@@ -139,14 +139,14 @@ is complete. As handshake messages, these MUST be added to the handshake transcr
 # Negotiation 
 
 Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD). 
-The extension_data for this extension MUST be empty (have a 0 length). Servers that support ticket 
+The extension_data for this extension MUST be empty, i.e., have length of 0. Servers that support ticket 
 requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers
 that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate 
 responses to TicketRequests issued by the client.
 
 # IANA Considerations
 
-((TODO: codepoint for handshake message type, ticket_identifier extension, and ticket_context extension))
+((TODO: codepoint for handshake message type and extensions))
 
 # Security Considerations
 
@@ -159,5 +159,5 @@ amount of time that mimics the ticket rotation period.
 
 # Acknowledgments
 
-The authors would like to thank Eric Rescorla and Nick Sullivan for discussions on earlier 
-versions of this draft.
+The authors would like to thank Eric Rescorla, Martin Thomson, and Nick Sullivan for 
+discussions on earlier versions of this draft.
