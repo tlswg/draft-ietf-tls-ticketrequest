@@ -9,86 +9,30 @@
 
   
 <style type="text/css">/*<![CDATA[*/
-@viewport {
-  zoom: 1.0;
-  width: extend-to-zoom;
-}
-@-ms-viewport {
-  width: extend-to-zoom;
-  zoom: 1.0;
-}
-
-@media screen and (min-width: 1024px) {
-  body>ul.toc, body>#rfc\.toc {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    right: calc(50vw - 550px);
-    width: 300px;
-    z-index: 1;
-  }
-  #rfc\.toc {
-    top: 55px;
-    overflow: auto;
-    overscroll-behavior: contain;
-  }
-  ul.toc, #rfc\.toc {
-    overflow: auto;
-    overscroll-behavior: contain;
-  }
-  ul.toc li, #rfc\.toc li {
-    font-size: 15px;
-    line-height: 20px;
-    text-indent: 0;
-    padding-left: 1em;
-  }
-  body>ul.toc {
-    top: 140px;
-  }
-
-  body {
-    padding-right: 350px;
-  }
-}
 
 body {
-  font: 16px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
   line-height: 24px;
   margin: 75px auto;
   max-width: 724px;
+  padding: 0 5px;
 }
 
-.title, .filename, h1, h2, h3, h4 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Helvetica Neue","Roboto Condensed","Open Sans",Helvetica,Calibri,sans-serif;
   font-size-adjust: 0.5;
-  font-weight: 500;
+  font-weight: bold;
   color: #333;
   line-height: 100%;
   margin: 0.8em 0 0.3em;
 }
-.title { font-size: 36px; }
-h1 { font-size: 36px; }
-h2 { font-size: 24px; }
-h3, h4 { font-size: 18px; }
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
   color: #333;
-}
-
-ul.toc li {
-  list-style: none;
-  text-indent: -2.5em;
-  padding-left: 2.5em;
-  padding-bottom: 5px;
-  margin: 0;
-}
-ul.toc ul {
-  margin: 0;
-}
-/* xml2rfc nests ul directly inside ul which messes with the style badly */
-ul.toc, ul.toc>ul, ul.toc ul>ul {
-  margin: 0 0 0 1.5em;
 }
 
 table {
@@ -117,24 +61,26 @@ td.reference {
 }
 
 
-table.header {
+table.header, table#rfc\.headerblock {
   width: 100%;
 }
-table.header td {
+table.header td, table#rfc\.headerblock td {
   border: none;
   background-color: transparent;
   color: black;
+  padding: 0;
 }
 .filename {
+  display: block;
   color: rgb(119, 119, 119);
-  font-size: 23px;
+  font-size: 20px;
   font-weight: normal;
-  height: auto;
   line-height: 100%;
+  margin: 10px 0 32px;
 }
 #rfc\.abstract+p, #rfc\.abstract p {
-  font-size: 18px;
-  line-height: 27px%;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 samp, tt, code, pre {
@@ -148,13 +94,15 @@ pre {
   padding: 5px;
   margin: 5px;
 }
-.figure {
+.figure, caption {
   font-style: italic;
   margin: 0 1.5em;
+  text-align: left;
 }
 
 address {
-  margin: 10px 0 0;
+  margin: 16px 2px;
+  line-height: 20px;
 }
 .vcard {
   font-style: normal;
@@ -162,8 +110,8 @@ address {
 .vcardline {
   display: block;
 }
-.vcardline .fn {
-  font-weight: bold;
+.vcardline .fn, address b {
+  font-weight: normal;
 }
 .vcardline .hidden {
   display: none;
@@ -228,6 +176,45 @@ address {
   font-style: normal;
 }
 
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 550px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
+}
+
 .github-fork-ribbon-wrapper {
   display: none;
 }
@@ -285,6 +272,7 @@ address {
     position: fixed;
   }
   /*]]>*/</style>
+  <meta name="viewport" content="initial-scale=1.0">
 
 
   <link href="#rfc.toc" rel="Contents">
@@ -305,7 +293,7 @@ address {
 
   <meta name="dct.creator" content="Wood, C." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequest-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-03-31" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-04-07" />
   <meta name="dct.abstract" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
   <meta name="description" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
 
@@ -326,10 +314,10 @@ address {
 </tr>
 <tr>
 <td class="left">Intended status: Informational</td>
-<td class="right">March 31, 2018</td>
+<td class="right">April 07, 2018</td>
 </tr>
 <tr>
-<td class="left">Expires: October 2, 2018</td>
+<td class="left">Expires: October 9, 2018</td>
 <td class="right"></td>
 </tr>
 
@@ -346,7 +334,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 2, 2018.</p>
+<p>This Internet-Draft will expire on October 9, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -384,7 +372,7 @@ address {
 <a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
 </h1>
 <p id="rfc.section.1.p.1">As per <a href="#RFC5077" class="xref">[RFC5077]</a>, and as described in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>, TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.  In contrast, clients are in complete control of how many tickets they may use when establishing future connections. For example, clients may open multiple TLS connections to the same server for HTTP, or may race TLS connections across different network interfaces.  The latter is especially useful in transport systems that implement Happy Eyeballs <a href="#RFC8305" class="xref">[RFC8305]</a>.  Thus, since connection concurrency and resumption is controlled by clients, a mechanism to request tickets on demand is desirable. In this document, we describe a new TLS extension and handshake message that permits clients to request new session tickets at will from the server.</p>
-<p id="rfc.section.1.p.2">This document specifies a new TLS handshake message &#8211; TicketRequest &#8211; that may be used to request tickets via NewSessionTicket messages. Ticket requests may carry optional application contexts to limit the ways in which tickets may be used.  NewSessionTicket responses MUST echo this application context in as an extension in response.</p>
+<p id="rfc.section.1.p.2">This document specifies a new TLS handshake message &#8211; TicketRequest &#8211; that may be used to request tickets via NewSessionTicket messages in TLS 1.3.  Ticket requests may carry optional application-specific contexts to define the ways in which tickets may be used. NewSessionTicket responses reciprocate this application context in an extension.</p>
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#requirements-language" id="requirements-language">Requirements Language</a>
 </h1>
@@ -417,7 +405,7 @@ struct {
 <li>identifier: A unique value for this ticket request. Clients SHOULD fill this in with a monotonically increasing counter.</li>
 <li>context: An opaque context to be used when generating the ticket request.  Clients and servers may use this context to implement or exchange data to be included in the ticket computation. Clients SHOULD make this field empty if it is not needed.</li>
 </ul>
-<p id="rfc.section.3.p.3">Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.  This message MUST carry two extensions, ticket_identifer and ticket_context, defined below.</p>
+<p id="rfc.section.3.p.3">Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.  The latter message MUST carry two extensions, ticket_identifer and ticket_context, defined below.</p>
 <pre>
 enum {
     ...
@@ -432,11 +420,11 @@ enum {
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#negotiation" id="negotiation">Negotiation</a>
 </h1>
-<p id="rfc.section.4.p.1">Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD).  The extension_data for this extension MUST be empty (have a 0 length). Servers that support ticket requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate responses to TicketRequests issued by the client.</p>
+<p id="rfc.section.4.p.1">Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD).  The extension_data for this extension MUST be empty, i.e., have length of 0. Servers that support ticket requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate responses to TicketRequests issued by the client.</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
 </h1>
-<p id="rfc.section.5.p.1">((TODO: codepoint for handshake message type, ticket_identifier extension, and ticket_context extension))</p>
+<p id="rfc.section.5.p.1">((TODO: codepoint for handshake message type and extensions))</p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
@@ -444,7 +432,7 @@ enum {
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
 </h1>
-<p id="rfc.section.7.p.1">The authors would like to thank Eric Rescorla and Nick Sullivan for discussions on earlier versions of this draft.</p>
+<p id="rfc.section.7.p.1">The authors would like to thank Eric Rescorla, Martin Thomson, and Nick Sullivan for discussions on earlier versions of this draft.</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">8.</a> Normative References</h1>
 <table><tbody>
