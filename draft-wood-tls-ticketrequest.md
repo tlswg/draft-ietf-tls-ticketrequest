@@ -1,7 +1,7 @@
 ---
-title: TLS Ticket Request
-abbrev: TLS Ticket Request
-docname: draft-wood-tls-ticketrequest-latest
+title: TLS Ticket Requests
+abbrev: TLS Ticket Requests
+docname: draft-wood-tls-ticketrequests-latest
 date:
 category: info
 
@@ -30,14 +30,15 @@ normative:
 
 --- abstract
 
-TLS session tickets are produced by servers to permit stateless session resumption for clients. 
-Moreover, servers often distribute at most one or two tickets to each client. As a matter
-of security and privacy concerns, clients should only use tickets once, especially if 
-tickets are used to protect early application data in TLS 1.3 and related protocols. 
-However, single tickets limit a client's ability to perform Happy Eyeball-style connection racing, 
-as multiple competing connections should not re-use the same ticket more than once. 
-This document describes a mechanism that enables the clients to request multiple TLS 
-session tickets from the server so as to enable such features.
+TLS session tickets enable stateless connection resumption for clients without
+storing per-client state. Servers vend session tickets to clients, at their 
+discretion, upon connection establishment. Clients store and use tickets when 
+resuming future connections. Moreover, clients should use tickets at most once for
+session resumption, especially if such keying material protects early application 
+data. Single-use tickets bound the number of parallel connections a client
+may initiate by the number of tickets it receives from a given server. To address
+this limitation, this document describes a mechanism by which clients may request 
+tickets as needed during a connection.
 
 --- middle
 
@@ -45,15 +46,14 @@ session tickets from the server so as to enable such features.
 
 As per {{RFC5077}}, and as described in {{I-D.ietf-tls-tls13}}, 
 TLS servers send clients session tickets at their own discretion in NewSessionTicket messages. 
-In contrast, clients are in complete control of how many tickets they may use when establishing 
-future connections. For example, clients may open multiple TLS connections to the same server
+Clients are in complete control of how many tickets they may use when establishing 
+future and subsequent connections. For example, clients may open multiple TLS connections to the same server
 for HTTP, or may race TLS connections across different network interfaces. 
 The latter is especially useful in transport systems that implement Happy Eyeballs {{RFC8305}}.
-Thus, since connection concurrency and resumption is controlled by clients, a mechanism to request 
-tickets on demand is desirable. In this document, we describe a new TLS extension and handshake 
-message that permits clients to request new session tickets at will from the server.
+Since connection concurrency and resumption is controlled by clients, a mechanism to request 
+tickets on demand is desirable. 
 
-This document specifies a new TLS handshake message -- TicketRequest -- 
+This document specifies a new TLS post-handshake message -- TicketRequest -- 
 that may be used to request tickets via NewSessionTicket messages in TLS 1.3. 
 Ticket requests may carry optional application-specific contexts to define the ways in 
 which tickets may be used. NewSessionTicket responses reciprocate this application 
@@ -70,14 +70,16 @@ document are to be interpreted as described in RFC 2119 {{RFC2119}}.
 The ability to request one or more tickets is useful for a variety of purposes:
 
 - Parallel HTTP connections: To minimize ticket reuse while still improving performance, it may
-be useful to use multiple separate tickets when opening parallel connections. If servers do not
-vend more than one ticket, clients are forced to restrict the number of parallel connections
-or re-use tickets. 
+be useful to use multiple, distinct tickets when opening parallel connections. Clients must 
+therefore bound the number of parallel connections they initiate by the number of tickets
+in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{RFC8305}} describes techniques for performing connection
 racing. The Transport Services Architecture implementation from {{I-D.brunstrom-taps-impl}} also describes how 
 connections may race across interfaces and address families. In cases where clients have early
 data to send and want to minimize or avoid ticket re-use, unique tickets for each unique
-connection attempt are useful.
+connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even
+session ticket encryption keys), distinct tickets will be needed to prevent premature ticket 
+invalidation by racing.
 - Connection priming: In some systems, connections may be primed or bootstrapped by a centralized
 service or daemon for faster connection establishment. Requesting tickets on demand allows such
 services to vend tickets to clients to use for accelerated handshakes with early data. (Note that
@@ -89,7 +91,7 @@ servers do not generate wasteful tickets for clients.
 
 # Ticket Requests
 
-TLS tickets may be requested via a TicketRequest handshake message, ticket_request(TBD). 
+TLS tickets may be requested via a TicketRequest post-handshake message, ticket_request(TBD). 
 Its structure is shown below.
 
 ~~~
@@ -106,9 +108,9 @@ a monotonically increasing counter.
 Clients and servers may use this context to implement or exchange data to be included in the
 ticket computation. Clients SHOULD make this field empty if it is not needed.
 
-Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.
-The latter message MUST carry two extensions, ticket_identifer and ticket_context, defined
-below.
+Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message,
+as defined in {{I-D.ietf-tls-tls13}}. The latter message MUST carry two extensions, 
+ticket_identifer and ticket_context, defined below.
 
 ~~~
 enum {
@@ -133,8 +135,10 @@ field.
 
 Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
 MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
-response identifier size. TicketRequest messages MUST NOT be sent until after the TLS handshake 
-is complete. As handshake messages, these MUST be added to the handshake transcript.
+response identifier size. 
+
+<!-- TicketRequest messages MUST NOT be sent until after the TLS handshake is complete.  -->
+<!-- As handshake messages, these MUST be added to the handshake transcript. -->
 
 # Negotiation 
 
@@ -146,12 +150,12 @@ responses to TicketRequests issued by the client.
 
 # IANA Considerations
 
-((TODO: codepoint for handshake message type and extensions))
+((TODO: codepoint for post-handshake message type and extensions))
 
 # Security Considerations
 
-Ticket re-use is a privacy and security concern. Moreover, pre-fetching as a means of
-avoiding or amortizing the cost of handshakes must also be used carefully. If servers
+Ticket re-use is a security and privacy concern. Moreover, pre-fetching as a means of
+avoiding or amortizing handshake costs must be used carefully. If servers
 do not rotate session ticket encryption keys frequently, clients may be encouraged to obtain
 and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime
 hints provided by servers, clients SHOULD dispose of pre-fetched tickets after some reasonable
