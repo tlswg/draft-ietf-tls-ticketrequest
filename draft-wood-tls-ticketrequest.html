@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>TLS Ticket Request</title>
+  <title>TLS Ticket Requests</title>
 
   
 <style type="text/css">/*<![CDATA[*/
@@ -292,10 +292,10 @@ ul.toc li {
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Wood, C." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequest-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-04-07" />
-  <meta name="dct.abstract" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
-  <meta name="description" content="TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequests-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-04-12" />
+  <meta name="dct.abstract" content="TLS session tickets enable stateless connection resumption for clients without storing per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets it receives from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection." />
+  <meta name="description" content="TLS session tickets enable stateless connection resumption for clients without storing per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets it receives from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection." />
 
 </head>
 
@@ -314,10 +314,10 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left">Intended status: Informational</td>
-<td class="right">April 07, 2018</td>
+<td class="right">April 12, 2018</td>
 </tr>
 <tr>
-<td class="left">Expires: October 9, 2018</td>
+<td class="left">Expires: October 14, 2018</td>
 <td class="right"></td>
 </tr>
 
@@ -325,16 +325,16 @@ ul.toc li {
     </tbody>
   </table>
 
-  <p class="title">TLS Ticket Request<br />
-  <span class="filename">draft-wood-tls-ticketrequest-latest</span></p>
+  <p class="title">TLS Ticket Requests<br />
+  <span class="filename">draft-wood-tls-ticketrequests-latest</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>TLS session tickets are produced by servers to permit stateless session resumption for clients.  Moreover, servers often distribute at most one or two tickets to each client. As a matter of security and privacy concerns, clients should only use tickets once, especially if tickets are used to protect early application data in TLS 1.3 and related protocols.  However, single tickets limit a client&#8217;s ability to perform Happy Eyeball-style connection racing, as multiple competing connections should not re-use the same ticket more than once.  This document describes a mechanism that enables the clients to request multiple TLS session tickets from the server so as to enable such features.</p>
+<p>TLS session tickets enable stateless connection resumption for clients without storing per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets it receives from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection.</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 9, 2018.</p>
+<p>This Internet-Draft will expire on October 14, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -371,8 +371,8 @@ ul.toc li {
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">As per <a href="#RFC5077" class="xref">[RFC5077]</a>, and as described in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>, TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.  In contrast, clients are in complete control of how many tickets they may use when establishing future connections. For example, clients may open multiple TLS connections to the same server for HTTP, or may race TLS connections across different network interfaces.  The latter is especially useful in transport systems that implement Happy Eyeballs <a href="#RFC8305" class="xref">[RFC8305]</a>.  Thus, since connection concurrency and resumption is controlled by clients, a mechanism to request tickets on demand is desirable. In this document, we describe a new TLS extension and handshake message that permits clients to request new session tickets at will from the server.</p>
-<p id="rfc.section.1.p.2">This document specifies a new TLS handshake message &#8211; TicketRequest &#8211; that may be used to request tickets via NewSessionTicket messages in TLS 1.3.  Ticket requests may carry optional application-specific contexts to define the ways in which tickets may be used. NewSessionTicket responses reciprocate this application context in an extension.</p>
+<p id="rfc.section.1.p.1">As per <a href="#RFC5077" class="xref">[RFC5077]</a>, and as described in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>, TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.  Clients are in complete control of how many tickets they may use when establishing future and subsequent connections. For example, clients may open multiple TLS connections to the same server for HTTP, or may race TLS connections across different network interfaces.  The latter is especially useful in transport systems that implement Happy Eyeballs <a href="#RFC8305" class="xref">[RFC8305]</a>.  Since connection concurrency and resumption is controlled by clients, a mechanism to request tickets on demand is desirable.</p>
+<p id="rfc.section.1.p.2">This document specifies a new TLS post-handshake message &#8211; TicketRequest &#8211; that may be used to request tickets via NewSessionTicket messages in TLS 1.3.  Ticket requests may carry optional application-specific contexts to define the ways in which tickets may be used. NewSessionTicket responses reciprocate this application context in an extension.</p>
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#requirements-language" id="requirements-language">Requirements Language</a>
 </h1>
@@ -384,15 +384,15 @@ ul.toc li {
 <p></p>
 
 <ul>
-<li>Parallel HTTP connections: To minimize ticket reuse while still improving performance, it may be useful to use multiple separate tickets when opening parallel connections. If servers do not vend more than one ticket, clients are forced to restrict the number of parallel connections or re-use tickets.</li>
-<li>Connection racing: Happy Eyeballs V2 <a href="#RFC8305" class="xref">[RFC8305]</a> describes techniques for performing connection racing. The Transport Services Architecture implementation from <a href="#I-D.brunstrom-taps-impl" class="xref">[I-D.brunstrom-taps-impl]</a> also describes how connections may race across interfaces and address families. In cases where clients have early data to send and want to minimize or avoid ticket re-use, unique tickets for each unique connection attempt are useful.</li>
+<li>Parallel HTTP connections: To minimize ticket reuse while still improving performance, it may be useful to use multiple, distinct tickets when opening parallel connections. Clients must therefore bound the number of parallel connections they initiate by the number of tickets in their possession, or risk ticket re-use.</li>
+<li>Connection racing: Happy Eyeballs V2 <a href="#RFC8305" class="xref">[RFC8305]</a> describes techniques for performing connection racing. The Transport Services Architecture implementation from <a href="#I-D.brunstrom-taps-impl" class="xref">[I-D.brunstrom-taps-impl]</a> also describes how connections may race across interfaces and address families. In cases where clients have early data to send and want to minimize or avoid ticket re-use, unique tickets for each unique connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even session ticket encryption keys), distinct tickets will be needed to prevent premature ticket invalidation by racing.</li>
 <li>Connection priming: In some systems, connections may be primed or bootstrapped by a centralized service or daemon for faster connection establishment. Requesting tickets on demand allows such services to vend tickets to clients to use for accelerated handshakes with early data. (Note that if early data is not needed by these connections, this method SHOULD NOT be used. Fresh handshakes SHOULD be performed instead.)</li>
 <li>Less ticket waste: Currently, TLS servers use application-specific, and often implementation-specific, logic to determine how many tickets to issue. By moving the burden of ticket count to clients, servers do not generate wasteful tickets for clients.</li>
 </ul>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#ticket-requests" id="ticket-requests">Ticket Requests</a>
 </h1>
-<p id="rfc.section.3.p.1">TLS tickets may be requested via a TicketRequest handshake message, ticket_request(TBD).  Its structure is shown below.</p>
+<p id="rfc.section.3.p.1">TLS tickets may be requested via a TicketRequest post-handshake message, ticket_request(TBD).  Its structure is shown below.</p>
 <pre>
 struct {
     opaque identifier&lt;0..255&gt;;
@@ -405,7 +405,7 @@ struct {
 <li>identifier: A unique value for this ticket request. Clients SHOULD fill this in with a monotonically increasing counter.</li>
 <li>context: An opaque context to be used when generating the ticket request.  Clients and servers may use this context to implement or exchange data to be included in the ticket computation. Clients SHOULD make this field empty if it is not needed.</li>
 </ul>
-<p id="rfc.section.3.p.3">Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message.  The latter message MUST carry two extensions, ticket_identifer and ticket_context, defined below.</p>
+<p id="rfc.section.3.p.3">Upon receipt of a TicketRequest message, servers MAY reply with a NewSessionTicket message, as defined in <a href="#I-D.ietf-tls-tls13" class="xref">[I-D.ietf-tls-tls13]</a>. The latter message MUST carry two extensions, ticket_identifer and ticket_context, defined below.</p>
 <pre>
 enum {
     ...
@@ -416,7 +416,7 @@ enum {
 </pre>
 <p id="rfc.section.3.p.4">The value of ticket_identifier MUST match that of the corresponding TicketRequest identifier field. The value of ticket_context MAY be used by servers to convey ticket context to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.</p>
 <p id="rfc.section.3.p.5">When a server S receives a TicketRequest with new identifier N it SHOULD generate a new ticket and cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S MUST reply with the same ticket previously generated. (This is to help deal with request retransmissions from the client.) If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
-<p id="rfc.section.3.p.6">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. TicketRequest messages MUST NOT be sent until after the TLS handshake is complete. As handshake messages, these MUST be added to the handshake transcript.</p>
+<p id="rfc.section.3.p.6">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#negotiation" id="negotiation">Negotiation</a>
 </h1>
@@ -424,11 +424,11 @@ enum {
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
 </h1>
-<p id="rfc.section.5.p.1">((TODO: codepoint for handshake message type and extensions))</p>
+<p id="rfc.section.5.p.1">((TODO: codepoint for post-handshake message type and extensions))</p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">Ticket re-use is a privacy and security concern. Moreover, pre-fetching as a means of avoiding or amortizing the cost of handshakes must also be used carefully. If servers do not rotate session ticket encryption keys frequently, clients may be encouraged to obtain and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime hints provided by servers, clients SHOULD dispose of pre-fetched tickets after some reasonable amount of time that mimics the ticket rotation period.</p>
+<p id="rfc.section.6.p.1">Ticket re-use is a security and privacy concern. Moreover, pre-fetching as a means of avoiding or amortizing handshake costs must be used carefully. If servers do not rotate session ticket encryption keys frequently, clients may be encouraged to obtain and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime hints provided by servers, clients SHOULD dispose of pre-fetched tickets after some reasonable amount of time that mimics the ticket rotation period.</p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
 </h1>
