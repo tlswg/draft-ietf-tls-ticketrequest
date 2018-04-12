@@ -205,7 +205,8 @@ Internet-Draft             TLS Ticket Requests                April 2018
    Servers SHOULD place a limit on the number of tickets they are
    willing to vend to clients.  Servers MUST NOT send more than 255
    tickets to clients, as this is the limit imposed by the request and
-   response identifier size.
+   response identifier size.  Lastly, servers SHOULD NOT send
+   NewSessionTickets to clients that express support for TicketRequests.
 
 4.  Negotiation
 
@@ -216,7 +217,6 @@ Internet-Draft             TLS Ticket Requests                April 2018
    send ticket requests to servers that do not signal support for this
    message.  If absent from a ClientHello, servers MUST NOT generate
    responses to TicketRequests issued by the client.
-
 
 
 
