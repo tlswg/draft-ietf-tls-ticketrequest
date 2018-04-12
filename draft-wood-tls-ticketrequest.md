@@ -13,6 +13,14 @@ pi: [toc, sortrefs, symrefs]
 
 author:
   -
+    ins: C. A. Wood
+    name: Christopher A. Wood
+    org: Apple Inc.
+    street: One Apple Park Way
+    city: Cupertino, California 95014
+    country: United States of America
+    email: cawood@apple.com
+  -
     ins: T. Pauly
     name: Tommy Pauly
     org: Apple Inc.
@@ -28,14 +36,6 @@ author:
     city: Cupertino, California 95014
     country: United States of America
     email: dschinazi@apple.com
-  -
-    ins: C. A. Wood
-    name: Christopher A. Wood
-    org: Apple Inc.
-    street: One Apple Park Way
-    city: Cupertino, California 95014
-    country: United States of America
-    email: cawood@apple.com
 
 normative:
   RFC2119:
@@ -141,18 +141,19 @@ The value of ticket_identifier MUST match that of the corresponding TicketReques
 field. The value of ticket_context MAY be used by servers to convey ticket context
 to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.
 
-When a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD
-cache it locally for some period of time T. If S receives a TicketRequest with identifier N
-within time period T, S SHOULD reply with the same ticket previously generated (and cached). 
-(This is to help deal with client request retransmissions.) If S receives a TicketRequest with identifier 
+Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
+MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
+response identifier size. Servers SHOULD NOT send unsolicited NewSessionTickets to clients 
+that express support for TicketRequests. 
+
+When TLS is operated over an unreliable transport, e.g., DTLS, servers may not always be able to 
+identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest 
+with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of 
+time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with 
+the same ticket previously generated (and cached). If S receives a TicketRequest with identifier 
 N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket 
 with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket 
 field.
-
-Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
-MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
-response identifier size. Lastly, servers SHOULD NOT send unsolicited NewSessionTickets to clients 
-that express support for TicketRequests.
 
 <!-- TicketRequest messages MUST NOT be sent until after the TLS handshake is complete.  -->
 <!-- As handshake messages, these MUST be added to the handshake transcript. -->

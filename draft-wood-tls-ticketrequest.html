@@ -303,7 +303,7 @@ address {
   <meta name="generator" content="xml2rfc version 2.5.2 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Pauly, T., Schinazi, D., and C. Wood" />
+  <meta name="dct.creator" content="Wood, C., Pauly, T., and D. Schinazi" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequests-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2018-4-12" />
   <meta name="dct.abstract" content="TLS session tickets enable stateless connection resumption for clients without server-side per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets received from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection." />
@@ -318,15 +318,15 @@ address {
     
     	<tr>
   <td class="left">Network Working Group</td>
-  <td class="right">T. Pauly</td>
+  <td class="right">C. Wood</td>
 </tr>
 <tr>
   <td class="left">Internet-Draft</td>
-  <td class="right">D. Schinazi</td>
+  <td class="right">T. Pauly</td>
 </tr>
 <tr>
   <td class="left">Intended status: Informational</td>
-  <td class="right">C. Wood</td>
+  <td class="right">D. Schinazi</td>
 </tr>
 <tr>
   <td class="left">Expires: October 14, 2018</td>
@@ -419,8 +419,8 @@ enum {
 } ExtensionType;
 </pre>
 <p id="rfc.section.3.p.4">The value of ticket_identifier MUST match that of the corresponding TicketRequest identifier field. The value of ticket_context MAY be used by servers to convey ticket context to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.</p>
-<p id="rfc.section.3.p.5">When a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached).  (This is to help deal with client request retransmissions.) If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
-<p id="rfc.section.3.p.6">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. Lastly, servers SHOULD NOT send unsolicited NewSessionTickets to clients that express support for TicketRequests.</p>
+<p id="rfc.section.3.p.5">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. Servers SHOULD NOT send unsolicited NewSessionTickets to clients that express support for TicketRequests.</p>
+<p id="rfc.section.3.p.6">When TLS is operated over an unreliable transport, e.g., DTLS, servers may not always be able to identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached). If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#negotiation" id="negotiation">Negotiation</a></h1>
 <p id="rfc.section.4.p.1">Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD).  The extension_data for this extension MUST be empty, i.e., have length of 0. Servers that support ticket requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate responses to TicketRequests issued by the client.</p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a></h1>
@@ -470,6 +470,28 @@ enum {
 <div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
+	  <span class="fn">Christopher A. Wood</span> 
+	  <span class="n hidden">
+		<span class="family-name">Wood</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Apple Inc.</span>
+	<span class="adr">
+	  <span class="vcardline">One Apple Park Way</span>
+
+	  <span class="vcardline">
+		<span class="locality">Cupertino, California 95014</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">United States of America</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:cawood@apple.com">cawood@apple.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
 	  <span class="fn">Tommy Pauly</span> 
 	  <span class="n hidden">
 		<span class="family-name">Pauly</span>
@@ -509,28 +531,6 @@ enum {
 	  <span class="country-name vcardline">United States of America</span>
 	</span>
 	<span class="vcardline">EMail: <a href="mailto:dschinazi@apple.com">dschinazi@apple.com</a></span>
-
-  </address>
-</div><div class="avoidbreak">
-  <address class="vcard">
-	<span class="vcardline">
-	  <span class="fn">Christopher A. Wood</span> 
-	  <span class="n hidden">
-		<span class="family-name">Wood</span>
-	  </span>
-	</span>
-	<span class="org vcardline">Apple Inc.</span>
-	<span class="adr">
-	  <span class="vcardline">One Apple Park Way</span>
-
-	  <span class="vcardline">
-		<span class="locality">Cupertino, California 95014</span>,  
-		<span class="region"></span>
-		<span class="code"></span>
-	  </span>
-	  <span class="country-name vcardline">United States of America</span>
-	</span>
-	<span class="vcardline">EMail: <a href="mailto:cawood@apple.com">cawood@apple.com</a></span>
 
   </address>
 </div>
