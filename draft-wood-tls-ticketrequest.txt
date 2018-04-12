@@ -2,8 +2,8 @@
 
 
 
-Network Working Group                                        D. Schinazi
-Internet-Draft                                                  T. Pauly
+Network Working Group                                           T. Pauly
+Internet-Draft                                               D. Schinazi
 Intended status: Informational                                   C. Wood
 Expires: October 14, 2018                                     Apple Inc.
                                                           April 12, 2018
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 1]
+Pauly, et al.           Expires October 14, 2018                [Page 1]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 2]
+Pauly, et al.           Expires October 14, 2018                [Page 2]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -165,7 +165,7 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 3]
+Pauly, et al.           Expires October 14, 2018                [Page 3]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -221,7 +221,7 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 4]
+Pauly, et al.           Expires October 14, 2018                [Page 4]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -277,21 +277,12 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 5]
+Pauly, et al.           Expires October 14, 2018                [Page 5]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
 
 Authors' Addresses
-
-   David Schinazi
-   Apple Inc.
-   One Apple Park Way
-   Cupertino, California 95014
-   United States of America
-
-   Email: dschinazi@apple.com
-
 
    Tommy Pauly
    Apple Inc.
@@ -300,6 +291,15 @@ Authors' Addresses
    United States of America
 
    Email: tpauly@apple.com
+
+
+   David Schinazi
+   Apple Inc.
+   One Apple Park Way
+   Cupertino, California 95014
+   United States of America
+
+   Email: dschinazi@apple.com
 
 
    Christopher A. Wood
@@ -333,4 +333,4 @@ Authors' Addresses
 
 
 
-Schinazi, et al.        Expires October 14, 2018                [Page 6]
+Pauly, et al.           Expires October 14, 2018                [Page 6]
