@@ -14,16 +14,16 @@ Expires: October 13, 2018
 Abstract
 
    TLS session tickets enable stateless connection resumption for
-   clients without storing per-client state.  Servers vend session
+   clients without server-side per-client state.  Servers vend session
    tickets to clients, at their discretion, upon connection
    establishment.  Clients store and use tickets when resuming future
    connections.  Moreover, clients should use tickets at most once for
    session resumption, especially if such keying material protects early
    application data.  Single-use tickets bound the number of parallel
-   connections a client may initiate by the number of tickets it
-   receives from a given server.  To address this limitation, this
-   document describes a mechanism by which clients may request tickets
-   as needed during a connection.
+   connections a client may initiate by the number of tickets received
+   from a given server.  To address this limitation, this document
+   describes a mechanism by which clients may request tickets as needed
+   during a connection.
 
 Status of This Memo
 
