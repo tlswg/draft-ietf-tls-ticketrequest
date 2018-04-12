@@ -135,8 +135,8 @@ field.
 
 Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers
 MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and 
-response identifier size. Lastly, servers SHOULD NOT send NewSessionTickets to clients that express
-support for TicketRequests.
+response identifier size. Lastly, servers SHOULD NOT send unsolicited NewSessionTickets to clients 
+that express support for TicketRequests.
 
 <!-- TicketRequest messages MUST NOT be sent until after the TLS handshake is complete.  -->
 <!-- As handshake messages, these MUST be added to the handshake transcript. -->
