@@ -2,10 +2,11 @@
 
 
 
-Network Working Group                                            C. Wood
-Internet-Draft                                                Apple Inc.
-Intended status: Informational                            April 11, 2018
-Expires: October 13, 2018
+Network Working Group                                        D. Schinazi
+Internet-Draft                                                  T. Pauly
+Intended status: Informational                                   C. Wood
+Expires: October 14, 2018                                     Apple Inc.
+                                                          April 12, 2018
 
 
                           TLS Ticket Requests
@@ -40,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 13, 2018.
+   This Internet-Draft will expire on October 14, 2018.
 
 Copyright Notice
 
@@ -49,15 +50,15 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
 
 
 
-Wood                    Expires October 13, 2018                [Page 1]
+Schinazi, et al.        Expires October 14, 2018                [Page 1]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
 
+   (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
@@ -76,7 +77,7 @@ Table of Contents
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
    7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
 
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Wood                    Expires October 13, 2018                [Page 2]
+Schinazi, et al.        Expires October 14, 2018                [Page 2]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -165,7 +165,7 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Wood                    Expires October 13, 2018                [Page 3]
+Schinazi, et al.        Expires October 14, 2018                [Page 3]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -193,13 +193,13 @@ Internet-Draft             TLS Ticket Requests                April 2018
    be empty if the corresponding TicketRequest context field is empty.
 
    When a server S receives a TicketRequest with new identifier N it
-   SHOULD generate a new ticket and cache it locally for some period of
-   time T.  If S receives a TicketRequest with identifier N within time
-   period T, S MUST reply with the same ticket previously generated.
-   (This is to help deal with request retransmissions from the client.)
-   If S receives a TicketRequest with identifier N outside time period
-   T, S SHOULD reply with an empty NewSessionTicket, i.e., a
-   NewSessionTicket with extension ticket_identifier carrying N,
+   MUST generate a new ticket and SHOULD cache it locally for some
+   period of time T.  If S receives a TicketRequest with identifier N
+   within time period T, S SHOULD reply with the same ticket previously
+   generated (and cached).  (This is to help deal with client request
+   retransmissions.)  If S receives a TicketRequest with identifier N
+   outside time period T, S SHOULD reply with an empty NewSessionTicket,
+   i.e., a NewSessionTicket with extension ticket_identifier carrying N,
    appropriate ticket_context extension, and empty ticket field.
 
    Servers SHOULD place a limit on the number of tickets they are
@@ -221,7 +221,7 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Wood                    Expires October 13, 2018                [Page 4]
+Schinazi, et al.        Expires October 14, 2018                [Page 4]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
@@ -277,12 +277,30 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
 
 
-Wood                    Expires October 13, 2018                [Page 5]
+Schinazi, et al.        Expires October 14, 2018                [Page 5]
 
 Internet-Draft             TLS Ticket Requests                April 2018
 
 
-Author's Address
+Authors' Addresses
+
+   David Schinazi
+   Apple Inc.
+   One Apple Park Way
+   Cupertino, California 95014
+   United States of America
+
+   Email: dschinazi@apple.com
+
+
+   Tommy Pauly
+   Apple Inc.
+   One Apple Park Way
+   Cupertino, California 95014
+   United States of America
+
+   Email: tpauly@apple.com
+
 
    Christopher A. Wood
    Apple Inc.
@@ -315,22 +333,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wood                    Expires October 13, 2018                [Page 6]
+Schinazi, et al.        Expires October 14, 2018                [Page 6]

@@ -13,6 +13,22 @@ pi: [toc, sortrefs, symrefs]
 
 author:
   -
+    ins: D. Schinazi
+    name: David Schinazi
+    org: Apple Inc.
+    street: One Apple Park Way
+    city: Cupertino, California 95014
+    country: United States of America
+    email: dschinazi@apple.com
+  -
+    ins: T. Pauly
+    name: Tommy Pauly
+    org: Apple Inc.
+    street: One Apple Park Way
+    city: Cupertino, California 95014
+    country: United States of America
+    email: tpauly@apple.com
+  -
     ins: C. A. Wood
     name: Christopher A. Wood
     org: Apple Inc.
@@ -125,11 +141,11 @@ The value of ticket_identifier MUST match that of the corresponding TicketReques
 field. The value of ticket_context MAY be used by servers to convey ticket context
 to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.
 
-When a server S receives a TicketRequest with new identifier N it SHOULD generate a new ticket and 
+When a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD
 cache it locally for some period of time T. If S receives a TicketRequest with identifier N
-within time period T, S MUST reply with the same ticket previously generated. (This is to help deal
-with request retransmissions from the client.) If S receives a TicketRequest with identifier N
-outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket 
+within time period T, S SHOULD reply with the same ticket previously generated (and cached). 
+(This is to help deal with client request retransmissions.) If S receives a TicketRequest with identifier 
+N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket 
 with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket 
 field.
 
