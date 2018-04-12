@@ -13,14 +13,6 @@ pi: [toc, sortrefs, symrefs]
 
 author:
   -
-    ins: D. Schinazi
-    name: David Schinazi
-    org: Apple Inc.
-    street: One Apple Park Way
-    city: Cupertino, California 95014
-    country: United States of America
-    email: dschinazi@apple.com
-  -
     ins: T. Pauly
     name: Tommy Pauly
     org: Apple Inc.
@@ -28,6 +20,14 @@ author:
     city: Cupertino, California 95014
     country: United States of America
     email: tpauly@apple.com
+  -
+    ins: D. Schinazi
+    name: David Schinazi
+    org: Apple Inc.
+    street: One Apple Park Way
+    city: Cupertino, California 95014
+    country: United States of America
+    email: dschinazi@apple.com
   -
     ins: C. A. Wood
     name: Christopher A. Wood
