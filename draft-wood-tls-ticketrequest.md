@@ -40,6 +40,7 @@ author:
 normative:
   RFC2119:
   RFC5077:
+  RFC8174:
   RFC8305:
   I-D.brunstrom-taps-impl:
   I-D.ietf-tls-tls13:
@@ -78,8 +79,10 @@ context in an extension.
 ## Requirements Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in RFC 2119 {{RFC2119}}.
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in
+{{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals,
+as shown here.
 
 # Use Cases
 
@@ -146,7 +149,7 @@ MUST NOT send more than 255 tickets to clients, as this is the limit imposed by 
 response identifier size. Servers SHOULD NOT send unsolicited NewSessionTickets to clients 
 that express support for TicketRequests. 
 
-When TLS is operated over an unreliable transport, e.g., DTLS, servers may not always be able to 
+When operated over an unreliable transport, e.g., DTLS, servers may not always be able to 
 identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest 
 with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of 
 time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with 

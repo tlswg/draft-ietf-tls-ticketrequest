@@ -384,7 +384,7 @@ address {
 <p id="rfc.section.1.p.1">As per <a href="#RFC5077">[RFC5077]</a>, and as described in <a href="#I-D.ietf-tls-tls13">[I-D.ietf-tls-tls13]</a>, TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.  Clients are in complete control of how many tickets they may use when establishing future and subsequent connections. For example, clients may open multiple TLS connections to the same server for HTTP, or may race TLS connections across different network interfaces.  The latter is especially useful in transport systems that implement Happy Eyeballs <a href="#RFC8305">[RFC8305]</a>.  Since connection concurrency and resumption is controlled by clients, a mechanism to request tickets on demand is desirable.</p>
 <p id="rfc.section.1.p.2">This document specifies a new TLS post-handshake message &#8211; TicketRequest &#8211; that may be used to request tickets via NewSessionTicket messages in TLS 1.3.  Ticket requests may carry optional application-specific contexts to define the ways in which tickets may be used. NewSessionTicket responses reciprocate this application context in an extension.</p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#requirements-language" id="requirements-language">Requirements Language</a></h1>
-<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in RFC 2119 <a href="#RFC2119">[RFC2119]</a>.</p>
+<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a> <a href="#RFC8174">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#use-cases" id="use-cases">Use Cases</a></h1>
 <p id="rfc.section.2.p.1">The ability to request one or more tickets is useful for a variety of purposes:</p>
 <p/>
@@ -420,7 +420,7 @@ enum {
 </pre>
 <p id="rfc.section.3.p.4">The value of ticket_identifier MUST match that of the corresponding TicketRequest identifier field. The value of ticket_context MAY be used by servers to convey ticket context to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.</p>
 <p id="rfc.section.3.p.5">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. Servers SHOULD NOT send unsolicited NewSessionTickets to clients that express support for TicketRequests.</p>
-<p id="rfc.section.3.p.6">When TLS is operated over an unreliable transport, e.g., DTLS, servers may not always be able to identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached). If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
+<p id="rfc.section.3.p.6">When operated over an unreliable transport, e.g., DTLS, servers may not always be able to identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached). If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#negotiation" id="negotiation">Negotiation</a></h1>
 <p id="rfc.section.4.p.1">Clients negotiate use of ticket requests via a new ExtensionType, ticket_request(TBD).  The extension_data for this extension MUST be empty, i.e., have length of 0. Servers that support ticket requests MAY echo this extension in the EncryptedExtensions. Clients MUST NOT send ticket requests to servers that do not signal support for this message. If absent from a ClientHello, servers MUST NOT generate responses to TicketRequests issued by the client.</p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a></h1>
@@ -455,6 +455,12 @@ enum {
         <b id="RFC5077">[RFC5077]</b>
       </td>
       <td class="top"><a>Salowey, J.</a>, <a>Zhou, H.</a>, <a>Eronen, P.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/rfc5077">Transport Layer Security (TLS) Session Resumption without Server-Side State</a>", RFC 5077, DOI 10.17487/RFC5077, January 2008.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC8174">[RFC8174]</b>
+      </td>
+      <td class="top"><a>Leiba, B.</a>, "<a href="http://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
     </tr>
     <tr>
       <td class="reference">

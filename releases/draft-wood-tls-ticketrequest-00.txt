@@ -10,7 +10,7 @@ Expires: October 14, 2018                                     Apple Inc.
 
 
                           TLS Ticket Requests
-                  draft-wood-tls-ticketrequests-latest
+                  draft-wood-tls-ticketrequests-00
 
 Abstract
 
