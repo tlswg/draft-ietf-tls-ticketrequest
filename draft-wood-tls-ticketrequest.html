@@ -293,7 +293,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Wood, C., Pauly, T., and D. Schinazi" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wood-tls-ticketrequests-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-04-12" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-04-13" />
   <meta name="dct.abstract" content="TLS session tickets enable stateless connection resumption for clients without server-side per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets received from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection." />
   <meta name="description" content="TLS session tickets enable stateless connection resumption for clients without server-side per-client state. Servers vend session tickets to clients, at their discretion, upon connection establishment. Clients store and use tickets when resuming future connections. Moreover, clients should use tickets at most once for session resumption, especially if such keying material protects early application data. Single-use tickets bound the number of parallel connections a client may initiate by the number of tickets received from a given server. To address this limitation, this document describes a mechanism by which clients may request tickets as needed during a connection." />
 
@@ -317,12 +317,12 @@ ul.toc li {
 <td class="right">D. Schinazi</td>
 </tr>
 <tr>
-<td class="left">Expires: October 14, 2018</td>
+<td class="left">Expires: October 15, 2018</td>
 <td class="right">Apple Inc.</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">April 12, 2018</td>
+<td class="right">April 13, 2018</td>
 </tr>
 
     	
@@ -338,7 +338,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 14, 2018.</p>
+<p>This Internet-Draft will expire on October 15, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -380,7 +380,7 @@ ul.toc li {
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#requirements-language" id="requirements-language">Requirements Language</a>
 </h1>
-<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in RFC 2119 <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
+<p id="rfc.section.1.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#use-cases" id="use-cases">Use Cases</a>
 </h1>
@@ -420,7 +420,7 @@ enum {
 </pre>
 <p id="rfc.section.3.p.4">The value of ticket_identifier MUST match that of the corresponding TicketRequest identifier field. The value of ticket_context MAY be used by servers to convey ticket context to clients. Its value MUST be empty if the corresponding TicketRequest context field is empty.</p>
 <p id="rfc.section.3.p.5">Servers SHOULD place a limit on the number of tickets they are willing to vend to clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit imposed by the request and response identifier size. Servers SHOULD NOT send unsolicited NewSessionTickets to clients that express support for TicketRequests.</p>
-<p id="rfc.section.3.p.6">When TLS is operated over an unreliable transport, e.g., DTLS, servers may not always be able to identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached). If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
+<p id="rfc.section.3.p.6">When operated over an unreliable transport, e.g., DTLS, servers may not always be able to identify retransmissions of ticket requests. In this case, when a server S receives a TicketRequest with new identifier N it MUST generate a new ticket and SHOULD cache it locally for some period of time T. If S receives a TicketRequest with identifier N within time period T, S SHOULD reply with the same ticket previously generated (and cached). If S receives a TicketRequest with identifier N outside time period T, S SHOULD reply with an empty NewSessionTicket, i.e., a NewSessionTicket with extension ticket_identifier carrying N, appropriate ticket_context extension, and empty ticket field.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#negotiation" id="negotiation">Negotiation</a>
 </h1>
@@ -459,6 +459,11 @@ enum {
 <td class="reference"><b id="RFC5077">[RFC5077]</b></td>
 <td class="top">
 <a>Salowey, J.</a>, <a>Zhou, H.</a>, <a>Eronen, P.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/rfc5077">Transport Layer Security (TLS) Session Resumption without Server-Side State</a>", RFC 5077, DOI 10.17487/RFC5077, January 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC8305">[RFC8305]</b></td>
