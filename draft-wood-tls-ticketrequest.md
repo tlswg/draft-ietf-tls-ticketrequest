@@ -130,18 +130,19 @@ struct {
 count
 : The number of tickets desired by the client.
 
-Servers SHOULD place a limit on the number of tickets they are willing to vend to
-clients. Servers MUST NOT send more than 255 tickets to clients, as this is the limit
-imposed by TicketRequestContents.count. Servers SHOULD NOT send more NewSessionTickets
-than are requested by clients.
+A supporting server MAY vend TicketRequestContents.count NewSessionTicket messages to a
+requesting client, and SHOULD NOT send more than TicketRequestContents.count NewSessionTicket
+messages to a requesting client. Servers SHOULD place a limit on the number of tickets they are willing to
+vend to clients. Thus, the number of NewSessionTicket messages sent should be the minimum of
+the server's self-imposed limit and TicketRequestContents.count. Servers MUST NOT send more
+than 255 tickets to clients, as this is the limit imposed by TicketRequestContents.count.
 
 Servers that support ticket requests MAY echo "ticket_request" in the EncryptedExtensions.
 
 # IANA Considerations
 
-IANA is requested to Create an entry, ticket_requests(0xffcd),
-in the existing registry for ExtensionType (defined in
-{{RFC8446}}), with "TLS 1.3" column values being set to
+IANA is requested to Create an entry, ticket_requests(0xffcd), in the existing registry
+for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
 "CH, EE", and "Recommended" column being set to "Yes".
 
 # Security Considerations
