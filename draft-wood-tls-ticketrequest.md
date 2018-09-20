@@ -115,7 +115,7 @@ extension:
 
 ~~~
 enum {
-    ticket_request(0xffcd), (65535)
+    ticket_request(TBD), (65535)
 } ExtensionType;
 ~~~
 
@@ -135,15 +135,15 @@ requesting client, and SHOULD NOT send more than TicketRequestContents.count New
 messages to a requesting client. Servers SHOULD place a limit on the number of tickets they are willing to
 vend to clients. Thus, the number of NewSessionTicket messages sent should be the minimum of
 the server's self-imposed limit and TicketRequestContents.count. Servers MUST NOT send more
-than 255 tickets to clients, as this is the limit imposed by TicketRequestContents.count.
+than 255 tickets to clients.
 
-Servers that support ticket requests MAY echo "ticket_request" in the EncryptedExtensions.
+Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions.
 
 # IANA Considerations
 
-IANA is requested to Create an entry, ticket_requests(0xffcd), in the existing registry
+IANA is requested to Create an entry, ticket_requests(TBD), in the existing registry
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
-"CH, EE", and "Recommended" column being set to "Yes".
+"CH", and "Recommended" column being set to "Yes".
 
 # Security Considerations
 
@@ -156,5 +156,5 @@ amount of time that mimics the ticket rotation period.
 
 # Acknowledgments
 
-The authors would like to thank Eric Rescorla, Martin Thomson, Nick Sullivan, and David Benjamin
+The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, and Martin Thomson
 for discussions on earlier versions of this draft.
