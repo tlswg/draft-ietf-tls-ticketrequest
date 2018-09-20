@@ -5,8 +5,8 @@
 Network Working Group                                           T. Pauly
 Internet-Draft                                               D. Schinazi
 Intended status: Informational                                   C. Wood
-Expires: March 23, 2019                                       Apple Inc.
-                                                      September 19, 2018
+Expires: March 24, 2019                                       Apple Inc.
+                                                      September 20, 2018
 
 
                           TLS Ticket Requests
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 23, 2019.
+   This Internet-Draft will expire on March 24, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 1]
+Pauly, et al.            Expires March 24, 2019                 [Page 1]
 
 Internet-Draft             TLS Ticket Requests            September 2018
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 2]
+Pauly, et al.            Expires March 24, 2019                 [Page 2]
 
 Internet-Draft             TLS Ticket Requests            September 2018
 
@@ -158,14 +158,14 @@ Internet-Draft             TLS Ticket Requests            September 2018
    the following "ticket_request" extension:
 
    enum {
-       ticket_request(0xffcd), (65535)
+       ticket_request(TBD), (65535)
    } ExtensionType;
 
 
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 3]
+Pauly, et al.            Expires March 24, 2019                 [Page 3]
 
 Internet-Draft             TLS Ticket Requests            September 2018
 
@@ -186,18 +186,17 @@ Internet-Draft             TLS Ticket Requests            September 2018
    tickets they are willing to vend to clients.  Thus, the number of
    NewSessionTicket messages sent should be the minimum of the server's
    self-imposed limit and TicketRequestContents.count.  Servers MUST NOT
-   send more than 255 tickets to clients, as this is the limit imposed
-   by TicketRequestContents.count.
+   send more than 255 tickets to clients.
 
-   Servers that support ticket requests MAY echo "ticket_request" in the
-   EncryptedExtensions.
+   Servers that support ticket requests MUST NOT echo "ticket_request"
+   in the EncryptedExtensions.
 
 4.  IANA Considerations
 
-   IANA is requested to Create an entry, ticket_requests(0xffcd), in the
+   IANA is requested to Create an entry, ticket_requests(TBD), in the
    existing registry for ExtensionType (defined in [RFC8446]), with "TLS
-   1.3" column values being set to "CH, EE", and "Recommended" column
-   being set to "Yes".
+   1.3" column values being set to "CH", and "Recommended" column being
+   set to "Yes".
 
 5.  Security Considerations
 
@@ -212,8 +211,8 @@ Internet-Draft             TLS Ticket Requests            September 2018
 
 6.  Acknowledgments
 
-   The authors would like to thank Eric Rescorla, Martin Thomson, Nick
-   Sullivan, and David Benjamin for discussions on earlier versions of
+   The authors would like to thank David Benjamin, Eric Rescorla, Nick
+   Sullivan, and Martin Thomson for discussions on earlier versions of
    this draft.
 
 
@@ -221,7 +220,8 @@ Internet-Draft             TLS Ticket Requests            September 2018
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 4]
+
+Pauly, et al.            Expires March 24, 2019                 [Page 4]
 
 Internet-Draft             TLS Ticket Requests            September 2018
 
@@ -277,7 +277,7 @@ Authors' Addresses
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 5]
+Pauly, et al.            Expires March 24, 2019                 [Page 5]
 
 Internet-Draft             TLS Ticket Requests            September 2018
 
@@ -333,4 +333,4 @@ Internet-Draft             TLS Ticket Requests            September 2018
 
 
 
-Pauly, et al.            Expires March 23, 2019                 [Page 6]
+Pauly, et al.            Expires March 24, 2019                 [Page 6]
