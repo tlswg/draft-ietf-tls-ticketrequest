@@ -2,11 +2,11 @@
 
 
 
-Network Working Group                                            C. Wood
-Internet-Draft                                                  T. Pauly
-Intended status: Informational                               D. Schinazi
-Expires: October 14, 2018                                     Apple Inc.
-                                                          April 12, 2018
+Network Working Group                                           T. Pauly
+Internet-Draft                                               D. Schinazi
+Intended status: Informational                                   C. Wood
+Expires: April 12, 2019                                       Apple Inc.
+                                                        October 09, 2018
 
 
                           TLS Ticket Requests
@@ -23,8 +23,8 @@ Abstract
    application data.  Single-use tickets bound the number of parallel
    connections a client may initiate by the number of tickets received
    from a given server.  To address this limitation, this document
-   describes a mechanism by which clients may request tickets as needed
-   during a connection.
+   describes a mechanism by which clients may specify the desired number
+   of tickets needed for future connections.
 
 Status of This Memo
 
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 14, 2018.
+   This Internet-Draft will expire on April 12, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Wood, et al.            Expires October 14, 2018                [Page 1]
+Pauly, et al.            Expires April 12, 2019                 [Page 1]
 
-Internet-Draft             TLS Ticket Requests                April 2018
+Internet-Draft             TLS Ticket Requests              October 2018
 
 
    (http://trustee.ietf.org/license-info) in effect on the date of
@@ -72,32 +72,30 @@ Table of Contents
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   2
    2.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Ticket Requests . . . . . . . . . . . . . . . . . . . . . . .   3
-   4.  Negotiation . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   7.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   5
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   4
+   7.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
-   As per [RFC5077], and as described in [I-D.ietf-tls-tls13], TLS
-   servers send clients session tickets at their own discretion in
-   NewSessionTicket messages.  Clients are in complete control of how
-   many tickets they may use when establishing future and subsequent
-   connections.  For example, clients may open multiple TLS connections
-   to the same server for HTTP, or may race TLS connections across
-   different network interfaces.  The latter is especially useful in
-   transport systems that implement Happy Eyeballs [RFC8305].  Since
-   connection concurrency and resumption is controlled by clients, a
-   mechanism to request tickets on demand is desirable.
+   As per [RFC5077], and as described in [RFC8446], TLS servers send
+   clients session tickets at their own discretion in NewSessionTicket
+   messages.  Clients are in complete control of how many tickets they
+   may use when establishing future and subsequent connections.  For
+   example, clients may open multiple TLS connections to the same server
+   for HTTP, or may race TLS connections across different network
+   interfaces.  The latter is especially useful in transport systems
+   that implement Happy Eyeballs [RFC8305].  Since connection
+   concurrency and resumption is controlled by clients, a standard
+   mechanism to request more than one ticket is desirable.
 
-   This document specifies a new TLS post-handshake message -
-   TicketRequest - that may be used to request tickets via
-   NewSessionTicket messages in TLS 1.3.  Ticket requests may carry
-   optional application-specific contexts to define the ways in which
-   tickets may be used.  NewSessionTicket responses reciprocate this
-   application context in an extension.
+   This document specifies a new TLS extension - ticket_request - that
+   may be used by clients to express their desired number of session
+   tickets.  Servers may use this extension as a hint of the number of
+   NewSessionTicket messages to vend.  This extension is only applicable
+   to TLS 1.3 [RFC8446] and future versions of TLS.
 
 1.1.  Requirements Language
 
@@ -109,9 +107,11 @@ Table of Contents
 
 
 
-Wood, et al.            Expires October 14, 2018                [Page 2]
+
+
+Pauly, et al.            Expires April 12, 2019                 [Page 2]
 
-Internet-Draft             TLS Ticket Requests                April 2018
+Internet-Draft             TLS Ticket Requests              October 2018
 
 
 2.  Use Cases
@@ -127,14 +127,14 @@ Internet-Draft             TLS Ticket Requests                April 2018
 
    o  Connection racing: Happy Eyeballs V2 [RFC8305] describes
       techniques for performing connection racing.  The Transport
-      Services Architecture implementation from
-      [I-D.brunstrom-taps-impl] also describes how connections may race
-      across interfaces and address families.  In cases where clients
-      have early data to send and want to minimize or avoid ticket re-
-      use, unique tickets for each unique connection attempt are useful.
-      Moreover, as some servers may implement single-use tickets (and
-      even session ticket encryption keys), distinct tickets will be
-      needed to prevent premature ticket invalidation by racing.
+      Services Architecture implementation from [I-D.ietf-taps-impl]
+      also describes how connections may race across interfaces and
+      address families.  In cases where clients have early data to send
+      and want to minimize or avoid ticket re-use, unique tickets for
+      each unique connection attempt are useful.  Moreover, as some
+      servers may implement single-use tickets (and even session ticket
+      encryption keys), distinct tickets will be needed to prevent
+      premature ticket invalidation by racing.
 
    o  Connection priming: In some systems, connections may be primed or
       bootstrapped by a centralized service or daemon for faster
@@ -148,119 +148,91 @@ Internet-Draft             TLS Ticket Requests                April 2018
       specific, and often implementation-specific, logic to determine
       how many tickets to issue.  By moving the burden of ticket count
       to clients, servers do not generate wasteful tickets for clients.
+      Moreover, as ticket generation may involve expensive computation,
+      e.g., public key cryptographic operations, avoiding waste is
+      desirable.
 
 3.  Ticket Requests
 
-   TLS tickets may be requested via a TicketRequest post-handshake
-   message, ticket_request(TBD).  Its structure is shown below.
-
-   struct {
-       opaque identifier<0..255>;
-       opaque context<0..2^16-1>;
-   } TicketRequest;
-
-   o  identifier: A unique value for this ticket request.  Clients
-      SHOULD fill this in with a monotonically increasing counter.
-
-
-
-
-Wood, et al.            Expires October 14, 2018                [Page 3]
-
-Internet-Draft             TLS Ticket Requests                April 2018
-
-
-   o  context: An opaque context to be used when generating the ticket
-      request.  Clients and servers may use this context to implement or
-      exchange data to be included in the ticket computation.  Clients
-      SHOULD make this field empty if it is not needed.
-
-   Upon receipt of a TicketRequest message, servers MAY reply with a
-   NewSessionTicket message, as defined in [I-D.ietf-tls-tls13].  The
-   latter message MUST carry two extensions, ticket_identifer and
-   ticket_context, defined below.
+   Clients may indicate to servers their desired number of tickets via
+   the following "ticket_request" extension:
 
    enum {
-       ...
-       ticket_identifier(TBD),
-       ticket_context(TBD+1),
-       (65535)
+       ticket_request(TBD), (65535)
    } ExtensionType;
 
-   The value of ticket_identifier MUST match that of the corresponding
-   TicketRequest identifier field.  The value of ticket_context MAY be
-   used by servers to convey ticket context to clients.  Its value MUST
-   be empty if the corresponding TicketRequest context field is empty.
-
-   Servers SHOULD place a limit on the number of tickets they are
-   willing to vend to clients.  Servers MUST NOT send more than 255
-   tickets to clients, as this is the limit imposed by the request and
-   response identifier size.  Servers SHOULD NOT send unsolicited
-   NewSessionTickets to clients that express support for TicketRequests.
-
-   When operated over an unreliable transport, e.g., DTLS, servers may
-   not always be able to identify retransmissions of ticket requests.
-   In this case, when a server S receives a TicketRequest with new
-   identifier N it MUST generate a new ticket and SHOULD cache it
-   locally for some period of time T.  If S receives a TicketRequest
-   with identifier N within time period T, S SHOULD reply with the same
-   ticket previously generated (and cached).  If S receives a
-   TicketRequest with identifier N outside time period T, S SHOULD reply
-   with an empty NewSessionTicket, i.e., a NewSessionTicket with
-   extension ticket_identifier carrying N, appropriate ticket_context
-   extension, and empty ticket field.
-
-4.  Negotiation
-
-   Clients negotiate use of ticket requests via a new ExtensionType,
-   ticket_request(TBD).  The extension_data for this extension MUST be
-   empty, i.e., have length of 0.  Servers that support ticket requests
-   MAY echo this extension in the EncryptedExtensions.  Clients MUST NOT
-   send ticket requests to servers that do not signal support for this
 
 
 
 
-Wood, et al.            Expires October 14, 2018                [Page 4]
+Pauly, et al.            Expires April 12, 2019                 [Page 3]
 
-Internet-Draft             TLS Ticket Requests                April 2018
+Internet-Draft             TLS Ticket Requests              October 2018
 
 
-   message.  If absent from a ClientHello, servers MUST NOT generate
-   responses to TicketRequests issued by the client.
+   Clients may send this extension in ClientHello.  It contains the
+   following structure:
 
-5.  IANA Considerations
+   struct {
+       uint8 count;
+   } TicketRequestContents;
 
-   ((TODO: codepoint for post-handshake message type and extensions))
+   count  The number of tickets desired by the client.
 
-6.  Security Considerations
+   A supporting server MAY vend TicketRequestContents.count
+   NewSessionTicket messages to a requesting client, and SHOULD NOT send
+   more than TicketRequestContents.count NewSessionTicket messages to a
+   requesting client.  Servers SHOULD place a limit on the number of
+   tickets they are willing to vend to clients.  Thus, the number of
+   NewSessionTicket messages sent should be the minimum of the server's
+   self-imposed limit and TicketRequestContents.count.  Servers MUST NOT
+   send more than 255 tickets to clients.
 
-   Ticket re-use is a security and privacy concern.  Moreover, pre-
-   fetching as a means of avoiding or amortizing handshake costs must be
+   Servers that support ticket requests MUST NOT echo "ticket_request"
+   in the EncryptedExtensions.
+
+4.  IANA Considerations
+
+   IANA is requested to Create an entry, ticket_requests(TBD), in the
+   existing registry for ExtensionType (defined in [RFC8446]), with "TLS
+   1.3" column values being set to "CH", and "Recommended" column being
+   set to "Yes".
+
+5.  Security Considerations
+
+   Ticket re-use is a security and privacy concern.  Moreover, ticket
+   pooling as a means of avoiding or amortizing handshake costs must be
    used carefully.  If servers do not rotate session ticket encryption
    keys frequently, clients may be encouraged to obtain and use tickets
    beyond common lifetime windows of, e.g., 24 hours.  Despite ticket
-   lifetime hints provided by servers, clients SHOULD dispose of pre-
-   fetched tickets after some reasonable amount of time that mimics the
-   ticket rotation period.
+   lifetime hints provided by servers, clients SHOULD dispose of pooled
+   tickets after some reasonable amount of time that mimics the ticket
+   rotation period.
 
-7.  Acknowledgments
+6.  Acknowledgments
 
-   The authors would like to thank Eric Rescorla, Martin Thomson, and
-   Nick Sullivan for discussions on earlier versions of this draft.
+   The authors would like to thank David Benjamin, Eric Rescorla, Nick
+   Sullivan, and Martin Thomson for discussions on earlier versions of
+   this draft.
 
-8.  Normative References
 
-   [I-D.brunstrom-taps-impl]
+
+
+
+
+
+Pauly, et al.            Expires April 12, 2019                 [Page 4]
+
+Internet-Draft             TLS Ticket Requests              October 2018
+
+
+7.  Normative References
+
+   [I-D.ietf-taps-impl]
               Brunstrom, A., Pauly, T., Enghardt, T., Grinnemo, K.,
               Jones, T., Tiesel, P., Perkins, C., and M. Welzl,
               "Implementing Interfaces to Transport Services", draft-
-              brunstrom-taps-impl-00 (work in progress), March 2018.
-
-   [I-D.ietf-tls-tls13]
-              Rescorla, E., "The Transport Layer Security (TLS) Protocol
-              Version 1.3", draft-ietf-tls-tls13-28 (work in progress),
-              March 2018.
+              ietf-taps-impl-01 (work in progress), July 2018.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -272,16 +244,6 @@ Internet-Draft             TLS Ticket Requests                April 2018
               Server-Side State", RFC 5077, DOI 10.17487/RFC5077,
               January 2008, <https://www.rfc-editor.org/info/rfc5077>.
 
-
-
-
-
-
-Wood, et al.            Expires October 14, 2018                [Page 5]
-
-Internet-Draft             TLS Ticket Requests                April 2018
-
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -291,16 +253,11 @@ Internet-Draft             TLS Ticket Requests                April 2018
               DOI 10.17487/RFC8305, December 2017, <https://www.rfc-
               editor.org/info/rfc8305>.
 
+   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/info/rfc8446>.
+
 Authors' Addresses
-
-   Christopher A. Wood
-   Apple Inc.
-   One Apple Park Way
-   Cupertino, California 95014
-   United States of America
-
-   Email: cawood@apple.com
-
 
    Tommy Pauly
    Apple Inc.
@@ -309,6 +266,20 @@ Authors' Addresses
    United States of America
 
    Email: tpauly@apple.com
+
+
+
+
+
+
+
+
+
+
+
+Pauly, et al.            Expires April 12, 2019                 [Page 5]
+
+Internet-Draft             TLS Ticket Requests              October 2018
 
 
    David Schinazi
@@ -320,6 +291,13 @@ Authors' Addresses
    Email: dschinazi@apple.com
 
 
+   Christopher A. Wood
+   Apple Inc.
+   One Apple Park Way
+   Cupertino, California 95014
+   United States of America
+
+   Email: cawood@apple.com
 
 
 
@@ -333,4 +311,26 @@ Authors' Addresses
 
 
 
-Wood, et al.            Expires October 14, 2018                [Page 6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pauly, et al.            Expires April 12, 2019                 [Page 6]

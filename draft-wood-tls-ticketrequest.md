@@ -42,8 +42,7 @@ normative:
   RFC5077:
   RFC8174:
   RFC8305:
-  I-D.brunstrom-taps-impl:
-  I-D.ietf-tls-tls13:
+  I-D.ietf-taps-impl:
 
 --- abstract
 
@@ -61,7 +60,7 @@ the desired number of tickets needed for future connections.
 
 # Introduction
 
-As per {{RFC5077}}, and as described in {{I-D.ietf-tls-tls13}},
+As per {{RFC5077}}, and as described in {{RFC8446}},
 TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.
 Clients are in complete control of how many tickets they may use when establishing
 future and subsequent connections. For example, clients may open multiple TLS connections to the same server
@@ -92,7 +91,7 @@ be useful to use multiple, distinct tickets when opening parallel connections. C
 therefore bound the number of parallel connections they initiate by the number of tickets
 in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{RFC8305}} describes techniques for performing connection
-racing. The Transport Services Architecture implementation from {{I-D.brunstrom-taps-impl}} also describes how
+racing. The Transport Services Architecture implementation from {{I-D.ietf-taps-impl}} also describes how
 connections may race across interfaces and address families. In cases where clients have early
 data to send and want to minimize or avoid ticket re-use, unique tickets for each unique
 connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even
