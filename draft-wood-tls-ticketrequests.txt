@@ -5,8 +5,8 @@
 Network Working Group                                           T. Pauly
 Internet-Draft                                               D. Schinazi
 Intended status: Informational                                   C. Wood
-Expires: April 13, 2019                                       Apple Inc.
-                                                        October 10, 2018
+Expires: April 17, 2019                                       Apple Inc.
+                                                        October 14, 2018
 
 
                           TLS Ticket Requests
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 13, 2019.
+   This Internet-Draft will expire on April 17, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 1]
+Pauly, et al.            Expires April 17, 2019                 [Page 1]
 
 Internet-Draft             TLS Ticket Requests              October 2018
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 2]
+Pauly, et al.            Expires April 17, 2019                 [Page 2]
 
 Internet-Draft             TLS Ticket Requests              October 2018
 
@@ -165,7 +165,7 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 3]
+Pauly, et al.            Expires April 17, 2019                 [Page 3]
 
 Internet-Draft             TLS Ticket Requests              October 2018
 
@@ -221,7 +221,7 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 4]
+Pauly, et al.            Expires April 17, 2019                 [Page 4]
 
 Internet-Draft             TLS Ticket Requests              October 2018
 
@@ -277,7 +277,7 @@ Authors' Addresses
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 5]
+Pauly, et al.            Expires April 17, 2019                 [Page 5]
 
 Internet-Draft             TLS Ticket Requests              October 2018
 
@@ -333,4 +333,4 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 13, 2019                 [Page 6]
+Pauly, et al.            Expires April 17, 2019                 [Page 6]
