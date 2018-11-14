@@ -23,11 +23,11 @@ author:
   -
     ins: D. Schinazi
     name: David Schinazi
-    org: Apple Inc.
-    street: One Apple Park Way
-    city: Cupertino, California 95014
+    org: Google LLC
+    street: 1600 Amphitheatre Parkway
+    city: Mountain View, California 94043
     country: United States of America
-    email: dschinazi@apple.com
+    email: dschinazi.ietf@gmail.com
   -
     ins: C. A. Wood
     name: Christopher A. Wood
