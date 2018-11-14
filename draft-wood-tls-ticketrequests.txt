@@ -3,10 +3,12 @@
 
 
 Network Working Group                                           T. Pauly
-Internet-Draft                                               D. Schinazi
-Intended status: Informational                                   C. Wood
-Expires: April 17, 2019                                       Apple Inc.
-                                                        October 14, 2018
+Internet-Draft                                                Apple Inc.
+Intended status: Informational                               D. Schinazi
+Expires: May 18, 2019                                         Google LLC
+                                                                 C. Wood
+                                                              Apple Inc.
+                                                       November 14, 2018
 
 
                           TLS Ticket Requests
@@ -41,23 +43,23 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 17, 2019.
+   This Internet-Draft will expire on May 18, 2019.
 
 Copyright Notice
 
    Copyright (c) 2018 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
+
+
+
+Pauly, et al.             Expires May 18, 2019                  [Page 1]
+
+Internet-Draft             TLS Ticket Requests             November 2018
+
+
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-
-
-
-Pauly, et al.            Expires April 17, 2019                 [Page 1]
-
-Internet-Draft             TLS Ticket Requests              October 2018
-
-
    (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
@@ -107,11 +109,9 @@ Table of Contents
 
 
 
-
-
-Pauly, et al.            Expires April 17, 2019                 [Page 2]
+Pauly, et al.             Expires May 18, 2019                  [Page 2]
 
-Internet-Draft             TLS Ticket Requests              October 2018
+Internet-Draft             TLS Ticket Requests             November 2018
 
 
 2.  Use Cases
@@ -165,9 +165,9 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 17, 2019                 [Page 3]
+Pauly, et al.             Expires May 18, 2019                  [Page 3]
 
-Internet-Draft             TLS Ticket Requests              October 2018
+Internet-Draft             TLS Ticket Requests             November 2018
 
 
    Clients may send this extension in ClientHello.  It contains the
@@ -221,9 +221,9 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 17, 2019                 [Page 4]
+Pauly, et al.             Expires May 18, 2019                  [Page 4]
 
-Internet-Draft             TLS Ticket Requests              October 2018
+Internet-Draft             TLS Ticket Requests             November 2018
 
 
 7.  Normative References
@@ -232,7 +232,7 @@ Internet-Draft             TLS Ticket Requests              October 2018
               Brunstrom, A., Pauly, T., Enghardt, T., Grinnemo, K.,
               Jones, T., Tiesel, P., Perkins, C., and M. Welzl,
               "Implementing Interfaces to Transport Services", draft-
-              ietf-taps-impl-01 (work in progress), July 2018.
+              ietf-taps-impl-02 (work in progress), October 2018.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -277,18 +277,18 @@ Authors' Addresses
 
 
 
-Pauly, et al.            Expires April 17, 2019                 [Page 5]
+Pauly, et al.             Expires May 18, 2019                  [Page 5]
 
-Internet-Draft             TLS Ticket Requests              October 2018
+Internet-Draft             TLS Ticket Requests             November 2018
 
 
    David Schinazi
-   Apple Inc.
-   One Apple Park Way
-   Cupertino, California 95014
+   Google LLC
+   1600 Amphitheatre Parkway
+   Mountain View, California 94043
    United States of America
 
-   Email: dschinazi@apple.com
+   Email: dschinazi.ietf@gmail.com
 
 
    Christopher A. Wood
@@ -333,4 +333,4 @@ Internet-Draft             TLS Ticket Requests              October 2018
 
 
 
-Pauly, et al.            Expires April 17, 2019                 [Page 6]
+Pauly, et al.             Expires May 18, 2019                  [Page 6]
