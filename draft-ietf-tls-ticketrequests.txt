@@ -5,14 +5,14 @@
 Network Working Group                                           T. Pauly
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                               D. Schinazi
-Expires: May 18, 2019                                         Google LLC
+Expires: July 23, 2019                                        Google LLC
                                                                  C. Wood
                                                               Apple Inc.
-                                                       November 14, 2018
+                                                        January 19, 2019
 
 
                           TLS Ticket Requests
-                  draft-wood-tls-ticketrequests-latest
+                  draft-ietf-tls-ticketrequests-latest
 
 Abstract
 
@@ -43,19 +43,19 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 18, 2019.
+   This Internet-Draft will expire on July 23, 2019.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 1]
+Pauly, et al.             Expires July 23, 2019                 [Page 1]
 
-Internet-Draft             TLS Ticket Requests             November 2018
+Internet-Draft             TLS Ticket Requests              January 2019
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 2]
+Pauly, et al.             Expires July 23, 2019                 [Page 2]
 
-Internet-Draft             TLS Ticket Requests             November 2018
+Internet-Draft             TLS Ticket Requests              January 2019
 
 
 2.  Use Cases
@@ -165,9 +165,9 @@ Internet-Draft             TLS Ticket Requests             November 2018
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 3]
+Pauly, et al.             Expires July 23, 2019                 [Page 3]
 
-Internet-Draft             TLS Ticket Requests             November 2018
+Internet-Draft             TLS Ticket Requests              January 2019
 
 
    Clients may send this extension in ClientHello.  It contains the
@@ -221,9 +221,9 @@ Internet-Draft             TLS Ticket Requests             November 2018
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 4]
+Pauly, et al.             Expires July 23, 2019                 [Page 4]
 
-Internet-Draft             TLS Ticket Requests             November 2018
+Internet-Draft             TLS Ticket Requests              January 2019
 
 
 7.  Normative References
@@ -277,9 +277,9 @@ Authors' Addresses
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 5]
+Pauly, et al.             Expires July 23, 2019                 [Page 5]
 
-Internet-Draft             TLS Ticket Requests             November 2018
+Internet-Draft             TLS Ticket Requests              January 2019
 
 
    David Schinazi
@@ -333,4 +333,4 @@ Internet-Draft             TLS Ticket Requests             November 2018
 
 
 
-Pauly, et al.             Expires May 18, 2019                  [Page 6]
+Pauly, et al.             Expires July 23, 2019                 [Page 6]
