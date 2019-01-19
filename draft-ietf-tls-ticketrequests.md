@@ -1,7 +1,7 @@
 ---
 title: TLS Ticket Requests
 abbrev: TLS Ticket Requests
-docname: draft-wood-tls-ticketrequests-latest
+docname: draft-ietf-tls-ticketrequests-latest
 date:
 category: info
 
