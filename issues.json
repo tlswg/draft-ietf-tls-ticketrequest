@@ -1,12 +1,12 @@
 [
 
   {
-    "url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/2",
-    "repository_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest",
-    "labels_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/2/labels{/name}",
-    "comments_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/2/comments",
-    "events_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/2/events",
-    "html_url": "https://github.com/chris-wood/draft-wood-tls-ticketrequest/pull/2",
+    "url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/2",
+    "repository_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest",
+    "labels_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/2/labels{/name}",
+    "comments_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/2/comments",
+    "events_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/2/events",
+    "html_url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/2",
     "id": 361581441,
     "node_id": "MDExOlB1bGxSZXF1ZXN0MjE2NTE2MzI0",
     "number": 2,
@@ -45,22 +45,22 @@
     "created_at": "2018-09-19T05:15:05Z",
     "updated_at": "2018-10-10T04:53:03Z",
     "closed_at": "2018-10-10T04:53:03Z",
-    "author_association": "OWNER",
+    "author_association": "MEMBER",
     "pull_request": {
-      "url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/pulls/2",
-      "html_url": "https://github.com/chris-wood/draft-wood-tls-ticketrequest/pull/2",
-      "diff_url": "https://github.com/chris-wood/draft-wood-tls-ticketrequest/pull/2.diff",
-      "patch_url": "https://github.com/chris-wood/draft-wood-tls-ticketrequest/pull/2.patch"
+      "url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/pulls/2",
+      "html_url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/2",
+      "diff_url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/2.diff",
+      "patch_url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/2.patch"
     },
     "body": ""
   },
   {
-    "url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/1",
-    "repository_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest",
-    "labels_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/1/labels{/name}",
-    "comments_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/1/comments",
-    "events_url": "https://api.github.com/repos/chris-wood/draft-wood-tls-ticketrequest/issues/1/events",
-    "html_url": "https://github.com/chris-wood/draft-wood-tls-ticketrequest/issues/1",
+    "url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/1",
+    "repository_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest",
+    "labels_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/1/labels{/name}",
+    "comments_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/1/comments",
+    "events_url": "https://api.github.com/repos/tlswg/draft-ietf-tls-ticketrequest/issues/1/events",
+    "html_url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/1",
     "id": 342693005,
     "node_id": "MDU6SXNzdWUzNDI2OTMwMDU=",
     "number": 1,
@@ -99,7 +99,7 @@
     "created_at": "2018-07-19T11:41:27Z",
     "updated_at": "2018-07-19T11:41:27Z",
     "closed_at": null,
-    "author_association": "OWNER",
+    "author_association": "MEMBER",
     "body": ""
   }
 
