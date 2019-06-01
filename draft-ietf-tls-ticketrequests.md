@@ -52,7 +52,7 @@ to clients, at their discretion, upon connection establishment. Clients store an
 use tickets when resuming future connections. This document describes a mechanism by
 which clients may specify the desired number of tickets needed for future connections.
 This extension aims to remove server ambiguity surrounding ticket count while simultaneously
-reducing ticket waste and priming clients for future parallel connections.
+reducing ticket waste and priming clients for future connection attempts.
 
 --- middle
 
