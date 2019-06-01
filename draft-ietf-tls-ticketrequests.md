@@ -47,32 +47,33 @@ normative:
 --- abstract
 
 TLS session tickets enable stateless connection resumption for clients without
-server-side per-client state. Servers vend session tickets to clients, at their
-discretion, upon connection establishment. Clients store and use tickets when
-resuming future connections. Moreover, clients should use tickets at most once for
-session resumption, especially if such keying material protects early application
-data. Single-use tickets bound the number of parallel connections a client
-may initiate by the number of tickets received from a given server. To address
-this limitation, this document describes a mechanism by which clients may specify
-the desired number of tickets needed for future connections.
+server-side, per-client state. Servers vend an arbitrary number of session tickets
+to clients, at their discretion, upon connection establishment. Clients store and
+use tickets when resuming future connections. This document describes a mechanism by
+which clients may specify the desired number of tickets needed for future connections.
+This extension aims to remove server ambiguity surrounding ticket count while simultaneously
+reducing ticket waste and priming clients for future parallel connections.
 
 --- middle
 
 # Introduction
 
-As per {{RFC5077}}, and as described in {{RFC8446}},
-TLS servers send clients session tickets at their own discretion in NewSessionTicket messages.
-Clients are in complete control of how many tickets they may use when establishing
-future and subsequent connections. For example, clients may open multiple TLS connections to the same server
-for HTTP, or may race TLS connections across different network interfaces.
-The latter is especially useful in transport systems that implement Happy Eyeballs {{RFC8305}}.
-Since connection concurrency and resumption is controlled by clients, a standard mechanism
-to request more than one ticket is desirable.
+As per {{RFC5077}}, and as described in {{RFC8446}}, TLS servers send clients an arbitrary
+number of session tickets at their own discretion in NewSessionTicket messages. There are
+two limitations with this design. First, servers typically guess (or hard-code) the number
+of tickets vended per connection. Second, clients do not have a way of expressing their
+desired number of tickets, which may impact future connection establishment.
+For example, clients may open multiple TLS connections to the same server for HTTP,
+or may race TLS connections across different network interfaces. The latter is especially
+useful in transport systems that implement Happy Eyeballs V2 {{RFC8305}}. Since clients control
+connection concurrency and resumption, a standard mechanism for requesting more than one
+ticket is desirable.
 
-This document specifies a new TLS extension -- ticket_request -- that may be used
+This document specifies a new TLS extension -- "ticket_request" -- that may be used
 by clients to express their desired number of session tickets. Servers may use this
 extension as a hint of the number of NewSessionTicket messages to vend.
-This extension is only applicable to TLS 1.3 {{!RFC8446}} and future versions of TLS.
+This extension is only applicable to TLS 1.3 {{!RFC8446}}, DTLS 1.3 {{!I-D.ietf-tls-dtls13}},
+and future versions of thereof.
 
 ## Requirements Language
 
@@ -140,20 +141,20 @@ Servers that support ticket requests MUST NOT echo "ticket_request" in the Encry
 
 # IANA Considerations
 
-IANA is requested to Create an entry, ticket_requests(TBD), in the existing registry
+IANA is requested to Create an entry, ticket_request(TBD), in the existing registry
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
 "CH", and "Recommended" column being set to "Yes".
 
 # Security Considerations
 
-Ticket re-use is a security and privacy concern. Moreover, ticket pooling as a means of
-avoiding or amortizing handshake costs must be used carefully. If servers
-do not rotate session ticket encryption keys frequently, clients may be encouraged to obtain
+Ticket re-use is a security and privacy concern. Moreover, clients must take care when pooling
+tickets as a means of avoiding or amortizing handshake costs. If servers do not rotate session
+ticket encryption keys frequently, clients may be encouraged to obtain
 and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime
 hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable
 amount of time that mimics the ticket rotation period.
 
 # Acknowledgments
 
-The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, and Martin Thomson
-for discussions on earlier versions of this draft.
+The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, Martin Thomson,
+and other members of the TLS WG for discussions on earlier versions of this draft.
