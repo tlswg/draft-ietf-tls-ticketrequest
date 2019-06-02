@@ -65,7 +65,7 @@ of tickets vended per connection. Second, clients do not have a way of expressin
 desired number of tickets, which may impact future connection establishment.
 For example, clients may open multiple TLS connections to the same server for HTTP,
 or may race TLS connections across different network interfaces. The latter is especially
-useful in transport systems that implement Happy Eyeballs V2 {{RFC8305}}. Since clients control
+useful in transport systems that implement Happy Eyeballs {{RFC8305}}. Since clients control
 connection concurrency and resumption, a standard mechanism for requesting more than one
 ticket is desirable.
 
@@ -73,7 +73,7 @@ This document specifies a new TLS extension -- "ticket_request" -- that may be u
 by clients to express their desired number of session tickets. Servers may use this
 extension as a hint of the number of NewSessionTicket messages to vend.
 This extension is only applicable to TLS 1.3 {{!RFC8446}}, DTLS 1.3 {{!I-D.ietf-tls-dtls13}},
-and future versions of thereof.
+and future versions thereof.
 
 ## Requirements Language
 
@@ -157,4 +157,4 @@ amount of time that mimics the ticket rotation period.
 # Acknowledgments
 
 The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, Martin Thomson,
-and other members of the TLS WG for discussions on earlier versions of this draft.
+and other members of the TLS Working Group for discussions on earlier versions of this draft.
