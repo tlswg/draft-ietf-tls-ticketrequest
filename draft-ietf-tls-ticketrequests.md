@@ -51,8 +51,9 @@ server-side, per-client state. Servers vend an arbitrary number of session ticke
 to clients, at their discretion, upon connection establishment. Clients store and
 use tickets when resuming future connections. This document describes a mechanism by
 which clients may specify the desired number of tickets needed for future connections.
-This extension aims to remove server ambiguity surrounding ticket count while simultaneously
-reducing ticket waste and priming clients for future connection attempts.
+This extension aims to provide a means for servers to determine the number of tickets
+to generate as a means of reducing ticket waste, while simultaneously priming clients
+for future connection attempts.
 
 --- middle
 
@@ -60,7 +61,7 @@ reducing ticket waste and priming clients for future connection attempts.
 
 As per {{RFC5077}}, and as described in {{RFC8446}}, TLS servers send clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
-two limitations with this design. First, servers typically guess (or hard-code) the number
+two limitations with this design. First, servers choose some (often hard-coded) number
 of tickets vended per connection. Second, clients do not have a way of expressing their
 desired number of tickets, which may impact future connection establishment.
 For example, clients may open multiple TLS connections to the same server for HTTP,
