@@ -108,11 +108,13 @@ SHOULD be performed instead.)
 logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
 servers do not generate wasteful tickets for clients. Moreover, as ticket generation may involve
 expensive computation, e.g., public key cryptographic operations, avoiding waste is desirable.
+- Decline resumption: Clients may indicate they have no intention of connection resumption by
+sending a ticket request with count of zero.
 
 # Ticket Requests
 
-Clients may indicate to servers their desired number of tickets via the following "ticket_request"
-extension:
+Clients may indicate to servers their desired number of tickets for a single connection via the
+following "ticket_request" extension:
 
 ~~~
 enum {
@@ -138,7 +140,12 @@ vend to clients. Thus, the number of NewSessionTicket messages sent should be th
 the server's self-imposed limit and TicketRequestContents.count. Servers MUST NOT send more
 than 255 tickets to clients.
 
-Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions.
+Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
+message. A client MUST abort the connection with an "illegal_parameter" alert if the
+"ticket_request" extension is in the EncryptedExtensions message.
+
+Clients MUST NOT change the value of TicketRequestContents.count in second ClientHello
+messages sent in response to a HelloRetryRequest.
 
 # IANA Considerations
 
