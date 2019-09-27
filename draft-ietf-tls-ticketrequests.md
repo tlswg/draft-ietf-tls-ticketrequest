@@ -39,10 +39,7 @@ author:
 
 normative:
   RFC2119:
-  RFC5077:
   RFC8174:
-  RFC8305:
-  I-D.ietf-taps-impl:
 
 --- abstract
 
@@ -59,14 +56,14 @@ for future connection attempts.
 
 # Introduction
 
-As per {{RFC5077}}, and as described in {{RFC8446}}, TLS servers send clients an arbitrary
+As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers send clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
 two limitations with this design. First, servers choose some (often hard-coded) number
 of tickets vended per connection. Second, clients do not have a way of expressing their
 desired number of tickets, which may impact future connection establishment.
 For example, clients may open multiple TLS connections to the same server for HTTP,
 or may race TLS connections across different network interfaces. The latter is especially
-useful in transport systems that implement Happy Eyeballs {{RFC8305}}. Since clients control
+useful in transport systems that implement Happy Eyeballs {{?RFC8305}}. Since clients control
 connection concurrency and resumption, a standard mechanism for requesting more than one
 ticket is desirable.
 
@@ -92,8 +89,8 @@ The ability to request one or more tickets is useful for a variety of purposes:
 be useful to use multiple, distinct tickets when opening parallel connections. Clients must
 therefore bound the number of parallel connections they initiate by the number of tickets
 in their possession, or risk ticket re-use.
-- Connection racing: Happy Eyeballs V2 {{RFC8305}} describes techniques for performing connection
-racing. The Transport Services Architecture implementation from {{I-D.ietf-taps-impl}} also describes how
+- Connection racing: Happy Eyeballs V2 {{?RFC8305}} describes techniques for performing connection
+racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes how
 connections may race across interfaces and address families. In cases where clients have early
 data to send and want to minimize or avoid ticket re-use, unique tickets for each unique
 connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even
@@ -108,11 +105,13 @@ SHOULD be performed instead.)
 logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
 servers do not generate wasteful tickets for clients. Moreover, as ticket generation may involve
 expensive computation, e.g., public key cryptographic operations, avoiding waste is desirable.
+- Decline resumption: Clients may indicate they have no intention of resuming connections by
+sending a ticket request with count of zero.
 
 # Ticket Requests
 
-Clients may indicate to servers their desired number of tickets via the following "ticket_request"
-extension:
+Clients may indicate to servers their desired number of tickets for a single connection via the
+following "ticket_request" extension:
 
 ~~~
 enum {
@@ -138,7 +137,12 @@ vend to clients. Thus, the number of NewSessionTicket messages sent should be th
 the server's self-imposed limit and TicketRequestContents.count. Servers MUST NOT send more
 than 255 tickets to clients.
 
-Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions.
+Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
+message. A client MUST abort the connection with an "illegal_parameter" alert if the
+"ticket_request" extension is present in the EncryptedExtensions message.
+
+Clients MUST NOT change the value of TicketRequestContents.count in second ClientHello
+messages sent in response to a HelloRetryRequest.
 
 # IANA Considerations
 
