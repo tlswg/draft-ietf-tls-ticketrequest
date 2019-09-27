@@ -108,7 +108,7 @@ SHOULD be performed instead.)
 logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
 servers do not generate wasteful tickets for clients. Moreover, as ticket generation may involve
 expensive computation, e.g., public key cryptographic operations, avoiding waste is desirable.
-- Decline resumption: Clients may indicate they have no intention of connection resumption by
+- Decline resumption: Clients may indicate they have no intention of resuming connections by
 sending a ticket request with count of zero.
 
 # Ticket Requests
@@ -142,7 +142,7 @@ than 255 tickets to clients.
 
 Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
 message. A client MUST abort the connection with an "illegal_parameter" alert if the
-"ticket_request" extension is in the EncryptedExtensions message.
+"ticket_request" extension is present in the EncryptedExtensions message.
 
 Clients MUST NOT change the value of TicketRequestContents.count in second ClientHello
 messages sent in response to a HelloRetryRequest.
