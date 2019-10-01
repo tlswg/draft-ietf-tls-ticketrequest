@@ -1,7 +1,7 @@
 ---
 title: TLS Ticket Requests
 abbrev: TLS Ticket Requests
-docname: draft-ietf-tls-ticketrequests-latest
+docname: draft-ietf-tls-ticketrequests-02
 date:
 category: info
 
@@ -56,7 +56,7 @@ for future connection attempts.
 
 # Introduction
 
-As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers vend clients an arbitrary
+As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers send clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
 two limitations with this design. First, servers choose some (often hard-coded) number
 of tickets vended per connection. Second, clients do not have a way of expressing their
@@ -141,9 +141,8 @@ Servers that support ticket requests MUST NOT echo "ticket_request" in the Encry
 message. A client MUST abort the connection with an "illegal_parameter" alert if the
 "ticket_request" extension is present in the EncryptedExtensions message.
 
-If a client receives a HelloRetryRequest, the presence (or absence) of the "ticket_request" extension
-MUST be maintained in the second ClientHello message. Moreover, if this extension is present, a client
-MUST NOT change the value of TicketRequestContents.count in the second ClientHello message.
+Clients MUST NOT change the value of TicketRequestContents.count in second ClientHello
+messages sent in response to a HelloRetryRequest.
 
 # IANA Considerations
 
