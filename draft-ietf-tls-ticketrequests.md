@@ -134,7 +134,7 @@ A supporting server MAY vend TicketRequestContents.count NewSessionTicket messag
 requesting client, and SHOULD NOT send more than TicketRequestContents.count NewSessionTicket
 messages to a requesting client. Servers SHOULD place a limit on the number of tickets they are willing to
 vend to clients. Thus, the number of NewSessionTicket messages sent should be the minimum of
-the server's self-imposed limit and TicketRequestContents.count. Servers MUST NOT send more
+the server's self-imposed limit and TicketRequestContents.count. Servers SHOULD NOT send more
 than 255 tickets to clients.
 
 Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
