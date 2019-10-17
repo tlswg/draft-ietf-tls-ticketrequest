@@ -104,7 +104,7 @@ SHOULD be performed instead.)
 - Less ticket waste: Currently, TLS servers use application-specific, and often implementation-specific,
 logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
 servers do not generate wasteful tickets. As an example, clients might only request one ticket during
-resumption. Moreover, as ticket generation may involve expensive computation, e.g., public key 
+resumption. Moreover, as ticket generation might involve expensive computation, e.g., public key 
 cryptographic operations, avoiding waste is desirable.
 - Decline resumption: Clients can indicate they have no intention of resuming connections by
 sending a ticket request with count of zero.
