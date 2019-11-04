@@ -3,7 +3,7 @@ title: TLS Ticket Requests
 abbrev: TLS Ticket Requests
 docname: draft-ietf-tls-ticketrequests-latest
 date:
-category: info
+category: std
 
 ipr: trust200902
 keyword: Internet-Draft
