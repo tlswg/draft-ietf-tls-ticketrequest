@@ -2,9 +2,9 @@
 
 This is the working area for the individual Internet-Draft, "TLS Ticket Requests".
 
-* [Editor's Copy](https://tlswg.github.io/draft-ietf-tls-ticketrequest)
+* [Editor's Copy](https://tlswg.org/draft-ietf-tls-ticketrequest/)
 * [Individual Draft](https://tools.ietf.org/html/draft-ietf-tls-ticketrequests)
-* [Compare Editor's Copy to Individual Draft](https://tlswg.github.io/draft-ietf-tls-ticketrequest/#go.draft-ietf-tls-ticketrequests.diff)
+* [Compare Editor's Copy to Individual Draft](https://tlswg.org/draft-ietf-tls-ticketrequest/#go.draft-ietf-tls-ticketrequests.diff)
 
 ## Building the Draft
 
