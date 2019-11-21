@@ -1,6 +1,6 @@
-# TLS Ticke Requests
+# TLS Ticket Requests
 
-This is the working area for the individual Internet-Draft, "TLS Ticke Reques s".
+This is the working area for the individual Internet-Draft, "TLS Ticket Requests".
 
 * [Editor's Copy](https://tlswg.github.io/draft-wood-tls-ticketrequest/#go.draft-wood-tls-ticketrequests.html)
 * [Individual Draft](https://tools.ietf.org/html/draft-wood-tls-ticketrequests)
