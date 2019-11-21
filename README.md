@@ -1,4 +1,4 @@
-# TLS Ticke Reques s
+# TLS Ticke Requests
 
 This is the working area for the individual Internet-Draft, "TLS Ticke Reques s".
 
