@@ -131,9 +131,12 @@ struct {
 count
 : The number of tickets desired by the client.
 
-A supporting server MAY use TicketRequestContents.count when determining how many NewSessionTicket 
-messages to send to a requesting client, and SHOULD place a limit on the number of tickets sent.
-The number of NewSessionTicket messages sent SHOULD be the minimum of the server's self-imposed 
+Clients can use TicketRequestContents.count to indicate the number of tickets
+they would prefer to receive. Servers SHOULD NOT send more tickets than
+TicketRequestContents.count, as clients will most likely discard any additional
+tickets. Servers SHOULD additionally place a limit on the number of tickets
+they are willing to send, to save resources. Therefore, the number of
+NewSessionTicket messages sent will be the minimum of the server's self-imposed
 limit and TicketRequestContents.count.
 
 Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
