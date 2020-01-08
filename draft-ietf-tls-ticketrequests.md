@@ -162,6 +162,13 @@ and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticke
 hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable
 amount of time that mimics the ticket rotation period.
 
+In some cases, a server may sent NewSessionTicket immediately upon sending its Finished rather
+than waiting for the client Finished. An attacker may take advantage of this behavior to create
+an amplification attack proportional to the count value toward a target by performing the key
+exchange over UDP with spoofed packets. The limit on the number of NewSessionTicket messages
+sent in response to a "ticket_request"  MUST be based on the applicability and the amplification
+factor of such attack.
+
 Servers that do not enforce a limit on the number of NewSessionTicket messages sent in response
 to a "ticket_request" extension could leave themselves open to DoS attacks, especially if ticket
 creation is expensive.
