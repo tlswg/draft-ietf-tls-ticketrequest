@@ -155,7 +155,7 @@ MUST NOT change the value of TicketRequestContents.count in the second ClientHel
 
 IANA is requested to Create an entry, ticket_request(TBD), in the existing registry
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
-"CH", and "Recommended" column being set to "Yes".
+"CH, EE", and "Recommended" column being set to "Yes".
 
 # Security Considerations
 
