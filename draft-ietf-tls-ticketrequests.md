@@ -153,6 +153,15 @@ IANA is requested to Create an entry, ticket_request(TBD), in the existing regis
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
 "CH", and "Recommended" column being set to "Yes".
 
+# Performance Considerations
+
+Servers can send the requested tickets in NewSessionTicket messages at any time after the
+client Finished message. If the server chooses to send a large number of tickets to the client,
+it can potentially harm application performance if the tickets are sent before application data.
+For example, if the transport connection has a constrained congestion window, the ticket
+messages could delay the sending of application data. To avoid this, servers should
+prioritize sending application data over tickets when possible.
+
 # Security Considerations
 
 Ticket re-use is a security and privacy concern. Moreover, clients must take care when pooling
