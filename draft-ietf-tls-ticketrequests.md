@@ -90,7 +90,7 @@ be useful to use multiple, distinct tickets when opening parallel connections. C
 therefore bound the number of parallel connections they initiate by the number of tickets
 in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{?RFC8305}} describes techniques for performing connection
-racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes 
+racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes
 how connections can race across interfaces and address families. In cases where clients have early
 data to send and want to minimize or avoid ticket re-use, unique tickets for each unique
 connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even
@@ -104,7 +104,7 @@ SHOULD be performed instead.)
 - Less ticket waste: Currently, TLS servers use application-specific, and often implementation-specific,
 logic to determine how many tickets to issue. By moving the burden of ticket count to clients,
 servers do not generate wasteful tickets. As an example, clients might only request one ticket during
-resumption. Moreover, as ticket generation might involve expensive computation, e.g., public key 
+resumption. Moreover, as ticket generation might involve expensive computation, e.g., public key
 cryptographic operations, avoiding waste is desirable.
 - Decline resumption: Clients can indicate they have no intention of resuming connections by
 sending a ticket request with count of zero.
@@ -139,9 +139,13 @@ they are willing to send, to save resources. Therefore, the number of
 NewSessionTicket messages sent will typically be the minimum of the server's self-imposed
 limit and TicketRequestContents.count.
 
-Servers that support ticket requests MUST NOT echo "ticket_request" in the EncryptedExtensions
-message. A client MUST abort the connection with an "illegal_parameter" alert if the
-"ticket_request" extension is present in the EncryptedExtensions message.
+A server that supports ticket requests MAY echo the "ticket_request" extension in the
+EncryptedExtensions message. If present, it contains a TicketRequestContents structure, where
+TicketRequestContents.count indicates the number of tickets the server expects to send to the client.
+
+Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
+A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
+is present in either of these messages.
 
 If a client receives a HelloRetryRequest, the presence (or absence) of the "ticket_request" extension
 MUST be maintained in the second ClientHello message. Moreover, if this extension is present, a client
@@ -151,7 +155,7 @@ MUST NOT change the value of TicketRequestContents.count in the second ClientHel
 
 IANA is requested to Create an entry, ticket_request(TBD), in the existing registry
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
-"CH", and "Recommended" column being set to "Yes".
+"CH, EE", and "Recommended" column being set to "Yes".
 
 # Security Considerations
 
@@ -169,5 +173,5 @@ creation is expensive.
 # Acknowledgments
 
 The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, Martin Thomson,
-Hubert Kario, and other members of the TLS Working Group for discussions on earlier versions of 
+Hubert Kario, and other members of the TLS Working Group for discussions on earlier versions of
 this draft.
