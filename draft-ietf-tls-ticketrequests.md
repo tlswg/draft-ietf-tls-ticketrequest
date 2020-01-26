@@ -159,7 +159,7 @@ Servers can send tickets in NewSessionTicket messages any time after the
 server Finished message (see {{RFC8446}}; Section 4.6.1). A server which chooses to send a large number of tickets to a client
 can potentially harm application performance if the tickets are sent before application data.
 For example, if the transport connection has a constrained congestion window, ticket
-messages could delay the sending of application data. To avoid this, servers should
+messages could delay sending application data. To avoid this, servers should
 prioritize sending application data over tickets when possible.
 
 # Security Considerations
