@@ -164,7 +164,7 @@ amount of time that mimics the ticket rotation period.
 
 In some cases, a server may send NewSessionTicket messages immediately upon sending 
 the server Finished message rather than waiting for the client Finished. If the server
-has not verified the client's ownership of the IP address - for example with the TLS 
+has not verified the client's ownership of the IP address, e.g., with the TLS 
 Cookie mechanism - ,  an attacker may take advantage of this behavior to create
 an amplification attack proportional to the count value toward a target by performing the key
 exchange over UDP with spoofed packets. The limit on the number of NewSessionTicket messages
