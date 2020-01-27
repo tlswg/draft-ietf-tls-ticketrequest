@@ -168,7 +168,7 @@ has not verified the client's ownership of the IP address - for example with the
 Cookie mechanism - ,  an attacker may take advantage of this behavior to create
 an amplification attack proportional to the count value toward a target by performing the key
 exchange over UDP with spoofed packets. The limit on the number of NewSessionTicket messages
-sent in response to a "ticket_request"  MUST be based on the applicability and the amplification
+sent in response to a "ticket_request"  SHOULD be based on the applicability and the amplification
 factor of such attack.
 
 Servers that do not enforce a limit on the number of NewSessionTicket messages sent in response
