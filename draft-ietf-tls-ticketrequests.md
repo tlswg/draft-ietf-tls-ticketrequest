@@ -167,9 +167,7 @@ the server Finished message rather than waiting for the client Finished. If the 
 has not verified the client's ownership of the IP address, e.g., with the TLS 
 Cookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create
 an amplification attack proportional to the count value toward a target by performing a key
-exchange over UDP with spoofed packets. Servers should limit the number of NewSessionTicket messages
-sent in response to a "ticket_request" based on the applicability and the amplification
-factor of such attack.
+exchange over UDP with spoofed packets. Servers SHOULD limit the number of NewSessionTicket messages they send until they have verified the client's ownership of its IP address.
 
 Servers that do not enforce a limit on the number of NewSessionTicket messages sent in response
 to a "ticket_request" extension could leave themselves open to DoS attacks, especially if ticket
