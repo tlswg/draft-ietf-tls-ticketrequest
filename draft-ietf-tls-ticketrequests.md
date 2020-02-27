@@ -91,11 +91,12 @@ therefore bound the number of parallel connections they initiate by the number o
 in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{?RFC8305}} describes techniques for performing connection
 racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes
-how connections can race across interfaces and address families. In cases where clients have early
-data to send and want to minimize or avoid ticket re-use, unique tickets for each unique
-connection attempt are useful. Moreover, as some servers may implement single-use tickets (and even
-session ticket encryption keys), distinct tickets will be needed to prevent premature ticket
-invalidation by racing.
+how connections can race across interfaces and address families. In such cases, clients may use
+more than one ticket while racing connection attempts in order to establish one successful connection.
+Requesting multiple tickets a priori equips clients with enough tickets to initiate connection racing while
+avoiding ticket re-use and ensuring that their cache of tickets does not empty during such races.
+Moreover, as some servers may implement single-use tickets (and even session ticket encryption keys),
+distinct tickets will be needed to prevent premature ticket invalidation by racing.
 - Connection priming: In some systems, connections can be primed or bootstrapped by a centralized
 service or daemon for faster connection establishment. Requesting tickets on demand allows such
 services to vend tickets to clients to use for accelerated handshakes with early data. (Note that
@@ -175,9 +176,9 @@ and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticke
 hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable
 amount of time that mimics the ticket rotation period.
 
-In some cases, a server may send NewSessionTicket messages immediately upon sending 
+In some cases, a server may send NewSessionTicket messages immediately upon sending
 the server Finished message rather than waiting for the client Finished. If the server
-has not verified the client's ownership of its IP address, e.g., with the TLS 
+has not verified the client's ownership of its IP address, e.g., with the TLS
 Cookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create
 an amplification attack proportional to the count value toward a target by performing a key
 exchange over UDP with spoofed packets. Servers SHOULD limit the number of NewSessionTicket messages they send until they have verified the client's ownership of its IP address.
