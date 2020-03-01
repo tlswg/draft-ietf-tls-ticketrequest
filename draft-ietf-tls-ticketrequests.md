@@ -79,10 +79,12 @@ ultimately derive from an initial full handshake.  Especially when the client
 was initially authenticated with a client certificate, that session may need to
 be refreshed from time to time.  Consequently, a server may periodically
 perform a full handshake even when the client presents a valid ticket for a
-session that is too old.  When that happens a client should replace all its
-cached tickets with fresh ones obtained from the full handshake.  The
-number of tickets the server should vend for a full handshake may therefore
-need to be larger than the number for routine resumption.
+session that is too old.  When that happens, it is possible that all tickets
+derived from the same original session are equally invalid.  A client avoids a
+full handshake on subsequent connections if it replaces all stored tickets with
+fresh values.  The number of tickets the server should vend for a full
+handshake may therefore need to be larger than the number for routine
+resumption.
 
 This document specifies a new TLS extension -- "ticket_request" -- that can be used
 by clients to express their desired number of session tickets. Servers can use this
@@ -110,7 +112,7 @@ in their possession, or risk ticket re-use.
 racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes
 how connections can race across interfaces and address families. In such cases, clients may use
 more than one ticket while racing connection attempts in order to establish one successful connection.
-Requesting multiple tickets a priori equips clients with enough tickets to initiate connection racing while
+Having  multiple tickets equips clients with enough tickets to initiate connection racing while
 avoiding ticket re-use and ensuring that their cache of tickets does not empty during such races.
 Moreover, as some servers may implement single-use tickets (and even session ticket encryption keys),
 distinct tickets will be needed to prevent premature ticket invalidation by racing.
