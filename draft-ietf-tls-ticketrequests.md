@@ -75,16 +75,16 @@ connection concurrency and resumption, a standard mechanism for requesting more 
 ticket is desirable.
 
 Third, we should note that the various tickets in the client's possession
-ultimately derive from an initial full handshake.  Especially when the client
+ultimately derive from some initial full handshake.  Especially when the client
 was initially authenticated with a client certificate, that session may need to
 be refreshed from time to time.  Consequently, a server may periodically
-perform a full handshake even when the client presents a valid ticket for a
-session that is too old.  When that happens, it is possible that all tickets
+force a full handshake even when the client presents a valid ticket for a
+session that is too old.  When that happens, it is possible that any other tickets
 derived from the same original session are equally invalid.  A client avoids a
 full handshake on subsequent connections if it replaces all stored tickets with
-fresh values.  The number of tickets the server should vend for a full
-handshake may therefore need to be larger than the number for routine
-resumption.
+fresh ones obtained from the just performed full handshake.  The number of
+tickets the server should vend for a full handshake may therefore need to be
+larger than the number for routine resumption.
 
 This document specifies a new TLS extension -- "ticket_request" -- that can be used
 by clients to express their desired number of session tickets. Servers can use this
@@ -159,14 +159,13 @@ struct {
 
 new_session_count
 : The number of tickets desired by the client when the server chooses to
-negotiate a fresh session (full handshake), thereby implicitly invalidating all
-other tickets sharing the same initial session as the presented ticket.  This
-is also the ticket count requested when the client presented no initial ticket
-making a full handshake unavoidable.
+negotiate a fresh session (full handshake).  This is also the ticket count
+requested when the client presented no initial ticket making a full handshake
+unavoidable.
 
 resumption_count
 : The number of tickets desired by the client when the server is willing to
-resume the associated session.
+resume using the presented ticket.
 
 Clients can use the above structure to indicate the number of tickets they
 would prefer to receive when sessions are resumed or new sessions are
@@ -180,38 +179,56 @@ ultimately end up with just the tickets from a single resumed session, so
 in that case a resumption_count commensurate with the number of parallel
 sessions would be used.
 
+Priming of the ticket cache need not happen all at once.  Clients that
+anticipate opening frequent connections to a given server can ask for 2 or 3
+tickets on each full handshake, and attain the requisite steady-state cache
+size after a few initial full handshakes, without substantial risk of
+"overshoot" or need to accurately predict the connection concurrency.
+
+When a client presenting a previously obtained ticket finds that the server
+nevertheless negotiates a fresh session, the client should assume that any
+other tickets associated with the same session as the presented ticket are also
+no longer valid for resumption.  This includes not only the tickets obtained
+during the initial full handshake, but all tickets subsequently obtained as
+part of subsequent resumptions.  Requesting more than one ticket in case a
+full handshake is forced by the server helps to keep the session cache primed.
+
 On the other hand, with e.g. server-to-server traffic with fixed source
-addresses and no connection racing, ticket reuse may be appropriate.  Clients
-that wish to reuse tickets when possible should send an extension with the
-resumption_count set to 0, and the new_session_count set to the value desired
-for a full handshake (typically 1).
+addresses and no connection racing, ticket reuse may be an option (ticket reuse
+is NOT RECOMMENDED per Section C.4 of {{RFC8446}}, and is only appropriate when
+replay and privacy concerns do not apply).  Clients that wish to reuse tickets
+when possible should send an extension with the resumption_count set to 0, and
+the new_session_count set to the value desired for a full handshake (typically
+1).
 
 Servers SHOULD NOT send more tickets than requested for the handshake type
 selected by the server (resumption or full handshake) as clients will most
 likely discard any additional tickets.
 
-When a resumption is performed, and the requested resumption_count is zero, the
-client is requesting ticket reuse.  If the presented ticket is valid for
-additional resumptions (only possible when the server supports reuse), it
-SHOULD return no tickets.  Otherwise, when either the server does not support
-reuse, or the ticket is expiring, and needs to be replaced (e.g. reissued under
-a fresh session-ticket encryption key) the server SHOULD return one ticket.
+When the client presents a ticket for resumption, but the requested
+resumption_count is zero and the new_session_count is non-zero, the client
+is requesting ticket reuse (despite section C.4 of {{RFC8446}}).  If
+the presented ticket is valid for additional resumptions (only possible when
+the server supports reuse), it SHOULD return no tickets.  Otherwise, when
+either the server does not support reuse, or the ticket is expiring, and needs
+to be replaced (e.g. reissued under a fresh session-ticket encryption key) the
+server SHOULD return one ticket.
 
 Servers SHOULD additionally place a limit on the number of tickets they are
-willing to send, to save resources.  Therefore, the number of NewSessionTicket
-messages sent will typically be the minimum of the server's self-imposed limit
-and the number requested.
+willing to send (whether for full handshakes or resumptions), to save
+resources.  Therefore, the number of NewSessionTicket messages sent will
+typically be the minimum of the server's self-imposed limit and the number
+requested.
 
 A server that supports ticket requests MAY echo the "ticket_request" extension
 in the EncryptedExtensions message. If present, it contains a
 TicketRequestContents structure, where TicketRequestContents.new_session_count
 indicates the number of tickets the server expects to send to the client.
-
 If the extension is echoed, the TicketRequestContents.resumption_count can
 be set to a non-zero value to indicate that the server supports ticket
 reuse, otherwise (i.e. zero) the server does not support ticket reuse.  Ticket
 reuse has privacy implications and should be used with care or not at all,
-see the security considerations section.
+see the security considerations section and section C.4 of {{RFC8446}}.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
