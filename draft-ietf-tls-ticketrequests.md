@@ -151,9 +151,13 @@ struct {
 } ClientTicketRequest;
 
 struct {
+    uint8 expected_count;
+} ServerTicketRequest;
+
+struct {
     select (Handshake.msg_type) {
         case client_hello: ClientTicketRequest;
-        case encrypted_extensions: uint8 expected_count;
+        case encrypted_extensions: ServerTicketRequest;
     }
 } TicketRequestContents;
 ~~~
@@ -177,8 +181,8 @@ good choice that allows the server to replace each ticket with a fresh ticket,
 without over-provisioning the client with excess tickets. However, clients
 which race multiple connections and place a separate ticket in each will
 ultimately end up with just the tickets from a single resumed session.
-In that case, a resumption_count commensurate with the number of parallel
-sessions would be used.
+In that case, clients SHOULD send a resumption_count equal to the number
+of sessions they are attempting in parallel.
 
 When a client presenting a previously obtained ticket finds that the server
 nevertheless negotiates a fresh session, the client should assume that any
