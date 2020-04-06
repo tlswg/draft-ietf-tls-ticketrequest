@@ -58,10 +58,10 @@ for future connection attempts.
 
 As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers vend clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
-two limitations with this design.
+three limitations with this design.
 
-First, servers choose some (often hard-coded) number of tickets vended per
-connection.  Some servers (e.g. OpenSSL) return a different default number of
+First, servers vend some (often hard-coded) number of tickets per
+connection.  Some server implementations return a different default number of
 tickets for session resumption than for the initial full handshake that created
 the session.  No static choice, whether fixed, or resumption-dependent is ideal
 for all situations.
@@ -74,7 +74,7 @@ useful in transport systems that implement Happy Eyeballs {{?RFC8305}}. Since cl
 connection concurrency and resumption, a standard mechanism for requesting more than one
 ticket is desirable.
 
-Third, we should note that the various tickets in the client's possession
+Third, all tickets in the client's possession
 ultimately derive from some initial full handshake.  Especially when the client
 was initially authenticated with a client certificate, that session may need to
 be refreshed from time to time.  Consequently, a server may periodically
@@ -114,8 +114,8 @@ how connections can race across interfaces and address families. In such cases, 
 more than one ticket while racing connection attempts in order to establish one successful connection.
 Having  multiple tickets equips clients with enough tickets to initiate connection racing while
 avoiding ticket re-use and ensuring that their cache of tickets does not empty during such races.
-Moreover, as some servers may implement single-use tickets (and even session ticket encryption keys),
-distinct tickets will be needed to prevent premature ticket invalidation by racing.
+Moreover, as some servers may implement single-use tickets, distinct tickets prevent
+premature ticket invalidation by racing.
 - Connection priming: In some systems, connections can be primed or bootstrapped by a centralized
 service or daemon for faster connection establishment. Requesting tickets on demand allows such
 services to vend tickets to clients to use for accelerated handshakes with early data. (Note that
@@ -129,18 +129,12 @@ cryptographic operations, avoiding waste is desirable.
 - Decline resumption: Clients can indicate they have no intention of resuming connections by
 sending a ticket request with count of zero.
 
-As noted earlier, clients that ask for only a modest ticket count on resumption
-risk getting insufficiently many tickets if a full handshake proves necessary,
-which invalidates not only the just consumed ticket, but all outstanding
-tickets.  Therefore, in order for the extension to correctly handle both
-routine resumption and an unanticipated full handshake, the client sends
-two separate numbers.  The number of tickets the server should return on
-resumption, and the number on a full handshake.
-
 # Ticket Requests
 
-Clients can indicate to servers their desired number of tickets for a single connection via the
-following "ticket_request" extension:
+As discussed in {{introduction}}, clients may want different numbers of tickets
+for fresh or resumed handshakes. Clients may indicate to servers their desired
+number of tickets for a single connection, in the case of a full handshake or
+resumption, via the following "ticket_request" extension:
 
 ~~~
 enum {
@@ -159,60 +153,34 @@ struct {
 
 new_session_count
 : The number of tickets desired by the client when the server chooses to
-negotiate a fresh session (full handshake).  This is also the ticket count
-requested when the client presented no initial ticket making a full handshake
-unavoidable.
+negotiate a fresh session (full handshake).
 
 resumption_count
 : The number of tickets desired by the client when the server is willing to
 resume using the presented ticket.
 
-Clients can use the above structure to indicate the number of tickets they
-would prefer to receive when sessions are resumed or new sessions are
-negotiated.
+Clients can use the above structure to indicate their desired number of tickets
+for fresh or resumed connections.
 
 Typically, once a client's ticket cache is primed, a resumption count of 1 is a
 good choice that allows the server to replace each ticket with a fresh ticket,
-without over-provisioning the client with excess tickets.  However, clients that
-are racing multiple connections placing a separate ticket in each, will
-ultimately end up with just the tickets from a single resumed session, so
-in that case a resumption_count commensurate with the number of parallel
+without over-provisioning the client with excess tickets.  However, clients
+which race multiple connections place a separate ticket in each will
+ultimately end up with just the tickets from a single resumed session.
+In that case, a resumption_count commensurate with the number of parallel
 sessions would be used.
-
-Priming of the ticket cache need not happen all at once.  Clients that
-anticipate opening frequent connections to a given server can ask for 2 or 3
-tickets on each full handshake, and attain the requisite steady-state cache
-size after a few initial full handshakes, without substantial risk of
-"overshoot" or need to accurately predict the connection concurrency.
 
 When a client presenting a previously obtained ticket finds that the server
 nevertheless negotiates a fresh session, the client should assume that any
 other tickets associated with the same session as the presented ticket are also
-no longer valid for resumption.  This includes not only the tickets obtained
-during the initial full handshake, but all tickets subsequently obtained as
+no longer valid for resumption.  This includes tickets obtained
+during the initial full handshake and all tickets subsequently obtained as
 part of subsequent resumptions.  Requesting more than one ticket in case a
 full handshake is forced by the server helps to keep the session cache primed.
-
-On the other hand, with e.g. server-to-server traffic with fixed source
-addresses and no connection racing, ticket reuse may be an option (ticket reuse
-is NOT RECOMMENDED per Section C.4 of {{RFC8446}}, and is only appropriate when
-replay and privacy concerns do not apply).  Clients that wish to reuse tickets
-when possible should send an extension with the resumption_count set to 0, and
-the new_session_count set to the value desired for a full handshake (typically
-1).
 
 Servers SHOULD NOT send more tickets than requested for the handshake type
 selected by the server (resumption or full handshake) as clients will most
 likely discard any additional tickets.
-
-When the client presents a ticket for resumption, but the requested
-resumption_count is zero and the new_session_count is non-zero, the client
-is requesting ticket reuse (despite section C.4 of {{RFC8446}}).  If
-the presented ticket is valid for additional resumptions (only possible when
-the server supports reuse), it SHOULD return no tickets.  Otherwise, when
-either the server does not support reuse, or the ticket is expiring, and needs
-to be replaced (e.g. reissued under a fresh session-ticket encryption key) the
-server SHOULD return one ticket.
 
 Servers SHOULD additionally place a limit on the number of tickets they are
 willing to send (whether for full handshakes or resumptions), to save
@@ -224,11 +192,6 @@ A server that supports ticket requests MAY echo the "ticket_request" extension
 in the EncryptedExtensions message. If present, it contains a
 TicketRequestContents structure, where TicketRequestContents.new_session_count
 indicates the number of tickets the server expects to send to the client.
-If the extension is echoed, the TicketRequestContents.resumption_count can
-be set to a non-zero value to indicate that the server supports ticket
-reuse, otherwise (i.e. zero) the server does not support ticket reuse.  Ticket
-reuse has privacy implications and should be used with care or not at all,
-see the security considerations section and section C.4 of {{RFC8446}}.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
@@ -247,7 +210,8 @@ for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being s
 # Performance Considerations
 
 Servers can send tickets in NewSessionTicket messages any time after the
-server Finished message (see {{RFC8446}}; Section 4.6.1). A server which chooses to send a large number of tickets to a client
+server Finished message (see {{RFC8446}}; Section 4.6.1). A server which
+chooses to send a large number of tickets to a client
 can potentially harm application performance if the tickets are sent before application data.
 For example, if the transport connection has a constrained congestion window, ticket
 messages could delay sending application data. To avoid this, servers should
