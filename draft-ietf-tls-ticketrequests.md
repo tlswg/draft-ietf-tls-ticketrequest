@@ -58,7 +58,7 @@ for future connection attempts.
 
 As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers vend clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
-three limitations with this design.
+at least three limitations with this design.
 
 First, servers vend some (often hard-coded) number of tickets per
 connection.  Some server implementations return a different default number of
@@ -75,14 +75,14 @@ connection concurrency and resumption, a standard mechanism for requesting more 
 ticket is desirable.
 
 Third, all tickets in the client's possession
-ultimately derive from some initial full handshake.  Especially when the client
+ultimately derive from some initial full handshake. Especially when the client
 was initially authenticated with a client certificate, that session may need to
-be refreshed from time to time.  Consequently, a server may periodically
-force a full handshake even when the client presents a valid ticket for a
-session that is too old.  When that happens, it is possible that any other tickets
-derived from the same original session are equally invalid.  A client avoids a
-full handshake on subsequent connections if it replaces all stored tickets with
-fresh ones obtained from the just performed full handshake.  The number of
+be refreshed from time to time. Consequently, a server may periodically
+force a full handshake even when the client presents a valid ticket.
+When that happens, it is possible that any other tickets derived from the
+same original session are equally invalid. A client avoids a full handshake
+on subsequent connections if it replaces all stored tickets with
+fresh ones obtained from the just performed full handshake. The number of
 tickets the server should vend for a full handshake may therefore need to be
 larger than the number for routine resumption.
 
@@ -148,6 +148,13 @@ Clients MAY send this extension in ClientHello. It contains the following struct
 struct {
     uint8 new_session_count;
     uint8 resumption_count;
+} ClientTicketRequest;
+
+struct {
+    select (Handshake.msg_type) {
+        case client_hello: ClientTicketRequest;
+        case encrypted_extensions: uint8 expected_count;
+    }
 } TicketRequestContents;
 ~~~
 
@@ -159,13 +166,16 @@ resumption_count
 : The number of tickets desired by the client when the server is willing to
 resume using the presented ticket.
 
-Clients can use the above structure to indicate their desired number of tickets
-for fresh or resumed connections.
+expected_count
+: The number of tickets the server expects to send in response to a client
+ticket_request extension.
 
-Typically, once a client's ticket cache is primed, a resumption count of 1 is a
+A client starting a fresh connection SHOULD set new_session_count to the desired
+number of session tickets and resumption_count to 0.
+Once a client's ticket cache is primed, a resumption_count of 1 is a
 good choice that allows the server to replace each ticket with a fresh ticket,
-without over-provisioning the client with excess tickets.  However, clients
-which race multiple connections place a separate ticket in each will
+without over-provisioning the client with excess tickets. However, clients
+which race multiple connections and place a separate ticket in each will
 ultimately end up with just the tickets from a single resumed session.
 In that case, a resumption_count commensurate with the number of parallel
 sessions would be used.
@@ -179,19 +189,16 @@ part of subsequent resumptions.  Requesting more than one ticket in case a
 full handshake is forced by the server helps to keep the session cache primed.
 
 Servers SHOULD NOT send more tickets than requested for the handshake type
-selected by the server (resumption or full handshake) as clients will most
-likely discard any additional tickets.
-
-Servers SHOULD additionally place a limit on the number of tickets they are
-willing to send (whether for full handshakes or resumptions), to save
-resources.  Therefore, the number of NewSessionTicket messages sent will
-typically be the minimum of the server's self-imposed limit and the number
-requested.
+selected by the server (resumption or full handshake). Moreover, servers
+SHOULD place a limit on the number of tickets they are willing to send, whether
+for full handshakes or resumptions, to save resources.  Therefore, the
+number of NewSessionTicket messages sent will typically be the minimum
+of the server's self-imposed limit and the number requested.
 
 A server that supports ticket requests MAY echo the "ticket_request" extension
-in the EncryptedExtensions message. If present, it contains a
-TicketRequestContents structure, where TicketRequestContents.new_session_count
-indicates the number of tickets the server expects to send to the client.
+in the EncryptedExtensions message. If present, it contains a single
+value, expected_count, indicating the number of tickets the server expects to
+send to the client.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
@@ -241,4 +248,5 @@ creation is expensive.
 
 The authors would like to thank David Benjamin, Eric Rescorla, Nick Sullivan, Martin Thomson,
 Hubert Kario, and other members of the TLS Working Group for discussions on earlier versions of
-this draft.
+this draft. Viktor Dukhovni contributed text allowing clients to send multiple
+counts in a ticket request.
