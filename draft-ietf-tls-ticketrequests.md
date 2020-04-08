@@ -149,17 +149,6 @@ struct {
     uint8 new_session_count;
     uint8 resumption_count;
 } ClientTicketRequest;
-
-struct {
-    uint8 expected_count;
-} ServerTicketRequestHint;
-
-struct {
-    select (Handshake.msg_type) {
-        case client_hello: ClientTicketRequest;
-        case encrypted_extensions: ServerTicketRequestHint;
-    }
-} TicketRequestContents;
 ~~~
 
 new_session_count
@@ -169,10 +158,6 @@ negotiate a fresh session (full handshake).
 resumption_count
 : The number of tickets desired by the client when the server is willing to
 resume using the presented ticket.
-
-expected_count
-: The number of tickets the server expects to send in response to a client
-ticket_request extension.
 
 A client starting a fresh connection SHOULD set new_session_count to the desired
 number of session tickets and resumption_count to 0.
@@ -202,9 +187,18 @@ Servers MAY send additional tickets, up to the same limit, if the tickets
 that are originally sent are somehow invalidated.
 
 A server which supports and uses a client "ticket_request" extension MUST also send
-the "ticket_request" extension in the EncryptedExtensions message. The server
-"ticket_request" extension contains a single value, expected_count, indicating the
-number of tickets the server expects to send to the client.
+the "ticket_request" extension in the EncryptedExtensions message. It contains
+the following structure:
+
+~~~
+struct {
+    uint8 expected_count;
+} ServerTicketRequestHint;
+~~~
+
+expected_count
+: The number of tickets the server expects to send in response to a client
+ticket_request extension in this connection.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
@@ -212,7 +206,7 @@ is present in either of these messages.
 
 If a client receives a HelloRetryRequest, the presence (or absence) of the "ticket_request" extension
 MUST be maintained in the second ClientHello message. Moreover, if this extension is present, a client
-MUST NOT change the value of TicketRequestContents in the second ClientHello message.
+MUST NOT change the value of ClientTicketRequest in the second ClientHello message.
 
 # IANA Considerations
 
