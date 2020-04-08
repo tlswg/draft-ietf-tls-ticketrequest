@@ -112,7 +112,7 @@ in their possession, or risk ticket re-use.
 racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes
 how connections can race across interfaces and address families. In such cases, clients may use
 more than one ticket while racing connection attempts in order to establish one successful connection.
-Having  multiple tickets equips clients with enough tickets to initiate connection racing while
+Having multiple tickets equips clients with enough tickets to initiate connection racing while
 avoiding ticket re-use and ensuring that their cache of tickets does not empty during such races.
 Moreover, as some servers may implement single-use tickets, distinct tickets prevent
 premature ticket invalidation by racing.
