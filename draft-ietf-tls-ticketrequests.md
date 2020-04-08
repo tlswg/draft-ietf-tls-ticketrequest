@@ -181,8 +181,8 @@ good choice that allows the server to replace each ticket with a fresh ticket,
 without over-provisioning the client with excess tickets. However, clients
 which race multiple connections and place a separate ticket in each will
 ultimately end up with just the tickets from a single resumed session.
-In that case, clients SHOULD send a resumption_count equal to the number
-of sessions they are attempting in parallel.
+In that case, clients can send a resumption_count equal to the number of
+sessions they are attempting in parallel.
 
 When a client presenting a previously obtained ticket finds that the server
 nevertheless negotiates a fresh session, the client might assume that any
@@ -198,6 +198,8 @@ SHOULD place a limit on the number of tickets they are willing to send, whether
 for full handshakes or resumptions, to save resources.  Therefore, the
 number of NewSessionTicket messages sent will typically be the minimum
 of the server's self-imposed limit and the number requested.
+Servers MAY send additional tickets, up to the same limit, if the tickets
+that are originally sent are somehow invalidated.
 
 A server that supports ticket requests MAY echo the "ticket_request" extension
 in the EncryptedExtensions message. If present, it contains a single
