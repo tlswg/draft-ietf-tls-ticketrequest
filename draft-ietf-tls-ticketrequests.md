@@ -185,12 +185,12 @@ In that case, clients can send a resumption_count equal to the number of
 sessions they are attempting in parallel.
 
 When a client presenting a previously obtained ticket finds that the server
-nevertheless negotiates a fresh session, the client might assume that any
+nevertheless negotiates a fresh session, the client SHOULD assume that any
 other tickets associated with the same session as the presented ticket are also
 no longer valid for resumption.  This includes tickets obtained
 during the initial full handshake and all tickets subsequently obtained as
-part of subsequent resumptions.  Requesting more than one ticket in case a
-full handshake is forced by the server helps to keep the session cache primed.
+part of subsequent resumptions.  Requesting more than one ticket in cases when
+servers select a full handshake helps keep the session cache primed.
 
 Servers SHOULD NOT send more tickets than requested for the handshake type
 selected by the server (resumption or full handshake). Moreover, servers
@@ -201,10 +201,10 @@ of the server's self-imposed limit and the number requested.
 Servers MAY send additional tickets, up to the same limit, if the tickets
 that are originally sent are somehow invalidated.
 
-A server that supports ticket requests MAY echo the "ticket_request" extension
-in the EncryptedExtensions message. If present, it contains a single
-value, expected_count, indicating the number of tickets the server expects to
-send to the client.
+A server which supports and uses a client "ticket_request" extension MUST also send
+the "ticket_request" extension in the EncryptedExtensions message. The server
+"ticket_request" extension contains a single value, expected_count, indicating the
+number of tickets the server expects to send to the client.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
