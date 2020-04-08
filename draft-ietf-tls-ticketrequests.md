@@ -152,12 +152,12 @@ struct {
 
 struct {
     uint8 expected_count;
-} ServerTicketRequest;
+} ServerTicketRequestHint;
 
 struct {
     select (Handshake.msg_type) {
         case client_hello: ClientTicketRequest;
-        case encrypted_extensions: ServerTicketRequest;
+        case encrypted_extensions: ServerTicketRequestHint;
     }
 } TicketRequestContents;
 ~~~
