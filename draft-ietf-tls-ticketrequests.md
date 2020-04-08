@@ -185,7 +185,7 @@ In that case, clients SHOULD send a resumption_count equal to the number
 of sessions they are attempting in parallel.
 
 When a client presenting a previously obtained ticket finds that the server
-nevertheless negotiates a fresh session, the client should assume that any
+nevertheless negotiates a fresh session, the client might assume that any
 other tickets associated with the same session as the presented ticket are also
 no longer valid for resumption.  This includes tickets obtained
 during the initial full handshake and all tickets subsequently obtained as
