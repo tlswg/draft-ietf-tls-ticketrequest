@@ -199,8 +199,7 @@ struct {
 ~~~
 
 expected_count
-: The number of tickets the server expects to send in response to a client
-ticket_request extension in this connection.
+: The number of tickets the server expects to send in this connection.
 
 Servers MUST NOT send the "ticket_request" extension in ServerHello or HelloRetryRequest messages.
 A client MUST abort the connection with an "illegal_parameter" alert if the "ticket_request" extension
