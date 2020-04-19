@@ -180,7 +180,10 @@ part of subsequent resumptions.  Requesting more than one ticket in cases when
 servers select a full handshake helps keep the session cache primed.
 
 Servers SHOULD NOT send more tickets than requested for the handshake type
-selected by the server (resumption or full handshake). Moreover, servers
+selected by the server (resumption or full handshake). However, unless both
+counters are zero servers SHOULD send at least one ticket (in accordance with
+Appendix C.4 of {{RFC8446}}), even when the counter for the handshake type
+selected by the server is zero.  Moreover, servers
 SHOULD place a limit on the number of tickets they are willing to send, whether
 for full handshakes or resumptions, to save resources.  Therefore, the
 number of NewSessionTicket messages sent will typically be the minimum
