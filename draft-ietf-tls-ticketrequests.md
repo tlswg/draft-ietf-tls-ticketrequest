@@ -56,7 +56,7 @@ for future connection attempts.
 
 # Introduction
 
-As per {{!RFC5077}}, and as described in {{RFC8446}}, TLS servers vend clients an arbitrary
+As as described in {{!RFC8446}}, TLS servers vend clients an arbitrary
 number of session tickets at their own discretion in NewSessionTicket messages. There are
 at least three limitations with this design.
 
@@ -89,8 +89,8 @@ larger than the number for routine resumption.
 This document specifies a new TLS extension -- "ticket_request" -- that can be used
 by clients to express their desired number of session tickets. Servers can use this
 extension as a hint of the number of NewSessionTicket messages to vend.
-This extension is only applicable to TLS 1.3 {{!RFC8446}}, DTLS 1.3 {{!I-D.ietf-tls-dtls13}},
-and future versions thereof.
+This extension is only applicable to TLS 1.3 {{!RFC8446}}, 
+DTLS 1.3 {{!I-D.ietf-tls-dtls13}}, and future versions thereof.
 
 ## Requirements Language
 
