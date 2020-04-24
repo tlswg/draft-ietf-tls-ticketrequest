@@ -1,10 +1,10 @@
 # TLS Ticket Requests
 
-This is the working area for the individual Internet-Draft, "TLS Ticket Requests".
+This is the working area for the IETF [TLS Working Group](https://datatracker.ietf.org/wg/tls/documents/) Internet-Draft, "TLS Ticket Requests".
 
-* [Editor's Copy](https://tlswg.org/draft-ietf-tls-ticketrequest/draft-ietf-tls-ticketrequests.html)
-* [IETF Datatracker Copy](https://tools.ietf.org/html/draft-ietf-tls-ticketrequests)
-* [Compare Editor's Copy to IETF Datatracker Copy](https://tlswg.org/draft-ietf-tls-ticketrequest/#go.draft-ietf-tls-ticketrequests.diff)
+* [Editor's Copy](https://tlswg.github.io/draft-ietf-tls-ticketrequest/#go.draft-ietf-tls-ticketrequests.html)
+* [Working Group Draft](https://tools.ietf.org/html/draft-ietf-tls-ticketrequests)
+* [Compare Editor's Copy to Working Group Draft](https://tlswg.github.io/draft-ietf-tls-ticketrequest/#go.draft-ietf-tls-ticketrequests.diff)
 
 ## Building the Draft
 
