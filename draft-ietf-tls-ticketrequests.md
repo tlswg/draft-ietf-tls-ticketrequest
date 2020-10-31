@@ -44,7 +44,7 @@ normative:
 --- abstract
 
 TLS session tickets enable stateless connection resumption for clients without
-server-side, per-client state. Servers vend an arbitrary number of session tickets
+server-side, per-client, state. Servers vend an arbitrary number of session tickets
 to clients, at their discretion, upon connection establishment. Clients store and
 use tickets when resuming future connections. This document describes a mechanism by
 which clients can specify the desired number of tickets needed for future connections.
@@ -88,9 +88,9 @@ larger than the number for routine resumption.
 
 This document specifies a new TLS extension -- "ticket_request" -- that can be used
 by clients to express their desired number of session tickets. Servers can use this
-extension as a hint of the number of NewSessionTicket messages to vend.
+extension as a hint for the number of NewSessionTicket messages to vend.
 This extension is only applicable to TLS 1.3 {{!RFC8446}}, 
-DTLS 1.3 {{!I-D.ietf-tls-dtls13}}, and future versions thereof.
+DTLS 1.3 {{!I-D.ietf-tls-dtls13}}, and future versions of (D)TLS.
 
 ## Requirements Language
 
@@ -133,7 +133,7 @@ sending a ticket request with count of zero.
 
 As discussed in {{introduction}}, clients may want different numbers of tickets
 for fresh or resumed handshakes. Clients may indicate to servers their desired
-number of tickets for a single connection, in the case of a full handshake or
+number of tickets to receive on a single connection, in the case of a full handshake or
 resumption, via the following "ticket_request" extension:
 
 ~~~
@@ -157,7 +157,7 @@ negotiate a fresh session (full handshake).
 
 resumption_count
 : The number of tickets desired by the client when the server is willing to
-resume using the presented ticket.
+resume using a ticket presented in this ClientHello.
 
 A client starting a fresh connection SHOULD set new_session_count to the desired
 number of session tickets and resumption_count to 0.
@@ -211,9 +211,9 @@ MUST NOT change the value of ClientTicketRequest in the second ClientHello messa
 
 # IANA Considerations
 
-IANA is requested to Create an entry, ticket_request(TBD), in the existing registry
+IANA is requested to create an entry, ticket_request(TBD), in the existing registry
 for ExtensionType (defined in {{RFC8446}}), with "TLS 1.3" column values being set to
-"CH, EE", and "Recommended" column being set to "Yes".
+"CH, EE", and "Recommended" column being set to "Y".
 
 # Performance Considerations
 
@@ -232,13 +232,13 @@ tickets as a means of avoiding or amortizing handshake costs. If servers do not 
 ticket encryption keys frequently, clients may be encouraged to obtain
 and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime
 hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable
-amount of time that mimics the ticket rotation period.
+amount of time that mimics the session ticket encryption key rotation period.
 
 In some cases, a server may send NewSessionTicket messages immediately upon sending
 the server Finished message rather than waiting for the client Finished. If the server
 has not verified the client's ownership of its IP address, e.g., with the TLS
 Cookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create
-an amplification attack proportional to the count value toward a target by performing a key
+an amplification attack proportional to the count value toward a target by performing a (DTLS) key
 exchange over UDP with spoofed packets. Servers SHOULD limit the number of NewSessionTicket messages they send until they have verified the client's ownership of its IP address.
 
 Servers that do not enforce a limit on the number of NewSessionTicket messages sent in response
