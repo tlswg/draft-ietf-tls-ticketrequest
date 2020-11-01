@@ -1,0 +1,3534 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2020-11-01T00:10:00.959290+00:00",
+  "repo": "tlswg/draft-ietf-tls-ticketrequest",
+  "labels": [
+    {
+      "name": "bug",
+      "description": null,
+      "color": "ee0701"
+    },
+    {
+      "name": "duplicate",
+      "description": null,
+      "color": "cccccc"
+    },
+    {
+      "name": "enhancement",
+      "description": null,
+      "color": "84b6eb"
+    },
+    {
+      "name": "help wanted",
+      "description": null,
+      "color": "33aa3f"
+    },
+    {
+      "name": "good first issue",
+      "description": null,
+      "color": "7057ff"
+    },
+    {
+      "name": "invalid",
+      "description": null,
+      "color": "e6e6e6"
+    },
+    {
+      "name": "question",
+      "description": null,
+      "color": "cc317c"
+    },
+    {
+      "name": "wontfix",
+      "description": null,
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "MDU6SXNzdWUzNDI2OTMwMDU=",
+      "title": "Servers SHOULD NOT or MUST NOT send unsolicited NSTs",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/1",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-07-19T11:41:27Z",
+      "updatedAt": "2019-06-06T23:43:03Z",
+      "closedAt": "2019-06-06T23:43:03Z",
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "MDU6SXNzdWU0NTM3OTQ1Mzk=",
+      "title": "Issues from Hubert",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/4",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> typos: send, sended\r\n\r\nGood catch -- will fix.\r\n\r\n> I think that the use cases should list a situation in which the client does \r\n> not expect to perform session resume, so it can inform the server of that by \r\n> sending the value 0.\r\n\r\nGood suggestion! We can certainly add this. \r\n\r\n> The draft does not state what is the expected behaviour with tickets in \r\n> relation to post-handshake authentication.\r\n\r\nAs the extension is merely a hint to servers when deciding how many tickets to vend, I think this is out of scope for the document.\r\n\r\n> The draft does not state if the extension is negotiated once per session or \r\n> its values should be reused for resumed sessions.\r\n\r\nIt's intended to be once per session, and we'll add that.\r\n\r\n> The draft does not state how the extension interacts with Hello Retry Request \r\n> handshake. Can it be dropped/added/changed in 2nd CH message? What is expected \r\n> to happen when client does change it?\r\n\r\nAlso a good catch. Like other extensions that are not affected by the possibly updated ClientHello, it must not change. We need to specify the server side behavior, too.\r\n\r\n> > Servers that support ticket requests MUST NOT echo \"ticket_request\"\r\n> > in the EncryptedExtensions.\r\n> \r\n> It's not spelled out what the client is expected to do when server does \r\n> violate this expectation. I'd say it should abort with unsupported_extension.\r\n\r\nThat seems reasonable to me.\r\n",
+      "createdAt": "2019-06-08T13:33:58Z",
+      "updatedAt": "2019-09-27T23:37:37Z",
+      "closedAt": "2019-09-27T23:37:37Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed via #5.",
+          "createdAt": "2019-09-27T23:37:37Z",
+          "updatedAt": "2019-09-27T23:37:37Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "MDU6SXNzdWU1MDE3NDAzNDU=",
+      "title": "Discuss possible self-induced amplification for servers",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/6",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "If they don't enforce a limit, clients can cause them to do a lot of work.",
+      "createdAt": "2019-10-02T21:38:16Z",
+      "updatedAt": "2019-10-17T22:00:11Z",
+      "closedAt": "2019-10-17T22:00:11Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #7.",
+          "createdAt": "2019-10-17T22:00:11Z",
+          "updatedAt": "2019-10-17T22:00:11Z"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "MDU6SXNzdWU1MjI5NTQ4NjE=",
+      "title": "Add advisory text on prioritization of tickets vs. application data",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/9",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "tfpauly"
+      ],
+      "labels": [],
+      "body": "From @martinthomson.",
+      "createdAt": "2019-11-14T16:05:22Z",
+      "updatedAt": "2020-01-27T15:56:23Z",
+      "closedAt": "2020-01-27T15:56:22Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #16.",
+          "createdAt": "2020-01-27T15:56:22Z",
+          "updatedAt": "2020-01-27T15:56:22Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "MDU6SXNzdWU1NTI5MzkzMTM=",
+      "title": "ticket_request in HRR",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/13",
+      "state": "CLOSED",
+      "author": "ekr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "You probably want to be clear that ticket_request cannot appear in HRR, given that you have a section on it.",
+      "createdAt": "2020-01-21T15:12:24Z",
+      "updatedAt": "2020-01-27T15:56:50Z",
+      "closedAt": "2020-01-27T15:56:49Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed in #15. ",
+          "createdAt": "2020-01-27T15:56:49Z",
+          "updatedAt": "2020-01-27T15:56:49Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "MDU6SXNzdWU1NTQ5MjAxNDU=",
+      "title": "Allow server to echo the number of tickets that it expects to send",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/14",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From @huitema.",
+      "createdAt": "2020-01-24T19:45:49Z",
+      "updatedAt": "2020-01-27T15:56:37Z",
+      "closedAt": "2020-01-27T15:56:36Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #15.",
+          "createdAt": "2020-01-27T15:56:36Z",
+          "updatedAt": "2020-01-27T15:56:36Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjE2NTE2MzI0",
+      "title": "Updates based on Montreal feedback",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/2",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-09-19T05:15:05Z",
+      "updatedAt": "2018-10-10T04:53:03Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "e291a514af9a16ea651f75bb3a9720aa6ffe19a9",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/update",
+      "headRefOid": "c08e478fafaa0241aeb7f31bba2a5e1392ddcb5f",
+      "closedAt": "2018-10-10T04:53:03Z",
+      "mergedAt": "2018-10-10T04:53:02Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "1cadb8d3369af410507ac9753375e60bb36ee367"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTU2OTM0NzU4",
+          "commit": {
+            "abbreviatedOid": "6a79742"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2018-09-19T17:27:01Z",
+          "updatedAt": "2018-09-19T17:27:14Z",
+          "comments": [
+            {
+              "originalPosition": 190,
+              "body": "Is this the standard practice for adding new items, or does the table get drawn out ever?",
+              "createdAt": "2018-09-19T17:27:01Z",
+              "updatedAt": "2018-09-20T01:28:57Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTU3MDcxOTcw",
+          "commit": {
+            "abbreviatedOid": "6a79742"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-09-20T00:36:08Z",
+          "updatedAt": "2018-09-20T00:36:08Z",
+          "comments": [
+            {
+              "originalPosition": 190,
+              "body": "It's what we're using in the ESNI draft, so, I guess so?",
+              "createdAt": "2018-09-20T00:36:08Z",
+              "updatedAt": "2018-09-20T01:28:57Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTU3MDczMDgx",
+          "commit": {
+            "abbreviatedOid": "6a79742"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-09-20T00:43:54Z",
+          "updatedAt": "2018-09-20T00:43:54Z",
+          "comments": [
+            {
+              "originalPosition": 190,
+              "body": "Okay, sounds good then!",
+              "createdAt": "2018-09-20T00:43:54Z",
+              "updatedAt": "2018-09-20T01:28:57Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "MDExOlB1bGxSZXF1ZXN0Mjg0MzAyNjE5",
+      "title": "Edits for -01 and WGLC preparation.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/3",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2019-06-01T22:44:44Z",
+      "updatedAt": "2019-06-03T16:14:13Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "6fcd48bfceed86cbd85d645b361fe8aa8c15530d",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/edits",
+      "headRefOid": "3535829ec1e419aa963ea1a1cd65c8a43889aafe",
+      "closedAt": "2019-06-03T16:14:08Z",
+      "mergedAt": "2019-06-03T16:14:08Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "c9148159a7d36f981be6dbf9384e5e27310a8c10"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjE3MDE4",
+          "commit": {
+            "abbreviatedOid": "0ca1b01"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved pending minor changes",
+          "createdAt": "2019-06-02T09:08:54Z",
+          "updatedAt": "2019-06-02T09:11:20Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "I would just say Happy Eyeballs {{RFC8305}} because the property here isn't specific to v2.",
+              "createdAt": "2019-06-02T09:08:54Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "Is `of thereof` correct english? I would have written `of both`",
+              "createdAt": "2019-06-02T09:10:55Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "nit: spell out working group",
+              "createdAt": "2019-06-02T09:11:00Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjI4NDQ1",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-02T14:14:47Z",
+          "updatedAt": "2019-06-02T14:14:47Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Fixed!",
+              "createdAt": "2019-06-02T14:14:47Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjI4NDUx",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-02T14:14:54Z",
+          "updatedAt": "2019-06-02T14:14:54Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "Nope, typo! Fixed.",
+              "createdAt": "2019-06-02T14:14:54Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjI4NDY4",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-02T14:15:22Z",
+          "updatedAt": "2019-06-02T14:15:22Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "Fixed.",
+              "createdAt": "2019-06-02T14:15:22Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjUwMDY4",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T00:25:32Z",
+          "updatedAt": "2019-06-03T00:27:48Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "This early in the document, it's a bit unclear what \"server ambiguity surrounding ticket count\" means.",
+              "createdAt": "2019-06-03T00:25:32Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "In what way do the servers guess? Do you mean that they guess the number that the client will need to use?",
+              "createdAt": "2019-06-03T00:27:06Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjUwMjkw",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T00:29:13Z",
+          "updatedAt": "2019-06-03T00:29:13Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "They guess \"the number of tickets\" vended.",
+              "createdAt": "2019-06-03T00:29:13Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjUwMzUy",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T00:30:14Z",
+          "updatedAt": "2019-06-03T00:30:15Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Hmm, I'm not sure adding more text is appropriate here. Do you have an alternative way to phrase this?",
+              "createdAt": "2019-06-03T00:30:15Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjYyMDI3",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T02:30:55Z",
+          "updatedAt": "2019-06-03T02:30:55Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "Guess implies that there is a correct answer. This text doesn't clearly define whose correct answer that is. The server just does what it wants for itself, it doesn't really guess. If it is guessing at all, it's guessing what the client would want, right?",
+              "createdAt": "2019-06-03T02:30:55Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjYyMDk3",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T02:31:31Z",
+          "updatedAt": "2019-06-03T02:31:31Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "How about `servers typically determine some (often hard-coded) number of tickets...`",
+              "createdAt": "2019-06-03T02:31:31Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjYyMjU5",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T02:32:50Z",
+          "updatedAt": "2019-06-03T02:32:51Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Yeah, I agree we don't want more text, but a clearer statement would be nice. How about:\r\n`This extension aims to provide a means for servers to determine the number of tickets to generate, while simultaneously...`",
+              "createdAt": "2019-06-03T02:32:51Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjYyNzE2",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T02:36:29Z",
+          "updatedAt": "2019-06-03T02:36:30Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "I like it! I went with a variant: \"servers choose some (often hard-coded) number..\"",
+              "createdAt": "2019-06-03T02:36:29Z",
+              "updatedAt": "2019-06-03T16:13:50Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0NjYzMDA1",
+          "commit": {
+            "abbreviatedOid": "c3f54e5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T02:38:52Z",
+          "updatedAt": "2019-06-03T02:38:52Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "I also like it :) I went with another variant: \"This extension aims to provide a means for servers to determine the number of tickets to generate as a means of reducing ticket waste, while simultaneously priming clients for future connection attempts.\"",
+              "createdAt": "2019-06-03T02:38:52Z",
+              "updatedAt": "2019-06-03T16:13:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0OTQzNDU3",
+          "commit": {
+            "abbreviatedOid": "fe4963a"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-06-03T15:10:45Z",
+          "updatedAt": "2019-06-03T15:11:13Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Nit: I don't love having `a means...` twice in the sentence. I would change this second instance to `...to generate in order to reduce ticket waste,`",
+              "createdAt": "2019-06-03T15:10:45Z",
+              "updatedAt": "2019-06-03T16:13:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0OTgxNjcw",
+          "commit": {
+            "abbreviatedOid": "fe4963a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T16:13:41Z",
+          "updatedAt": "2019-06-03T16:13:42Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nto generate in order to reduce ticket waste, while simultaneously priming clients\r\n```",
+              "createdAt": "2019-06-03T16:13:41Z",
+              "updatedAt": "2019-06-03T16:13:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjQ0OTgxOTMx",
+          "commit": {
+            "abbreviatedOid": "3535829"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-06-03T16:14:13Z",
+          "updatedAt": "2019-06-03T16:14:13Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Fixed!",
+              "createdAt": "2019-06-03T16:14:13Z",
+              "updatedAt": "2019-06-03T16:14:13Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzIxODc3NTAy",
+      "title": "Address issues from Hubert.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/5",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #4.",
+      "createdAt": "2019-09-26T19:42:28Z",
+      "updatedAt": "2019-09-27T23:37:08Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "caw/edits",
+      "baseRefOid": "3535829ec1e419aa963ea1a1cd65c8a43889aafe",
+      "headRepository": "chris-wood/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/edits",
+      "headRefOid": "7c2d3064d1e29e9b934b1b442074b5056c44a399",
+      "closedAt": "2019-09-27T23:37:08Z",
+      "mergedAt": "2019-09-27T23:37:07Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "d822f2091f73a8ca8aba3269ac816bb6aa81a323"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mjk0NTY4NzMz",
+          "commit": {
+            "abbreviatedOid": "65bbd72"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks! Approved pending",
+          "createdAt": "2019-09-27T21:18:17Z",
+          "updatedAt": "2019-09-27T21:19:05Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "s/no intention of connection resumption/no intention of resuming connections/ ?",
+              "createdAt": "2019-09-27T21:18:17Z",
+              "updatedAt": "2019-09-27T23:36:58Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "s/is in/is present in/",
+              "createdAt": "2019-09-27T21:18:53Z",
+              "updatedAt": "2019-09-27T23:36:58Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzI5NDU5NTcz",
+      "title": "More edits from the list.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/7",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2019-10-17T20:59:07Z",
+      "updatedAt": "2019-10-17T21:59:59Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "d822f2091f73a8ca8aba3269ac816bb6aa81a323",
+      "headRepository": "chris-wood/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/edits-again",
+      "headRefOid": "39441b652e6bcdcf7bc91202ee229b5daa608a60",
+      "closedAt": "2019-10-17T21:59:59Z",
+      "mergedAt": "2019-10-17T21:59:59Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "7585f2a1eb526e96e1d8fc8ad8f5735af3f9a88f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTY1NzM2",
+          "commit": {
+            "abbreviatedOid": "357aa13"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved pending",
+          "createdAt": "2019-10-17T21:46:14Z",
+          "updatedAt": "2019-10-17T21:48:11Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "This file is not necessary, why not have a git tag when submitting?",
+              "createdAt": "2019-10-17T21:46:14Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            },
+            {
+              "originalPosition": 92,
+              "body": "s/should/SHOULD/",
+              "createdAt": "2019-10-17T21:47:04Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            },
+            {
+              "originalPosition": 112,
+              "body": "s/may/could/",
+              "createdAt": "2019-10-17T21:47:57Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTY4NjY5",
+          "commit": {
+            "abbreviatedOid": "357aa13"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-10-17T21:53:00Z",
+          "updatedAt": "2019-10-17T21:53:01Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I think this was just a mistake",
+              "createdAt": "2019-10-17T21:53:01Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTcwMTM1",
+          "commit": {
+            "abbreviatedOid": "357aa13"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-10-17T21:56:32Z",
+          "updatedAt": "2019-10-17T21:56:33Z",
+          "comments": [
+            {
+              "originalPosition": 112,
+              "body": "Fixed.",
+              "createdAt": "2019-10-17T21:56:32Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTcwMTg0",
+          "commit": {
+            "abbreviatedOid": "e1e2237"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-10-17T21:56:40Z",
+          "updatedAt": "2019-10-17T21:56:40Z",
+          "comments": [
+            {
+              "originalPosition": 92,
+              "body": "Fixed, and removed \"Typically,\"",
+              "createdAt": "2019-10-17T21:56:40Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTcwMjI5",
+          "commit": {
+            "abbreviatedOid": "e1e2237"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-10-17T21:56:46Z",
+          "updatedAt": "2019-10-17T21:56:47Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Yep, fat fingered.",
+              "createdAt": "2019-10-17T21:56:47Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTcwNzA5",
+          "commit": {
+            "abbreviatedOid": "e1e2237"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-10-17T21:57:52Z",
+          "updatedAt": "2019-10-17T21:58:49Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "Looks like we're removing `may` words, but we have one here. How about `might`?\r\n\r\n```suggestion\r\nresumption. Moreover, as ticket generation might involve expensive computation, e.g., public key \r\n```",
+              "createdAt": "2019-10-17T21:57:52Z",
+              "updatedAt": "2019-10-17T21:59:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzAzNTcxNjE3",
+          "commit": {
+            "abbreviatedOid": "39441b6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-10-17T21:59:53Z",
+          "updatedAt": "2019-10-17T21:59:54Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "Works for me!",
+              "createdAt": "2019-10-17T21:59:54Z",
+              "updatedAt": "2019-10-17T21:59:54Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzM2Mjk4MDY0",
+      "title": "changing track to standards",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/8",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@chris-wood merge at your convenience.",
+      "createdAt": "2019-11-04T14:12:24Z",
+      "updatedAt": "2019-11-04T14:13:43Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "7585f2a1eb526e96e1d8fc8ad8f5735af3f9a88f",
+      "headRepository": "seanturner/draft-ietf-tls-ticketrequest",
+      "headRefName": "track_std",
+      "headRefOid": "6889ebb43d9116859cb8166a704a3ad7b92d333b",
+      "closedAt": "2019-11-04T14:13:43Z",
+      "mergedAt": "2019-11-04T14:13:42Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "f1bdb6245dfaf8e252c466c4625138fcf10803bc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzQzODIxNjM4",
+      "title": "Reword normative paragraph",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/10",
+      "state": "MERGED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2019-11-21T03:08:01Z",
+      "updatedAt": "2019-11-25T23:43:07Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "338e2c60bee05f763eebd89250fe25721ef61d4f",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "rephrase",
+      "headRefOid": "0516f5713a3ac0b4515104a60bd6679ca2d390e8",
+      "closedAt": "2019-11-25T23:43:07Z",
+      "mergedAt": "2019-11-25T23:43:07Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "ba4d68ab6eff67bd69b6a8acae5e613a8bd9dde4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzIwNjE5OTA5",
+          "commit": {
+            "abbreviatedOid": "21bad8a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-11-21T03:20:44Z",
+          "updatedAt": "2019-11-21T03:20:44Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzIwNjI0Nzcx",
+          "commit": {
+            "abbreviatedOid": "21bad8a"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-11-21T03:41:34Z",
+          "updatedAt": "2019-11-21T03:41:34Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzIyMjgwOTEz",
+          "commit": {
+            "abbreviatedOid": "0516f57"
+          },
+          "author": "tomato42",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-11-25T13:38:12Z",
+          "updatedAt": "2019-11-25T13:38:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzQ1NTkzNTYx",
+      "title": "Avoid seemingly-normative language",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/11",
+      "state": "MERGED",
+      "author": "sayrer",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I don't think any of this paragraph should have 2119 language in it. But, even overlooking that minor disagreement, it's important to avoid unintentional requirements. I think my edit guides well-meaning implementors, while making no guarantees.",
+      "createdAt": "2019-11-26T08:04:00Z",
+      "updatedAt": "2019-12-13T02:41:01Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "ba4d68ab6eff67bd69b6a8acae5e613a8bd9dde4",
+      "headRepository": "sayrer/draft-ietf-tls-ticketrequest",
+      "headRefName": "patch-1",
+      "headRefOid": "090b159cea5b020f744b33fcf1049ccc48ee3129",
+      "closedAt": "2019-12-13T02:41:01Z",
+      "mergedAt": "2019-12-13T02:41:01Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "813c9e7e760f236c63fcf5f5ed9207b92b7fa720"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzIzMjE0NDI5",
+          "commit": {
+            "abbreviatedOid": "090b159"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This editorial change is fine by me.",
+          "createdAt": "2019-11-26T19:00:36Z",
+          "updatedAt": "2019-11-26T19:00:36Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzIzOTg3NjEw",
+          "commit": {
+            "abbreviatedOid": "090b159"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-11-27T23:18:22Z",
+          "updatedAt": "2019-11-27T23:18:22Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzMxNjM1OTQ2",
+          "commit": {
+            "abbreviatedOid": "090b159"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-12-13T02:23:07Z",
+          "updatedAt": "2019-12-13T02:23:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzYwNDc1NzUy",
+      "title": "adding security consideration on reflection attack",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12",
+      "state": "MERGED",
+      "author": "mglt",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adding the text proposed in the email",
+      "createdAt": "2020-01-08T14:07:05Z",
+      "updatedAt": "2020-02-25T16:50:53Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "813c9e7e760f236c63fcf5f5ed9207b92b7fa720",
+      "headRepository": "mglt/draft-ietf-tls-ticketrequest",
+      "headRefName": "patch-1",
+      "headRefOid": "777d476626d86a1b75ed0f5501674780c1e5a04f",
+      "closedAt": "2020-02-25T16:50:53Z",
+      "mergedAt": "2020-02-25T16:50:53Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "6006ebb7608746e6483e3fb7370f69f89e72ab80"
+      },
+      "comments": [
+        {
+          "author": "mglt",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Unless I am missing something, I believe that checking the IP address may\nbe useful to filter packets that are outside the key exchange, but I do not\nsee this as a counter measure to the amplification attack. With a single\nround trip, unless i am missing something, I do not see how the server can\nverify the Client's IP address. It receives the ClientHello responds with\nthe ServerHello..Finished,NewSessionTickets. In other cases, the server\nreceived from the given IP address the ClientHello and the client Finished\nwhich I think proves that IP receives the the ServerHello and responds to\nit.\n\nYours,\nDaniel\n\nOn Sat, Jan 25, 2020 at 9:16 AM Christopher Wood <notifications@github.com>\nwrote:\n\n> *@chris-wood* requested changes on this pull request.\n>\n> I'd like to see some text which says that this is only really a problem if\n> the server does not verify the client's IP address. Can we add that?\n>\n> \u2014\n> You are receiving this because you authored the thread.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12?email_source=notifications&email_token=ABSL7SRR5CNBH3HMV6S3LMTQ7RCTLA5CNFSM4KEI4EG2YY3PNVWWK3TUL52HS4DFWFIHK3DMKJSXC5LFON2FEZLWNFSXPKTDN5WW2ZLOORPWSZGOCTBQ7PA#pullrequestreview-348327868>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABSL7SV3NUAGRQ2DKOG2EJDQ7RCTLANCNFSM4KEI4EGQ>\n> .\n>\n\n\n-- \nDaniel Migault\nEricsson\n8400 boulevard Decarie\nMontreal, QC   H4P 2N2\nCanada\n\nPhone: +1 514-452-2160\n",
+          "createdAt": "2020-01-25T16:35:06Z",
+          "updatedAt": "2020-01-25T16:35:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "TLS has a cookie extension for this purpose, for example.",
+          "createdAt": "2020-01-25T17:04:36Z",
+          "updatedAt": "2020-01-25T17:04:36Z"
+        },
+        {
+          "author": "mglt",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks, looks good to me.\nYours,\nDaniel\n\nOn Mon, Jan 27, 2020 at 8:03 PM David Schinazi <notifications@github.com>\nwrote:\n\n> *@DavidSchinazi* commented on this pull request.\n> ------------------------------\n>\n> In draft-ietf-tls-ticketrequests.md\n> <https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12#discussion_r371565803>\n> :\n>\n> > @@ -162,6 +162,15 @@ and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticke\n>  hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable\n>  amount of time that mimics the ticket rotation period.\n>\n> +In some cases, a server may send NewSessionTicket messages immediately upon sending\n> +the server Finished message rather than waiting for the client Finished. If the server\n> +has not verified the client's ownership of the IP address, e.g., with the TLS\n> +Cookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create\n> +an amplification attack proportional to the count value toward a target by performing a key\n> +exchange over UDP with spoofed packets. Server should limit the number of NewSessionTicket messages\n>\n> I think I'm somewhat understanding it, but it still feels overly\n> complicated. How about we replace the last sentence with Servers SHOULD\n> limit the number of NewSessionTicket messages they send until they have\n> verified the client's ownership of its IP address.\n>\n> \u2014\n> You are receiving this because you authored the thread.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12?email_source=notifications&email_token=ABSL7SUIAO6DOG5BHJSCGLLQ75777A5CNFSM4KEI4EG2YY3PNVWWK3TUL52HS4DFWFIHK3DMKJSXC5LFON2FEZLWNFSXPKTDN5WW2ZLOORPWSZGOCTHIDQI#discussion_r371565803>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABSL7SX5L3XR6O6PHWBL2GDQ75777ANCNFSM4KEI4EGQ>\n> .\n>\n\n\n-- \nDaniel Migault\nEricsson\n8400 boulevard Decarie\nMontreal, QC   H4P 2N2\nCanada\n\nPhone: +1 514-452-2160\n",
+          "createdAt": "2020-01-28T14:51:51Z",
+          "updatedAt": "2020-01-28T14:51:51Z"
+        },
+        {
+          "author": "mglt",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I agree with the change below and updated the text.\n\nOLD:\nServer should limit the number of NewSessionTicket messages sent in\nresponse to a \"ticket_request\" should be based on the applicability and the\namplification factor of such attack.\n\nNEW\nServers SHOULD limit the number of NewSessionTicket messages they send\nuntil they have verified the client's ownership of its IP address.\n\nOn Tue, Jan 28, 2020 at 11:14 AM Christopher Wood <notifications@github.com>\nwrote:\n\n> *@chris-wood* commented on this pull request.\n> ------------------------------\n>\n> In draft-ietf-tls-ticketrequests.md\n> <https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12#discussion_r371903307>\n> :\n>\n> > @@ -162,6 +162,15 @@ and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticke\n>  hints provided by servers, clients SHOULD dispose of pooled tickets after some reasonable\n>  amount of time that mimics the ticket rotation period.\n>\n> +In some cases, a server may send NewSessionTicket messages immediately upon sending\n> +the server Finished message rather than waiting for the client Finished. If the server\n> +has not verified the client's ownership of the IP address, e.g., with the TLS\n> +Cookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create\n> +an amplification attack proportional to the count value toward a target by performing a key\n> +exchange over UDP with spoofed packets. Server should limit the number of NewSessionTicket messages\n>\n> @mglt <https://github.com/mglt> can we go with David's suggestion above?\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/12?email_source=notifications&email_token=ABSL7SWT56FFWBCF6CPMV4LRABKVXA5CNFSM4KEI4EG2YY3PNVWWK3TUL52HS4DFWFIHK3DMKJSXC5LFON2FEZLWNFSXPKTDN5WW2ZLOORPWSZGOCTKQVBI#discussion_r371903307>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABSL7STFOEEVD342PXU5DITRABKVXANCNFSM4KEI4EGQ>\n> .\n>\n\n\n-- \nDaniel Migault\nEricsson\n8400 boulevard Decarie\nMontreal, QC   H4P 2N2\nCanada\n\nPhone: +1 514-452-2160\n",
+          "createdAt": "2020-01-28T16:38:00Z",
+          "updatedAt": "2020-01-28T16:38:00Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Great! We're just waiting on @tfpauly.",
+          "createdAt": "2020-01-28T19:04:19Z",
+          "updatedAt": "2020-01-28T19:04:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4MzI3ODA1",
+          "commit": {
+            "abbreviatedOid": "73aad45"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-25T14:14:41Z",
+          "updatedAt": "2020-01-25T14:14:42Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nIn some cases, a server may send NewSessionTicket immediately upon sending its Finished rather\r\n```",
+              "createdAt": "2020-01-25T14:14:41Z",
+              "updatedAt": "2020-02-25T16:48:26Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4MzI3ODY4",
+          "commit": {
+            "abbreviatedOid": "73aad45"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I'd like to see some text which says that this is only really a problem if the server does not verify the client's IP address. Can we add that?",
+          "createdAt": "2020-01-25T14:16:20Z",
+          "updatedAt": "2020-01-25T14:16:20Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4ODMwNzc3",
+          "commit": {
+            "abbreviatedOid": "764fa2b"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Some minor changes before this is good to go!",
+          "createdAt": "2020-01-27T17:11:05Z",
+          "updatedAt": "2020-01-27T17:14:48Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nhas not verified the client's ownership of the IP address, e.g., with the TLS \r\n```",
+              "createdAt": "2020-01-27T17:11:05Z",
+              "updatedAt": "2020-02-25T16:48:26Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nCookie extension (see {{RFC8446}}; Section 4.2.2), an attacker may take advantage of this behavior to create\r\n```",
+              "createdAt": "2020-01-27T17:11:14Z",
+              "updatedAt": "2020-02-25T16:48:27Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nsent in response to a \"ticket_request\" based on the applicability and the amplification\r\n```",
+              "createdAt": "2020-01-27T17:13:29Z",
+              "updatedAt": "2020-02-25T16:48:27Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nexchange over UDP with spoofed packets. Server should limit the number of NewSessionTicket messages\r\n```",
+              "createdAt": "2020-01-27T17:13:50Z",
+              "updatedAt": "2020-02-25T16:48:27Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nan amplification attack proportional to the count value toward a target by performing a key\r\n```",
+              "createdAt": "2020-01-27T17:14:27Z",
+              "updatedAt": "2020-02-25T16:48:28Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDQzMjYx",
+          "commit": {
+            "abbreviatedOid": "da71080"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-27T23:19:01Z",
+          "updatedAt": "2020-01-27T23:19:02Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nsent in response to a \"ticket_request\" should be based on the applicability and the amplification\r\n```",
+              "createdAt": "2020-01-27T23:19:01Z",
+              "updatedAt": "2020-02-25T16:48:28Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDQzMjc5",
+          "commit": {
+            "abbreviatedOid": "da71080"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks -- @tfpauly @DavidSchinazi please have a look!",
+          "createdAt": "2020-01-27T23:19:05Z",
+          "updatedAt": "2020-01-27T23:20:06Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDczNzM4",
+          "commit": {
+            "abbreviatedOid": "8e90335"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T00:49:33Z",
+          "updatedAt": "2020-01-28T00:49:33Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Overall I like this PR but that last sentence doesn't parse for me. What does it mean?",
+              "createdAt": "2020-01-28T00:49:33Z",
+              "updatedAt": "2020-02-25T16:48:28Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDczOTUy",
+          "commit": {
+            "abbreviatedOid": "8e90335"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T00:50:13Z",
+          "updatedAt": "2020-01-28T00:50:14Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nexchange over UDP with spoofed packets. Servers should limit the number of NewSessionTicket messages\r\n```",
+              "createdAt": "2020-01-28T00:50:13Z",
+              "updatedAt": "2020-02-25T16:48:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDc0MDUy",
+          "commit": {
+            "abbreviatedOid": "8e90335"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T00:50:34Z",
+          "updatedAt": "2020-01-28T00:50:34Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nsent in response to a \"ticket_request\" based on the applicability and the amplification\r\n```",
+              "createdAt": "2020-01-28T00:50:34Z",
+              "updatedAt": "2020-02-25T16:48:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDc0MTcy",
+          "commit": {
+            "abbreviatedOid": "8e90335"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T00:50:57Z",
+          "updatedAt": "2020-01-28T00:50:57Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I think the suggestions got messed up -- it should be fine with the proposed edits!",
+              "createdAt": "2020-01-28T00:50:57Z",
+              "updatedAt": "2020-02-25T16:48:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5MDc3OTUz",
+          "commit": {
+            "abbreviatedOid": "8e90335"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T01:03:58Z",
+          "updatedAt": "2020-01-28T01:03:58Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I think I'm somewhat understanding it, but it still feels overly complicated. How about we replace the last sentence with `Servers SHOULD limit the number of NewSessionTicket messages they send until they have verified the client's ownership of its IP address.`",
+              "createdAt": "2020-01-28T01:03:58Z",
+              "updatedAt": "2020-02-25T16:48:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5NTA2MTgx",
+          "commit": {
+            "abbreviatedOid": "f0b386e"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-28T16:14:17Z",
+          "updatedAt": "2020-01-28T16:14:18Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "@mglt can we go with David's suggestion above? ",
+              "createdAt": "2020-01-28T16:14:18Z",
+              "updatedAt": "2020-02-25T16:48:30Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ5NjAzMTI3",
+          "commit": {
+            "abbreviatedOid": "3a05f3a"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved pending Chris' last suggestion",
+          "createdAt": "2020-01-28T18:28:14Z",
+          "updatedAt": "2020-01-28T18:28:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY3MTIxMzEz",
+      "title": "Prohibit SH and HRR extensions, allow EE server hints",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/15",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #13 and #14.\r\n\r\nThe server hint came up in the context of QUIC, e.g., as a possible optimization to let clients know if they should expect any post handshake messages.\r\n\r\ncc @huitema, @martinthomson",
+      "createdAt": "2020-01-25T14:19:42Z",
+      "updatedAt": "2020-01-27T17:10:19Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "813c9e7e760f236c63fcf5f5ed9207b92b7fa720",
+      "headRepository": "chris-wood/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/hrr-and-server-hint",
+      "headRefOid": "e1b6cad3a26ccadcef1fa9bd875fb6d6cc06f1c3",
+      "closedAt": "2020-01-26T19:39:35Z",
+      "mergedAt": "2020-01-26T19:39:34Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "3d418d28852f53ecdffcc9a140dbf695c71c3424"
+      },
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks like this got merged without any business days to review it :) but otherwise the text looks good, approved.",
+          "createdAt": "2020-01-27T17:07:10Z",
+          "updatedAt": "2020-01-27T17:07:10Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Every day is a business day! ;-)",
+          "createdAt": "2020-01-27T17:10:19Z",
+          "updatedAt": "2020-01-27T17:10:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4MzI5Mzg0",
+          "commit": {
+            "abbreviatedOid": "e2d7923"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I'm not a huge fan of sending extensions that aren't really needed, but this seems fine.\r\n\r\nI missed the QUIC discussion (or maybe it's still in my inbox).\r\n\r\nBTW, I still like the idea of hoisting tickets to the application layer, but ekr seems to think that they belong at the TLS layer.  I guess we'll just have to keep disagreeing on that point :)",
+          "createdAt": "2020-01-25T14:55:10Z",
+          "updatedAt": "2020-01-25T14:56:34Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "The IANA considerations section should say \"CH, EE\".",
+              "createdAt": "2020-01-25T14:55:10Z",
+              "updatedAt": "2020-01-25T14:58:56Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4Mzk5OTk5",
+          "commit": {
+            "abbreviatedOid": "e1b6cad"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-01-26T19:31:24Z",
+          "updatedAt": "2020-01-26T19:31:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY3MjUyNjEx",
+      "title": "Add performance considerations",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/16",
+      "state": "MERGED",
+      "author": "tfpauly",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Write up text for #9 ",
+      "createdAt": "2020-01-26T19:30:51Z",
+      "updatedAt": "2020-01-27T17:13:16Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "813c9e7e760f236c63fcf5f5ed9207b92b7fa720",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "tfp/performance",
+      "headRefOid": "01a61dfbcc0559d5de125a1c71e2bbdc8df26510",
+      "closedAt": "2020-01-27T15:56:07Z",
+      "mergedAt": "2020-01-27T15:56:06Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "ee764d3f3c8961c5579ff758d3fed512c1e1971f"
+      },
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This PR looks good to me",
+          "createdAt": "2020-01-27T17:13:16Z",
+          "updatedAt": "2020-01-27T17:13:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDAwNTE4",
+          "commit": {
+            "abbreviatedOid": "0e90aec"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2020-01-26T19:41:18Z",
+          "updatedAt": "2020-01-26T19:43:28Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nserver Finished message (see {{RFC8446}}; Section 4.6.1). A server which chooses to send a large number of tickets to a client\r\n```",
+              "createdAt": "2020-01-26T19:41:18Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nServers can send tickets in NewSessionTicket messages any time after the\r\n```",
+              "createdAt": "2020-01-26T19:41:46Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\ncan potentially harm application performance if the tickets are sent before application data.\r\n```",
+              "createdAt": "2020-01-26T19:42:43Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nFor example, if the transport connection has a constrained congestion window, ticket\r\n```",
+              "createdAt": "2020-01-26T19:43:09Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nmessages could delay sending application data. To avoid this, servers should\r\n```",
+              "createdAt": "2020-01-26T19:43:19Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDAwOTIx",
+          "commit": {
+            "abbreviatedOid": "0e90aec"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T19:49:18Z",
+          "updatedAt": "2020-01-26T19:49:19Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "That section say client finished though... \r\n\r\n`At any time after the server has received the client Finished message, it MAY send a NewSessionTicket message.`",
+              "createdAt": "2020-01-26T19:49:19Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDAwOTUx",
+          "commit": {
+            "abbreviatedOid": "6991be2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T19:50:02Z",
+          "updatedAt": "2020-01-26T19:50:03Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I don't think removing the word works, grammatically?",
+              "createdAt": "2020-01-26T19:50:03Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDAxMTU0",
+          "commit": {
+            "abbreviatedOid": "6991be2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T19:54:17Z",
+          "updatedAt": "2020-01-26T19:54:18Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "If you apply them all it should :)",
+              "createdAt": "2020-01-26T19:54:18Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDAxMTcw",
+          "commit": {
+            "abbreviatedOid": "6991be2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T19:54:28Z",
+          "updatedAt": "2020-01-26T19:54:29Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "It also says this:\r\n\r\n```\r\nNote: Although the resumption master secret depends on the client's\r\n   second flight, a server which does not request client authentication\r\n   MAY compute the remainder of the transcript independently and then\r\n   send a NewSessionTicket immediately upon sending its Finished rather\r\n   than waiting for the client Finished.\r\n```",
+              "createdAt": "2020-01-26T19:54:29Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDA0MDAz",
+          "commit": {
+            "abbreviatedOid": "6991be2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T20:48:38Z",
+          "updatedAt": "2020-01-26T20:48:39Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Ahhh I see",
+              "createdAt": "2020-01-26T20:48:38Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NDA0MDE2",
+          "commit": {
+            "abbreviatedOid": "6991be2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-01-26T20:48:55Z",
+          "updatedAt": "2020-01-26T20:48:56Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Ah the other part had rolled off",
+              "createdAt": "2020-01-26T20:48:56Z",
+              "updatedAt": "2020-01-26T20:49:37Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NzcyNzgy",
+          "commit": {
+            "abbreviatedOid": "01a61df"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-01-27T15:55:59Z",
+          "updatedAt": "2020-01-27T15:55:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzgwNjA1MTQx",
+      "title": "Clarify racing pre-conditions",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/17",
+      "state": "CLOSED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per Tommy's suggestion on the list [1], clarify that connection racing should be started with enough tickets to succeed and not drain the cache.\r\n\r\n[1] https://mailarchive.ietf.org/arch/msg/tls/fOmUYve5DLomjx3-Df9xQy0bocg/",
+      "createdAt": "2020-02-27T02:33:46Z",
+      "updatedAt": "2020-04-06T18:21:32Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "6006ebb7608746e6483e3fb7370f69f89e72ab80",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/clarify-racing",
+      "headRefOid": "8a7e776f43c7249a85672e894fecca19d4cb6faa",
+      "closedAt": "2020-04-06T18:21:32Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY1NDMyMzk2",
+          "commit": {
+            "abbreviatedOid": "8a7e776"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-02-27T06:05:20Z",
+          "updatedAt": "2020-02-27T06:05:20Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY2NjYxMjY4",
+          "commit": {
+            "abbreviatedOid": "8a7e776"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Seems fine, apart from the parenthetical statement being unclear.",
+          "createdAt": "2020-02-28T20:19:10Z",
+          "updatedAt": "2020-02-28T20:20:16Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Do servers implement \"session ticket encryption keys\" or \"single-use session ticket encryption keys\"?",
+              "createdAt": "2020-02-28T20:19:11Z",
+              "updatedAt": "2020-02-28T20:20:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY2NjY4NjIz",
+          "commit": {
+            "abbreviatedOid": "8a7e776"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-02-28T20:33:41Z",
+          "updatedAt": "2020-02-28T20:33:41Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Good point. I'll just drop the parenthetical to avoid confusion.",
+              "createdAt": "2020-02-28T20:33:41Z",
+              "updatedAt": "2020-02-28T20:33:41Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzgxODIzNjcy",
+      "title": "Ticket request with separate resumption and new_session counts.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/18",
+      "state": "MERGED",
+      "author": "vdukhovni",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This improves both happy eyeballs and ticket reuse.",
+      "createdAt": "2020-02-29T09:13:25Z",
+      "updatedAt": "2020-04-18T14:11:04Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "6006ebb7608746e6483e3fb7370f69f89e72ab80",
+      "headRepository": "vdukhovni/draft-ietf-tls-ticketrequest",
+      "headRefName": "pull17",
+      "headRefOid": "e249362263b97d57cfc1b6c8c346aeab4a023b92",
+      "closedAt": "2020-04-18T14:11:03Z",
+      "mergedAt": "2020-04-18T14:11:03Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "e249362263b97d57cfc1b6c8c346aeab4a023b92"
+      },
+      "comments": [
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "> I still don't think that the additional count is warranted.\r\n> \r\n> The rationale here is reasonable, and does provide a degree of justification for the change, but I would prefer not to take on the additional complexity.\r\n\r\nI am significantly skeptical re complexity. The server looks at one counter when resuming and the other when doing a full handshake.  Where's the complexity?\r\n\r\nI am sorry to say that to me personally, the complexity objection sounds rather like reluctance to reconsider the design than a response on the merit.",
+          "createdAt": "2020-03-01T23:32:13Z",
+          "updatedAt": "2020-03-01T23:32:29Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY2ODg4MzAz",
+          "commit": {
+            "abbreviatedOid": "3dd8be9"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I still don't think that the additional count is warranted.\r\n\r\nThe rationale here is reasonable, and does provide a degree of justification for the change, but I would prefer not to take on the additional complexity.",
+          "createdAt": "2020-03-01T21:30:27Z",
+          "updatedAt": "2020-03-01T21:33:57Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\nsession that is too old.  When that happens, it is possible that all tickets\r\nderived from the same original session are equally invalid.  A client avoids\r\na full handshake on subsequent connections if it replaces all stored tickets\r\nwith fresh values.  The\r\n```",
+              "createdAt": "2020-03-01T21:31:08Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\nHaving multiple tickets equips clients with enough tickets to initiate connection racing while\r\n```",
+              "createdAt": "2020-03-01T21:31:59Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY2ODkxNTM0",
+          "commit": {
+            "abbreviatedOid": "3dd8be9"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-01T22:21:48Z",
+          "updatedAt": "2020-03-01T22:21:49Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Thanks, will merge.",
+              "createdAt": "2020-03-01T22:21:48Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzY2ODkyMDcz",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-01T22:29:22Z",
+          "updatedAt": "2020-03-01T22:29:22Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "merged",
+              "createdAt": "2020-03-01T22:29:22Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDA4MjI3",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I'm actually pretty enthusiastic about the technical mechanisms here, but I expect the surrounding discussion/recommendations to need work before they can attain consensus.",
+          "createdAt": "2020-03-06T00:32:32Z",
+          "updatedAt": "2020-03-06T01:21:56Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "The various tickets don't have to come from the same initial handshake, so either \"each ticket ... derives from\" or \"each ultimately derive from\" or \"derive from one or more initial full handshakes\" seems needed.",
+              "createdAt": "2020-03-06T00:32:32Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nforce a full handshake even when the client presents a valid ticket for a\r\n```",
+              "createdAt": "2020-03-06T00:35:27Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 96,
+              "body": "Implicit invalidation is something that we assume for the purposes of this mechanism, but is not a protocol requirement or universal invariant.",
+              "createdAt": "2020-03-06T00:41:19Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 103,
+              "body": "\"the associated session\" may not be the right phrasing; for on, \"associated with what\"",
+              "createdAt": "2020-03-06T00:42:06Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 121,
+              "body": "I'm not very comfortable with the phrasing in this paragraph.  At a minimum we'd need to note that this is in violation of the recommendation from RFC 8446 (as well as the reasoning for diverging from the recommendation, which is basicall already present), but it's not fully clear to me whether we have consensus to make this positive declaration (as opposed to remaining silent on the point in either direction).",
+              "createdAt": "2020-03-06T00:44:40Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 128,
+              "body": "I think this is what the client is requesting regardless of whether resumption is actually performed.  (Well, provided a ticket is presented, at least...)",
+              "createdAt": "2020-03-06T00:48:42Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "\"it\" doesn't have a clear antecedent from the grammar.  (It's clearly the server from the logic, but that only helps if you already know what the sentence is saying.)",
+              "createdAt": "2020-03-06T00:49:18Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "Similarly to the prior paragraph, it's not clear that this approach is going to garner consensus.  It might be more viable to simply state the implications of what the client requests without making recommendations as to server behavior; server behavior is basically up to server policy in this case, and we lack clear agreement on the recommended server behavior.  So, cover\r\n\r\n* requested resumption_count of zero is a request to reuse.  (Maybe reiterate \"in contravention of the RFC 8446 recommendation\")\r\n* how many tickets the server returns provides information about whether the ticket being used to resume the current session remains valid for future resumptions [with the details]",
+              "createdAt": "2020-03-06T00:52:23Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 135,
+              "body": "```suggestion\r\nwilling to send (whether for full handshakes or resumptions), to save resources.  Therefore, the number of NewSessionTicket\r\n```",
+              "createdAt": "2020-03-06T00:53:37Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 134,
+              "body": "It's not entirely clear that \"SHOULD\" is necessary, though I personally don't mind.  (Arguably we should have said this in 8446 if we wanted to, but we didn't.)",
+              "createdAt": "2020-03-06T00:54:38Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 144,
+              "body": "I think description of the semantics of the echoed TicketRequestContents fields should be within a single paragraph.  (So the \"if the extension is echoed\" transition would not be needed.)",
+              "createdAt": "2020-03-06T00:55:58Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 142,
+              "body": "```suggestion\r\nindicates the number of tickets the server expects to send to the client on this connection.\r\n```",
+              "createdAt": "2020-03-06T00:56:40Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 146,
+              "body": "It somehow feels more natural to reverse these; with \"zero issued tickets\" meaning \"reuse okay\" and a nonzero value implying that it is necessary to issue new tickets for resumptions.  But it doesn't actually matter provided the description is clear (which this is).\r\n\r\nThat said, we still need to reiterate that setting the value to indicate \"supports resumption\" remains NOT RECOMMENDED.",
+              "createdAt": "2020-03-06T00:57:40Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 148,
+              "body": "I would actually suggest defining a new structure for the echoed extension, with different names for the fields.  There doesn't seem to be much benefit from overloading the names.\r\n\r\nI also note that if I understand correctly, this field's ability to indicate whether the server supports reuse at all is a key fact in order avoid both (1) the perceived need for a magic 0->1 mapping, and (2) scenarios where a client that supports reuse talking to a server that does not support reuse ends up alternating resumption and full handshakes.  Specifically, such a client will know whether to request 0 or 1 tickets for future resumptions against the server in question.\r\n\r\nMany of the problems we currently have in this space (without any sort of extension) stem from the fact that the only data available to the client about server ticket policy is from the actual issued tickets, and since the server can issue/not-issue tickets for arbitrary reasons, it's hard to pick up a clear signal from that behavior.",
+              "createdAt": "2020-03-06T00:58:07Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            },
+            {
+              "originalPosition": 147,
+              "body": "It wouldn't hurt to mention that advice from 8446 again, I guess.",
+              "createdAt": "2020-03-06T00:58:37Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDI4Mzc1",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:23:45Z",
+          "updatedAt": "2020-03-06T01:23:46Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Indeed they don't in theory, but in practice they would, because any time the client sees an initial handshake, it should dump all previous tickets and store only the new ones. :-)",
+              "createdAt": "2020-03-06T01:23:45Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDI4NjUz",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:24:30Z",
+          "updatedAt": "2020-03-06T01:24:30Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "\"force\" is fine. I'll merge that.",
+              "createdAt": "2020-03-06T01:24:30Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDI5MjI3",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:26:24Z",
+          "updatedAt": "2020-03-06T01:26:25Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "Yes, it is the most plausible conclusion the client can draw from the fact that the present ticket failed to work.",
+              "createdAt": "2020-03-06T01:26:25Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDI5NTU3",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:27:32Z",
+          "updatedAt": "2020-03-06T01:27:33Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "Associated with the initial handshake that obtained the batch of tickets of which the presented ticket was one.  Tickets issued on resumption are still associated with the same initial session.",
+              "createdAt": "2020-03-06T01:27:32Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMwMjcy",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:29:43Z",
+          "updatedAt": "2020-03-06T01:29:43Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "If this needs clarification, do you have suggested text?  Or should I try to write some more words here?  I am a bit concerned about writing too much, and making folks even more reluctant to merge this. It is IMHO so far a fairly modest change, modulo explicit reuse support, which can be easily removed if there's no consensus for that (as seems likely... :-( ).",
+              "createdAt": "2020-03-06T01:29:43Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMwODY3",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:31:40Z",
+          "updatedAt": "2020-03-06T01:31:40Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "It is not a violation, the requirement in C.4 of 8446 is a SHOULD, not a MUST.  Clients and servers that have properly evaluated their situation and concluded that reuse has no downside could make use of this mechanism.  If/when we do specify reuse (perhaps later draft), there can be more caveats here. Consider this a draft, not the final text.",
+              "createdAt": "2020-03-06T01:31:40Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMwOTcz",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:32:00Z",
+          "updatedAt": "2020-03-06T01:32:01Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "Sure.",
+              "createdAt": "2020-03-06T01:32:00Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMxMzM5",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:33:09Z",
+          "updatedAt": "2020-03-06T01:33:10Z",
+          "comments": [
+            {
+              "originalPosition": 142,
+              "body": "Sure.",
+              "createdAt": "2020-03-06T01:33:09Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMxODc4",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:34:53Z",
+          "updatedAt": "2020-03-06T01:34:54Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "Yes, frankly I was not sure which value should indicate reuse support, and indeed the signal that the server does or not does not support reuse is perhaps not strictly needed.  This detail can be tuned as needed.  Yes, reuse is NOT RECOMMENDED.",
+              "createdAt": "2020-03-06T01:34:53Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMyOTY0",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:38:33Z",
+          "updatedAt": "2020-03-06T01:38:34Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "Yes, if we could rely on servers that support reuse to always explicitly signal that fact in an echoed extension, then the 0->1 magic would not be needed, since clients would never attempt reuse with a server that failed to promise it on the initial handshake.\r\n\r\nIt makes the client's state much more complicated (having to remember how the ticket was acquired, ...), especially in multi-process shared caches, ...  But it is not impossible.\r\n\r\nIMHO the 0->1 thing is much cheaper, and the echoed extension is then not really needed. This could use some discussion.",
+              "createdAt": "2020-03-06T01:38:34Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMzMDE5",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:38:44Z",
+          "updatedAt": "2020-03-06T01:38:45Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "Sure.",
+              "createdAt": "2020-03-06T01:38:45Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDMzNTc1",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:40:41Z",
+          "updatedAt": "2020-03-06T01:40:42Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "Yes.  We still have to document it as an assumption, though.",
+              "createdAt": "2020-03-06T01:40:41Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDM0MDQ3",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:42:18Z",
+          "updatedAt": "2020-03-06T01:42:19Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "I was thinking something like \"willing to resume using the ticket being presented in the current handshake\" or even just \"use the resumption handshake flow\"",
+              "createdAt": "2020-03-06T01:42:19Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDM0NDIz",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:43:38Z",
+          "updatedAt": "2020-03-06T01:43:38Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "It is a violation of the recommendation; it is not a protocol violation.  Feel free to describe it as \"behaving contrary to the recommendation\" or \"using knowledge of particular circumstances that justify deviating from the recommendation\" or however you want, just acknowledge that a particular behavior is recommended in the general case and this behavior is not it.",
+              "createdAt": "2020-03-06T01:43:38Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDM0NzIx",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T01:44:37Z",
+          "updatedAt": "2020-03-06T01:44:38Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "I mentioned it on the list, so we should probably have that discussion on the list.  (Not that it sounded like you were planning to have it here anyway...)",
+              "createdAt": "2020-03-06T01:44:37Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDk0NzA4",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T05:49:10Z",
+          "updatedAt": "2020-03-06T05:49:10Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "I think I addressed this in the next commit (coming up shortly).",
+              "createdAt": "2020-03-06T05:49:10Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMDk4NzU5",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:05:25Z",
+          "updatedAt": "2020-03-06T06:05:26Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I think I'll have addressed this as well.",
+              "createdAt": "2020-03-06T06:05:26Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMTAxMTc1",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:14:13Z",
+          "updatedAt": "2020-03-06T06:14:13Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "Adding some parenthetical text here...",
+              "createdAt": "2020-03-06T06:14:13Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMTAxMzQ4",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:14:48Z",
+          "updatedAt": "2020-03-06T06:14:48Z",
+          "comments": [
+            {
+              "originalPosition": 128,
+              "body": "Yes.",
+              "createdAt": "2020-03-06T06:14:48Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMTAyNDk1",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:18:25Z",
+          "updatedAt": "2020-03-06T06:18:26Z",
+          "comments": [
+            {
+              "originalPosition": 128,
+              "body": "Updated.",
+              "createdAt": "2020-03-06T06:18:25Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMTAzNzQ2",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:22:39Z",
+          "updatedAt": "2020-03-06T06:22:40Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "I'll drop the case wherein the server supports reuse if (or when) consensus is declared to be against specifying reuse.",
+              "createdAt": "2020-03-06T06:22:39Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwMTA0MTA4",
+          "commit": {
+            "abbreviatedOid": "f5f7e33"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-03-06T06:23:52Z",
+          "updatedAt": "2020-03-06T06:23:52Z",
+          "comments": [
+            {
+              "originalPosition": 134,
+              "body": "I think this was in the document before my edits...",
+              "createdAt": "2020-03-06T06:23:52Z",
+              "updatedAt": "2020-03-06T06:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwNzE4Mzcx",
+          "commit": {
+            "abbreviatedOid": "e249362"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "Thanks for making the updates",
+          "createdAt": "2020-03-07T03:19:31Z",
+          "updatedAt": "2020-03-07T03:21:20Z",
+          "comments": [
+            {
+              "originalPosition": 86,
+              "body": "```suggestion\r\nthe server supports reuse), the server SHOULD return no tickets.  Otherwise, when\r\n```",
+              "createdAt": "2020-03-07T03:19:32Z",
+              "updatedAt": "2020-03-07T03:21:20Z"
+            },
+            {
+              "originalPosition": 89,
+              "body": "I think (on first glance) I'm personally okay with this logic, but we'll need input from the WG, of course.",
+              "createdAt": "2020-03-07T03:20:42Z",
+              "updatedAt": "2020-03-07T03:21:20Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzcwODQzNzk5",
+          "commit": {
+            "abbreviatedOid": "e249362"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks for putting this down in writing! I think a separate counter is fine given the rationale, but I disagree with all text on re-use. I think that should happen elsewhere. So, requesting changes for now, though if the WG decides to address ticket re-use here then we will revisit!",
+          "createdAt": "2020-03-08T16:55:12Z",
+          "updatedAt": "2020-03-08T17:12:06Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nthree limitations with this design.\r\n```",
+              "createdAt": "2020-03-08T16:55:12Z",
+              "updatedAt": "2020-03-08T17:12:06Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nFirst, servers vend some (often hard-coded) number of tickets per\r\n```",
+              "createdAt": "2020-03-08T16:55:41Z",
+              "updatedAt": "2020-03-08T17:12:06Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nconnection.  Some server implementations return a different default number of\r\n```",
+              "createdAt": "2020-03-08T16:56:13Z",
+              "updatedAt": "2020-03-08T17:12:06Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nThird, all tickets in the client's possession\r\n```",
+              "createdAt": "2020-03-08T16:56:42Z",
+              "updatedAt": "2020-03-08T17:12:06Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\nMoreover, as some servers may implement single-use tickets,\r\n```",
+              "createdAt": "2020-03-08T16:58:29Z",
+              "updatedAt": "2020-03-08T17:12:06Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\ndistinct tickets prevent premature ticket invalidation by racing.\r\n```",
+              "createdAt": "2020-03-08T16:58:41Z",
+              "updatedAt": "2020-03-08T17:12:07Z"
+            },
+            {
+              "originalPosition": 59,
+              "body": "Can we simplify this text and move it to the following section? For example:\r\n\r\n```\r\nAs discussed in {{introduction}}, clients may want different numbers of tickets\r\nfor fresh or resumed handshakes. Clients may indicate to servers their desired \r\nnumber of tickets for a single connection, in the case of a full handshake or \r\nresumption, via the following \"ticket_request\" extension:\r\n\r\n...\r\n```",
+              "createdAt": "2020-03-08T17:03:28Z",
+              "updatedAt": "2020-03-08T17:12:07Z"
+            },
+            {
+              "originalPosition": 98,
+              "body": "```suggestion\r\n: The number of tickets desired by the client when the server chooses to\r\nnegotiate a fresh session (full handshake). \r\n```",
+              "createdAt": "2020-03-08T17:03:59Z",
+              "updatedAt": "2020-03-08T17:12:07Z"
+            },
+            {
+              "originalPosition": 106,
+              "body": "```suggestion\r\nClients can use the above structure to indicate their desired number of tickets\r\nfor fresh or resumed connections.\r\n```",
+              "createdAt": "2020-03-08T17:05:01Z",
+              "updatedAt": "2020-03-08T17:12:07Z"
+            },
+            {
+              "originalPosition": 114,
+              "body": "```suggestion\r\nultimately end up with just the tickets from a single resumed session.\r\nIn that case a resumption_count commensurate with the number of parallel\r\nsessions would be used.\r\n```",
+              "createdAt": "2020-03-08T17:06:05Z",
+              "updatedAt": "2020-03-08T17:12:07Z"
+            },
+            {
+              "originalPosition": 111,
+              "body": "```suggestion\r\nwithout over-provisioning the client with excess tickets.  However, clients\r\nrace multiple connections place a separate ticket in each, yet\r\n```",
+              "createdAt": "2020-03-08T17:07:00Z",
+              "updatedAt": "2020-03-08T17:12:08Z"
+            },
+            {
+              "originalPosition": 120,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2020-03-08T17:07:37Z",
+              "updatedAt": "2020-03-08T17:12:08Z"
+            },
+            {
+              "originalPosition": 128,
+              "body": "```suggestion\r\nno longer valid for resumption.  This includes tickets obtained\r\nduring the initial full handshake and all tickets subsequently obtained as\r\npart of subsequent resumptions.  Requesting more than one ticket in case a\r\nfull handshake is forced by the server helps to keep the session cache primed.\r\n```",
+              "createdAt": "2020-03-08T17:08:09Z",
+              "updatedAt": "2020-03-08T17:12:08Z"
+            },
+            {
+              "originalPosition": 136,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2020-03-08T17:08:33Z",
+              "updatedAt": "2020-03-08T17:12:08Z"
+            },
+            {
+              "originalPosition": 149,
+              "body": "(Suggesting removal of all ticket re-use text!)\r\n\r\n```suggestion\r\n```",
+              "createdAt": "2020-03-08T17:09:35Z",
+              "updatedAt": "2020-03-08T17:12:08Z"
+            },
+            {
+              "originalPosition": 165,
+              "body": "(Suggesting removal of all ticket re-use text!)\r\n\r\n```suggestion\r\n```",
+              "createdAt": "2020-03-08T17:10:35Z",
+              "updatedAt": "2020-03-08T17:12:09Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "MDExOlB1bGxSZXF1ZXN0Mzk5ODUyNTY5",
+      "title": "Use two counters for fresh and resumed connections",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/19",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is #18 without ticket re-use text. This also includes changes from #17.\r\n\r\nThe following table outlines the ticket request values for a a client that wants \r\nN tickets and always attempts to race a connection across K paths.\r\n\r\n| Client Scenario | new_session_count value | resumption_count value |\r\n| ------------- |:-------------:| -----:|\r\n| N = 0 | 0 | 0 |\r\n| Fresh handshake | N | 0 |\r\n| Resumption attempt | N | K |\r\n\r\nDid I get this right? Does this make sense? Should we put this in the document directly?",
+      "createdAt": "2020-04-06T19:18:39Z",
+      "updatedAt": "2020-04-18T14:11:02Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "6006ebb7608746e6483e3fb7370f69f89e72ab80",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/two-counters",
+      "headRefOid": "448906f255afb99b3fc17e91ba97b3e1d685170c",
+      "closedAt": "2020-04-18T14:11:02Z",
+      "mergedAt": "2020-04-18T14:11:02Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "d840b884d1be5b215a2d76ff1570cbaf1ebfb11a"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@martinthomson @DavidSchinazi do you think we should include the table in the PR's description in the text? I think its contents are implied from the text, so adding more text is just being verbose. But I could be persuaded otherwise.",
+          "createdAt": "2020-04-08T01:21:16Z",
+          "updatedAt": "2020-04-08T01:21:16Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> do you think we should include the table in the PR's description in the text\r\n\r\nI think that it might be confusing.  For instance, I see no reason that a client wouldn't have a fixed configuration.  A client that never races resumptions could send N and 1 always.",
+          "createdAt": "2020-04-08T03:46:21Z",
+          "updatedAt": "2020-04-08T03:46:21Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Server expected count usage seems underspecified and explained.\r\n\r\nCan you please provide text?",
+          "createdAt": "2020-04-08T21:39:34Z",
+          "updatedAt": "2020-04-08T21:39:34Z"
+        },
+        {
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@chris-wood I can't really provide text as I'm unclear on what the field is trying to even describe.",
+          "createdAt": "2020-04-08T21:41:25Z",
+          "updatedAt": "2020-04-08T21:41:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg4NTcwMzY2",
+          "commit": {
+            "abbreviatedOid": "33b45ab"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved pending minor nits. What's the status of implementing this new version in BoringSSL?",
+          "createdAt": "2020-04-06T19:55:59Z",
+          "updatedAt": "2020-04-06T20:04:25Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "nit: I'd prefer defining a `ServerTicketRequest` struct to make this look symmetrical",
+              "createdAt": "2020-04-06T19:56:00Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 118,
+              "body": "How about we rephrase this sentence normatively: `In that case, clients SHOULD send a resumption_count equal to the number of sessions they are attempting in parallel.`",
+              "createdAt": "2020-04-06T19:59:18Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 122,
+              "body": "should this should be a SHOULD?",
+              "createdAt": "2020-04-06T19:59:45Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg4NTg0NTc3",
+          "commit": {
+            "abbreviatedOid": "33b45ab"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-06T20:17:17Z",
+          "updatedAt": "2020-04-06T20:17:18Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "I'm fine with that -- I'll make the change!",
+              "createdAt": "2020-04-06T20:17:17Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg4NTg0NjUy",
+          "commit": {
+            "abbreviatedOid": "33b45ab"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-06T20:17:24Z",
+          "updatedAt": "2020-04-06T20:17:25Z",
+          "comments": [
+            {
+              "originalPosition": 118,
+              "body": "\ud83d\udc4d ",
+              "createdAt": "2020-04-06T20:17:24Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg4NTg5Nzk1",
+          "commit": {
+            "abbreviatedOid": "33b45ab"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-06T20:25:07Z",
+          "updatedAt": "2020-04-06T20:25:08Z",
+          "comments": [
+            {
+              "originalPosition": 122,
+              "body": "Eh, I'm not sure. I can see it going either way.",
+              "createdAt": "2020-04-06T20:25:07Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5NTcwNTg4",
+          "commit": {
+            "abbreviatedOid": "f2f8a86"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I have some suggestions, but they are all minor.  Thanks for working through this.",
+          "createdAt": "2020-04-08T00:03:54Z",
+          "updatedAt": "2020-04-08T00:07:37Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\nHaving multiple tickets equips clients with enough tickets to initiate connection racing while\r\n```",
+              "createdAt": "2020-04-08T00:03:54Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 123,
+              "body": "This is advisory text, so I would prefer that you avoid SHOULD.  Particularly for the resumption_count, which could equally be N (as it cannot apply in the absence of resumption, the value doesn't matter).",
+              "createdAt": "2020-04-08T00:05:04Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 122,
+              "body": "```suggestion\r\nnevertheless negotiates a fresh session, the client might assume that any\r\n```",
+              "createdAt": "2020-04-08T00:05:36Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 138,
+              "body": "I would add \"Servers MAY send additional tickets, up to the same limit, if the tickets that are originally sent are somehow invalidated.\"",
+              "createdAt": "2020-04-08T00:06:54Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "I don't think that this feature is useful, but it's fine.",
+              "createdAt": "2020-04-08T00:07:18Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5NTc3MzA0",
+          "commit": {
+            "abbreviatedOid": "5f88760"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T00:24:17Z",
+          "updatedAt": "2020-04-08T00:24:17Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "It was originally: \r\n\r\n```\r\nIn that case, a resumption_count commensurate with the number of parallel sessions would be used.\r\n```\r\n\r\n@DavidSchinazi, do you care strongly if we revert this?",
+              "createdAt": "2020-04-08T00:24:17Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5NTgyODEx",
+          "commit": {
+            "abbreviatedOid": "5f88760"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T00:42:58Z",
+          "updatedAt": "2020-04-08T00:42:58Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "In that case I'd prefer something like `In that case, clients can send a resumption_count equal to the number of sessions they are attempting in parallel.` - I prefer active to passive, also I don't like the word commensurate :)",
+              "createdAt": "2020-04-08T00:42:58Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5NTg0ODI2",
+          "commit": {
+            "abbreviatedOid": "5f88760"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T00:50:00Z",
+          "updatedAt": "2020-04-08T00:50:01Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "That works for me!",
+              "createdAt": "2020-04-08T00:50:00Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5NjE4OTA2",
+          "commit": {
+            "abbreviatedOid": "604d49a"
+          },
+          "author": "ekr",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T02:48:20Z",
+          "updatedAt": "2020-04-08T02:51:28Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "This seems like it needs to be a SHOULD, right? The idea is that the tickets are used up from a privacy perspective as soon as they are on the wire.",
+              "createdAt": "2020-04-08T02:48:20Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "RFC 6919 MIGHT WISH TO",
+              "createdAt": "2020-04-08T02:49:05Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "I.e., I think this should maybe be a SHOULD.",
+              "createdAt": "2020-04-08T02:49:39Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "Nit: I am not sure I would say \"forced\". Selected?",
+              "createdAt": "2020-04-08T02:49:58Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            },
+            {
+              "originalPosition": 142,
+              "body": "I tend to think this should be a MUST. ",
+              "createdAt": "2020-04-08T02:51:18Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5OTI1ODM2",
+          "commit": {
+            "abbreviatedOid": "604d49a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T12:28:53Z",
+          "updatedAt": "2020-04-08T12:28:53Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "This did use normative language previously, but @martinthomson observed that this was primarily advisory text. In this case, if clients don't follow the advice, they may end up with zero tickets.",
+              "createdAt": "2020-04-08T12:28:53Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5OTI1OTgy",
+          "commit": {
+            "abbreviatedOid": "604d49a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T12:29:06Z",
+          "updatedAt": "2020-04-08T12:29:06Z",
+          "comments": [
+            {
+              "originalPosition": 126,
+              "body": "That seems reasonable to me! I'll fix it.",
+              "createdAt": "2020-04-08T12:29:06Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg5OTI3NzAy",
+          "commit": {
+            "abbreviatedOid": "604d49a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T12:31:35Z",
+          "updatedAt": "2020-04-08T12:31:35Z",
+          "comments": [
+            {
+              "originalPosition": 142,
+              "body": "That seems reasonable to me as well (less choices to make for implementers). I'll fix it. ",
+              "createdAt": "2020-04-08T12:31:35Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMjkzMDI5",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T20:07:34Z",
+          "updatedAt": "2020-04-08T20:07:34Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "Can we clarify *when* the server expects to send these tickets?",
+              "createdAt": "2020-04-08T20:07:34Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMjkzMjQ2",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T20:07:57Z",
+          "updatedAt": "2020-04-08T20:07:58Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "Should this really be called a ServerTicketRequest? It doesn't seem like it's making a request, but instead sharing info.",
+              "createdAt": "2020-04-08T20:07:57Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMjk5MzM4",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T20:16:56Z",
+          "updatedAt": "2020-04-08T20:16:56Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "It's the server's version of the \"ticket_request\" extension, so I think we should keep it!",
+              "createdAt": "2020-04-08T20:16:56Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMjk5NjM3",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T20:17:22Z",
+          "updatedAt": "2020-04-08T20:17:22Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "That's elaborated on in RFC8446!",
+              "createdAt": "2020-04-08T20:17:22Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUwNTE1",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:37:36Z",
+          "updatedAt": "2020-04-08T21:37:36Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "Does it? Specifically, I mean: is this the number of tickets I will give you *this* handshake? Or after you resume? Or ever? Or outstanding at one time?",
+              "createdAt": "2020-04-08T21:37:36Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUwODUx",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:38:12Z",
+          "updatedAt": "2020-04-08T21:38:12Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "I think it's a bit misleading; it's not any sort of request. ServerTicketRequestHint or something maybe.",
+              "createdAt": "2020-04-08T21:38:12Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUxMDgy",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:38:39Z",
+          "updatedAt": "2020-04-08T21:38:39Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "All of the above :-) ",
+              "createdAt": "2020-04-08T21:38:39Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUxMjYw",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Server expected count usage seems underspecified and explained.",
+          "createdAt": "2020-04-08T21:39:02Z",
+          "updatedAt": "2020-04-08T21:39:02Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUxNDY2",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:39:24Z",
+          "updatedAt": "2020-04-08T21:39:24Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": ".... but more seriously, it's the amount the server expects to send in this connection. Suggestions for improvement are welcome!",
+              "createdAt": "2020-04-08T21:39:24Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUxNjgz",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:39:47Z",
+          "updatedAt": "2020-04-08T21:39:47Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "Can the field explanations be grouped with their struct definitions?",
+              "createdAt": "2020-04-08T21:39:47Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUyMTI1",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:40:42Z",
+          "updatedAt": "2020-04-08T21:40:43Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "Hmm, I disagree. Again, it's the server's \"ticket_request\" extension. I could live with `ServerTicketRequestHint.",
+              "createdAt": "2020-04-08T21:40:43Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUyMjk3",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:40:58Z",
+          "updatedAt": "2020-04-08T21:40:58Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "\"All of the above\" is very vague. What is an implementation supposed to do with this value? My comments asked if it was for *this* connection or including future connections in this session, which doesn't seem clear.",
+              "createdAt": "2020-04-08T21:40:58Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzUyNzgz",
+          "commit": {
+            "abbreviatedOid": "075e780"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:41:48Z",
+          "updatedAt": "2020-04-08T21:41:48Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "The request hint is for \"this connection,\" so this surely applies to \"this connection\" as well.",
+              "createdAt": "2020-04-08T21:41:48Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzU0MzEz",
+          "commit": {
+            "abbreviatedOid": "32ab3ae"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:44:49Z",
+          "updatedAt": "2020-04-08T21:44:49Z",
+          "comments": [
+            {
+              "originalPosition": 103,
+              "body": "Sure!",
+              "createdAt": "2020-04-08T21:44:49Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzU3MTYz",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T21:50:25Z",
+          "updatedAt": "2020-04-08T21:50:26Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "@tfpauly Clarified -- please have a look!",
+              "createdAt": "2020-04-08T21:50:25Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzg4NzE2",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:03:01Z",
+          "updatedAt": "2020-04-08T23:03:01Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "What's the rationale for this being a normative MUST? I.e., what would happen if the server didn't send the extension, but did provide the number of tickets that the client wanted? That would look like a server that didn't want to use the request, but got lucky. It seems like it could be a SHOULD, since it's hard to enforce?",
+              "createdAt": "2020-04-08T23:03:01Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzg4Nzc4",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:03:11Z",
+          "updatedAt": "2020-04-08T23:03:11Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "Better, thanks!",
+              "createdAt": "2020-04-08T23:03:11Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzkxMTEz",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:09:34Z",
+          "updatedAt": "2020-04-08T23:09:34Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "Less options (and therefore consistency) for server implementers, mainly. This makes the behavior clearly, \"if you use this extension, send one in response.\"",
+              "createdAt": "2020-04-08T23:09:34Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzk0NTkw",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:19:08Z",
+          "updatedAt": "2020-04-08T23:19:09Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "Right, makes sense. Sounds like a SHOULD, though. MUST feels like something that can result in a protocol violation error, which seems (to me right now) to be hard to enforce.",
+              "createdAt": "2020-04-08T23:19:09Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwMzk4OTA0",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:31:09Z",
+          "updatedAt": "2020-04-08T23:31:09Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "If it's a SHOULD and a server doesn't do it then clients can't determine whether or not the hint was consumed, which is the point of echoing it back. As a MUST, its use is clear. ",
+              "createdAt": "2020-04-08T23:31:09Z",
+              "updatedAt": "2020-04-09T17:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDAwMTg0",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:34:38Z",
+          "updatedAt": "2020-04-08T23:34:38Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "(I don't claim that this is useful for the client to know, as MT points out. Only that there's ambiguity if it's a SHOULD.)",
+              "createdAt": "2020-04-08T23:34:38Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDA2MTA2",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:52:09Z",
+          "updatedAt": "2020-04-08T23:52:09Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "I generally like the rule of thumb that a MUST needs to be enforceable; you can point to an implementation that doesn't follow the MUST and identify it. \r\n\r\nAs you say, echoing back the extension is a hint that the request was consumed, and clients MUST be able to handle it not being present (in case it wasn't actually used or consumed). Therefore it is impossible to distinguish between a server that just didn't consume the request, and a \"bad\" server that ignored your MUST flagrantly. I agree that we definitely want servers to send this, but it feels like a SHOULD since it doesn't allow anyone to detect misbehavior or send an error.",
+              "createdAt": "2020-04-08T23:52:09Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDA2NTg3",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:53:34Z",
+          "updatedAt": "2020-04-08T23:56:10Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "This really only needs to say what happens if you do something.  That is, clients might choose to send 0 (in either field) and that results in them getting 0 tickets.  That's OK if that is what they want.  So explain the consequences, but don't recommend a particular course of action.\r\n\r\nSure, I get that most people doing resumption will want more tickets, but there are plenty of reasons not to ask for more tickets.  Maybe they want to do a full handshake next time.",
+              "createdAt": "2020-04-08T23:53:34Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            },
+            {
+              "originalPosition": 116,
+              "body": "The reason I would use for making this a \"MUST\" is that it ensures that clients have a better idea about when new tickets are likely to be replacements.  If the server says 2 and then sends a third ticket, the client might infer that the first ticket it received is no longer good.",
+              "createdAt": "2020-04-08T23:55:01Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDA3NjEw",
+          "commit": {
+            "abbreviatedOid": "065e2ba"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-08T23:56:33Z",
+          "updatedAt": "2020-04-08T23:56:34Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "I think I would prefer a MUST here as well. That way, if a server does not send it we know that it is not compliant to this specification. Also, when implementing the server part of this, engineers don't have to decide whether to send this or not.",
+              "createdAt": "2020-04-08T23:56:33Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDEwMDM4",
+          "commit": {
+            "abbreviatedOid": "e37d676"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-09T00:03:06Z",
+          "updatedAt": "2020-04-09T00:03:07Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "I added some clarifying text that describes what happens when resumption_count is less than the number of parallel connection attempts.",
+              "createdAt": "2020-04-09T00:03:06Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwNDE5OTM4",
+          "commit": {
+            "abbreviatedOid": "e37d676"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-09T00:34:42Z",
+          "updatedAt": "2020-04-09T00:34:46Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "```suggestion\r\n: The number of tickets the server expects to send in this connection.\r\n```\r\n\r\nThis doesn't need to be in response to the client's extension.  Fewer words.",
+              "createdAt": "2020-04-09T00:34:42Z",
+              "updatedAt": "2020-04-09T17:08:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwOTc3NTMy",
+          "commit": {
+            "abbreviatedOid": "448906f"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-09T17:08:53Z",
+          "updatedAt": "2020-04-09T17:08:53Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "Good suggestion -- thanks!",
+              "createdAt": "2020-04-09T17:08:53Z",
+              "updatedAt": "2020-04-09T17:08:54Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkxMDkyNzk2",
+          "commit": {
+            "abbreviatedOid": "448906f"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-09T20:01:35Z",
+          "updatedAt": "2020-04-09T20:01:36Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "Eh, okay. I still think that it's clear enough as a SHOULD, but I can live with it.",
+              "createdAt": "2020-04-09T20:01:36Z",
+              "updatedAt": "2020-04-09T20:01:36Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkxMDkzMDE3",
+          "commit": {
+            "abbreviatedOid": "448906f"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-09T20:01:56Z",
+          "updatedAt": "2020-04-09T20:01:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDA1NzQ1MzE2",
+      "title": "Declining new tickets requires both counters == 0",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/20",
+      "state": "CLOSED",
+      "author": "vdukhovni",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-04-19T22:16:46Z",
+      "updatedAt": "2020-05-01T17:07:28Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "d840b884d1be5b215a2d76ff1570cbaf1ebfb11a",
+      "headRepository": "vdukhovni/draft-ietf-tls-ticketrequest",
+      "headRefName": "pull20",
+      "headRefOid": "70e3fdd396677e533585b401a260c7ea535b87e5",
+      "closedAt": "2020-05-01T17:07:28Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing per request from the chairs: https://mailarchive.ietf.org/arch/msg/tls/GqbYvrZJa8W9Fi5abgrHGdxlXaA/.",
+          "createdAt": "2020-05-01T17:07:28Z",
+          "updatedAt": "2020-05-01T17:07:28Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTExODcwNDIz",
+      "title": "editorial/nit fixes from AD evaluation",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/21",
+      "state": "MERGED",
+      "author": "kaduk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "hopefully nothing too outlandish in here",
+      "createdAt": "2020-10-28T22:20:35Z",
+      "updatedAt": "2020-10-31T14:38:24Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "78dff26917afab68d2cbc4e2d121df6e8cdd81ee",
+      "headRepository": "kaduk/draft-ietf-tls-ticketrequest",
+      "headRefName": "master",
+      "headRefOid": "a7b8fb3822694bdbe3d926f35688f3fef33cd971",
+      "closedAt": "2020-10-31T14:38:24Z",
+      "mergedAt": "2020-10-31T14:38:24Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "a16edaa678fc9438a1bbed8f6c0c39101db62a76"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!",
+          "createdAt": "2020-10-31T14:38:20Z",
+          "updatedAt": "2020-10-31T14:38:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTI4ODMz",
+          "commit": {
+            "abbreviatedOid": "a7b8fb3"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-28T22:22:22Z",
+          "updatedAt": "2020-10-28T22:22:23Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "My initial change here was to add a parenthetical \"if any\", since there may not be any presented tickets.  On the other hand, a quick read of 8446 didn't find any limitation on \"at most one ticket in a given 'pre_shared_key' extension\", so in principle there is not a single specific \"presented ticket\", and the \"if any\" parenthetical seems to not flow very well anymore after this change.",
+              "createdAt": "2020-10-28T22:22:22Z",
+              "updatedAt": "2020-10-28T22:22:23Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTE5MTQ4NTY4",
+          "commit": {
+            "abbreviatedOid": "a7b8fb3"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-28T23:06:39Z",
+          "updatedAt": "2020-10-28T23:06:39Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIxMTQ0MTcy",
+          "commit": {
+            "abbreviatedOid": "a7b8fb3"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-31T14:38:14Z",
+          "updatedAt": "2020-10-31T14:38:14Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
