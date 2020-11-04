@@ -225,7 +225,7 @@ prioritize sending application data over tickets when possible.
 # Security Considerations
 
 Ticket re-use is a security and privacy concern. Moreover, clients must take care when pooling
-tickets as a means of avoiding or amortizing connection costs. If servers do not rotate session
+tickets as a means of avoiding or amortizing handshake costs. If servers do not rotate session
 ticket encryption keys frequently, clients may be encouraged to obtain
 and use tickets beyond common lifetime windows of, e.g., 24 hours. Despite ticket lifetime
 hints provided by servers, clients SHOULD dispose of cached tickets after some reasonable
