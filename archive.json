@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-11-01T00:10:00.959290+00:00",
+  "timestamp": "2020-11-05T00:12:58.807640+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -3527,6 +3527,106 @@
           "createdAt": "2020-10-31T14:38:14Z",
           "updatedAt": "2020-10-31T14:38:14Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTE1MDg1ODkw",
+      "title": "Address Ben's review.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/22",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I opted to go with \"new connection\" instead of \"full handshake\" (where appropriate), since that seemed to be the more natural phrase. Please let me know what you think!\r\n\r\ncc @kaduk (and thanks for the review!)",
+      "createdAt": "2020-11-04T01:54:32Z",
+      "updatedAt": "2020-11-04T13:33:02Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "b540eea1b82e1e7c883bd2d527d3ba4638ecf7c2",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/ben-edits",
+      "headRefOid": "423cd824c49b201bdf50631941bbbea5fae87584",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIzMDA1MDI0",
+          "commit": {
+            "abbreviatedOid": "d91955f"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-11-04T02:32:10Z",
+          "updatedAt": "2020-11-04T02:32:10Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIzMDA3ODU0",
+          "commit": {
+            "abbreviatedOid": "d91955f"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-04T02:41:48Z",
+          "updatedAt": "2020-11-04T02:41:49Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "This one should maybe stay as 'handshake'",
+              "createdAt": "2020-11-04T02:41:48Z",
+              "updatedAt": "2020-11-04T13:33:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIzMzYxOTkx",
+          "commit": {
+            "abbreviatedOid": "d91955f"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-04T13:32:50Z",
+          "updatedAt": "2020-11-04T13:32:50Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "I don't feel strongly, so I'll swap it back.",
+              "createdAt": "2020-11-04T13:32:50Z",
+              "updatedAt": "2020-11-04T13:33:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIzMzYyMDYz",
+          "commit": {
+            "abbreviatedOid": "d91955f"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-11-04T13:32:55Z",
+          "updatedAt": "2020-11-04T13:32:56Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "```suggestion\r\ntickets as a means of avoiding or amortizing handshake costs. If servers do not rotate session\r\n```",
+              "createdAt": "2020-11-04T13:32:56Z",
+              "updatedAt": "2020-11-04T13:33:02Z"
+            }
+          ]
         }
       ]
     }
