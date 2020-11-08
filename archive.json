@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-11-05T00:12:58.807640+00:00",
+  "timestamp": "2020-11-08T00:13:04.576923+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -3535,24 +3535,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NTE1MDg1ODkw",
       "title": "Address Ben's review.",
       "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I opted to go with \"new connection\" instead of \"full handshake\" (where appropriate), since that seemed to be the more natural phrase. Please let me know what you think!\r\n\r\ncc @kaduk (and thanks for the review!)",
       "createdAt": "2020-11-04T01:54:32Z",
-      "updatedAt": "2020-11-04T13:33:02Z",
+      "updatedAt": "2020-11-05T00:45:49Z",
       "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
       "baseRefName": "master",
       "baseRefOid": "b540eea1b82e1e7c883bd2d527d3ba4638ecf7c2",
       "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
       "headRefName": "caw/ben-edits",
       "headRefOid": "423cd824c49b201bdf50631941bbbea5fae87584",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-11-05T00:45:49Z",
+      "mergedAt": "2020-11-05T00:45:49Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "89d33568345121c374ca0b8094d6c05c696992a4"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3627,6 +3629,19 @@
               "updatedAt": "2020-11-04T13:33:02Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTIzODM3NTkx",
+          "commit": {
+            "abbreviatedOid": "423cd82"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-11-05T00:42:40Z",
+          "updatedAt": "2020-11-05T00:42:40Z",
+          "comments": []
         }
       ]
     }
