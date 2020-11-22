@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-11-08T00:13:04.576923+00:00",
+  "timestamp": "2020-11-22T00:12:11.572596+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -182,6 +182,22 @@
           "updatedAt": "2020-01-27T15:56:36Z"
         }
       ]
+    },
+    {
+      "number": 23,
+      "id": "MDU6SXNzdWU3NDcxMzA3Nzc=",
+      "title": "IETF LC comments",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/23",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Ben: One nit that can be rolled in with any LC comments: in Section 3, we say \"clients can send a resumption_count equal to the number of sessions they are attempting in parallel\", and \"connections\" probably works better than \"sessions\" in that case.",
+      "createdAt": "2020-11-20T04:16:14Z",
+      "updatedAt": "2020-11-20T04:16:14Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
