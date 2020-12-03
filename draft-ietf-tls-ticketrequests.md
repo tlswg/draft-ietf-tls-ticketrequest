@@ -105,10 +105,10 @@ as shown here.
 
 The ability to request one or more tickets is useful for a variety of purposes:
 
-- Parallel HTTP connections: To minimize ticket reuse while still improving performance, it may
-be useful to use multiple, distinct tickets when opening parallel connections. Clients must
-therefore bound the number of parallel connections they initiate by the number of tickets
-in their possession, or risk ticket re-use.
+- Parallel HTTP connections: To improve performance, a client may open parallel connections.
+To avoid ticket reuse, the client may use multiple, distinct tickets on each connection.
+Clients must therefore bound the number of parallel connections they initiate by the number
+of tickets in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{?RFC8305}} describes techniques for performing connection
 racing. The Transport Services Architecture implementation from {{?TAPS=I-D.ietf-taps-impl}} also describes
 how connections can race across interfaces and address families. In such cases, clients may use
@@ -122,7 +122,7 @@ logic to determine how many tickets to issue. By moving the burden of ticket cou
 servers do not generate wasteful tickets. As an example, clients might only request one ticket during
 resumption. Moreover, as ticket generation might involve expensive computation, e.g., public key
 cryptographic operations, avoiding waste is desirable.
-- Decline resumption: Clients can indicate they have no intention of resuming connections by
+- Decline resumption: Clients can indicate they do not intend to resume a connection by
 sending a ticket request with count of zero.
 
 # Ticket Requests
@@ -148,11 +148,11 @@ struct {
 ~~~
 
 new_session_count
-: The number of tickets desired by the client when the server chooses to
+: The number of tickets desired by the client if the server chooses to
 negotiate a new connection.
 
 resumption_count
-: The number of tickets desired by the client when the server is willing to
+: The number of tickets desired by the client if the server is willing to
 resume using a ticket presented in this ClientHello.
 
 A client starting a new connection SHOULD set new_session_count to the desired
