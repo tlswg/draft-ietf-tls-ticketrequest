@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-11-22T00:12:11.572596+00:00",
+  "timestamp": "2020-12-03T00:12:41.666918+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -195,9 +195,17 @@
       "labels": [],
       "body": "From Ben: One nit that can be rolled in with any LC comments: in Section 3, we say \"clients can send a resumption_count equal to the number of sessions they are attempting in parallel\", and \"connections\" probably works better than \"sessions\" in that case.",
       "createdAt": "2020-11-20T04:16:14Z",
-      "updatedAt": "2020-11-20T04:16:14Z",
+      "updatedAt": "2020-12-01T03:07:05Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Document:  draft-ietf-tls-ticketrequests-06\r\nReviewer:  Dale R. Worley\r\nReview Date:  2020-11-27\r\nIETF LC End Date:  2020-12-03\r\nIESG Telechat date:  Not known\r\n\r\nSummary:\r\n\r\n    This draft is ready for publication as a Standards Track RFC.\r\n\r\nEditorial comments:\r\n\r\n2.  Use Cases\r\n\r\n   *  Parallel HTTP connections: To minimize ticket reuse while still\r\n      improving performance, it may be useful to use multiple, distinct\r\n      tickets when opening parallel connections.\r\n\r\nTo the naive reader, the ordering of the phrases doesn't seem to match\r\nthe logical ordering of the concepts.  Perhaps\r\n\r\n   *  Parallel HTTP connections: To improve performance, a client\r\n      may open parallel connections.  To avoid ticket reuse, the client\r\n      may use multiple, distinct tickets on each connection.\r\n\r\n--\r\n\r\n   *  Decline resumption: Clients can indicate they have no intention of\r\n      resuming connections by sending a ticket request with count of\r\n      zero.\r\n\r\n\"have no intention\" seems to me to suggest a decision that will not\r\nchange.  Since the future cannot be guaranteed, perhaps better wording\r\nis \"do not intend to resume\", suggesting a current state that might\r\npossibly change in the future.\r\n\r\n   new_session_count  The number of tickets desired by the client when\r\n      the server chooses to negotiate a new connection.\r\n\r\n   resumption_count  The number of tickets desired by the client when\r\n      the server is willing to resume using a ticket presented in this\r\n      ClientHello.\r\n\r\nIf I understand the processing which is suggested correctly, when the\r\nclient sends a ClientHello, the server can choose to either negotiate\r\na new connection, or (if a ticket is present in the ClientHello) the\r\nserver can choose to resume the previous connection represented by the\r\nticket.  These two parameters provide the requested ticket count for\r\nthe two situations.\r\n\r\nAssuming the above is correct, I would recommend changing the wording\r\nslightly, as \"when\" suggests a fact which is true over an extended\r\nperiod of time, whereas the provided counts are applicable in just this\r\none instance:\r\n\r\n   new_session_count  The number of tickets desired by the client if\r\n      the server chooses to negotiate a new connection.\r\n\r\n   resumption_count  The number of tickets desired by the client if\r\n      the server chooses to resume (using the ticket presented in this\r\n      ClientHello).\r\n\r\n(Change \"the\" to \"a\" in the last sentence if the ClientHello can\r\npresent more than one ticket among which the server can choose.)",
+          "createdAt": "2020-12-01T03:07:05Z",
+          "updatedAt": "2020-12-01T03:07:05Z"
+        }
+      ]
     }
   ],
   "pulls": [
