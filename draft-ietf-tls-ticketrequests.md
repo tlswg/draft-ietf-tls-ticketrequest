@@ -163,7 +163,7 @@ without over-provisioning the client with excess tickets. However, clients
 which race multiple connections and place a separate ticket in each will
 ultimately end up with just the tickets from a single resumed session.
 In that case, clients can send a resumption_count equal to the number of
-sessions they are attempting in parallel. (Clients which send a resumption_count
+connections they are attempting in parallel. (Clients which send a resumption_count
 less than the number of parallel connection attempts might end up with zero
 tickets.)
 
