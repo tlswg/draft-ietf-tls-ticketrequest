@@ -106,7 +106,7 @@ as shown here.
 The ability to request one or more tickets is useful for a variety of purposes:
 
 - Parallel HTTP connections: To improve performance, a client may open parallel connections.
-To avoid ticket reuse, the client may use multiple, distinct tickets on each connection.
+To avoid ticket reuse, the client may use distinct tickets on each connection.
 Clients must therefore bound the number of parallel connections they initiate by the number
 of tickets in their possession, or risk ticket re-use.
 - Connection racing: Happy Eyeballs V2 {{?RFC8305}} describes techniques for performing connection
