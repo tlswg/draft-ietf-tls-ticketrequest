@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-12-03T00:12:41.666918+00:00",
+  "timestamp": "2020-12-06T00:13:01.142409+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -188,15 +188,15 @@
       "id": "MDU6SXNzdWU3NDcxMzA3Nzc=",
       "title": "IETF LC comments",
       "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From Ben: One nit that can be rolled in with any LC comments: in Section 3, we say \"clients can send a resumption_count equal to the number of sessions they are attempting in parallel\", and \"connections\" probably works better than \"sessions\" in that case.",
       "createdAt": "2020-11-20T04:16:14Z",
-      "updatedAt": "2020-12-01T03:07:05Z",
-      "closedAt": null,
+      "updatedAt": "2020-12-03T19:01:53Z",
+      "closedAt": "2020-12-03T19:01:53Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -3666,6 +3666,121 @@
           "createdAt": "2020-11-05T00:42:40Z",
           "updatedAt": "2020-11-05T00:42:40Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTMxOTYwMjEw",
+      "title": "Address GENART review comments.",
+      "url": "https://github.com/tlswg/draft-ietf-tls-ticketrequest/pull/24",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #23.",
+      "createdAt": "2020-12-03T17:45:59Z",
+      "updatedAt": "2020-12-04T03:17:45Z",
+      "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "baseRefName": "master",
+      "baseRefOid": "89d33568345121c374ca0b8094d6c05c696992a4",
+      "headRepository": "tlswg/draft-ietf-tls-ticketrequest",
+      "headRefName": "caw/genart-review",
+      "headRefOid": "bf1ebc71ecdf3a56f27a26e380123e744cae0c5a",
+      "closedAt": "2020-12-03T19:01:53Z",
+      "mergedAt": "2020-12-03T19:01:53Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "7b0bb40c6a7eefdcceecbe5542c7ba6551c00ee0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTQ0MjY3Mjkw",
+          "commit": {
+            "abbreviatedOid": "bf1ebc7"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-12-03T18:42:28Z",
+          "updatedAt": "2020-12-03T18:42:28Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTQ0MjcyNzcx",
+          "commit": {
+            "abbreviatedOid": "bf1ebc7"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-12-03T18:49:39Z",
+          "updatedAt": "2020-12-03T18:49:39Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTQ0NjI3Mjg3",
+          "commit": {
+            "abbreviatedOid": "bf1ebc7"
+          },
+          "author": "kaduk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-12-04T03:14:24Z",
+          "updatedAt": "2020-12-04T03:14:25Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Hmm, is \"multiple\" still correct here?\r\nHaving distinct tickets on each connection causes the client to use multiple tickets overall, but this looks like it is parsing as saying that there are multiple tickets per connection, which doesn't seem right.",
+              "createdAt": "2020-12-04T03:14:24Z",
+              "updatedAt": "2020-12-04T03:14:25Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTQ0NjI4MDgy",
+          "commit": {
+            "abbreviatedOid": "bf1ebc7"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-12-04T03:17:00Z",
+          "updatedAt": "2020-12-04T03:17:01Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I'll fix directly on master.",
+              "createdAt": "2020-12-04T03:17:01Z",
+              "updatedAt": "2020-12-04T03:17:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTQ0NjI4Mjk3",
+          "commit": {
+            "abbreviatedOid": "bf1ebc7"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-12-04T03:17:45Z",
+          "updatedAt": "2020-12-04T03:17:45Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "(Fixed)",
+              "createdAt": "2020-12-04T03:17:45Z",
+              "updatedAt": "2020-12-04T03:17:45Z"
+            }
+          ]
         }
       ]
     }
