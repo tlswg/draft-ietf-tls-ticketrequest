@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-12-06T00:13:01.142409+00:00",
+  "timestamp": "2021-01-31T00:17:18.646073+00:00",
   "repo": "tlswg/draft-ietf-tls-ticketrequest",
   "labels": [
     {
@@ -893,7 +893,7 @@
       "labels": [],
       "body": "@chris-wood merge at your convenience.",
       "createdAt": "2019-11-04T14:12:24Z",
-      "updatedAt": "2019-11-04T14:13:43Z",
+      "updatedAt": "2021-01-29T15:30:41Z",
       "baseRepository": "tlswg/draft-ietf-tls-ticketrequest",
       "baseRefName": "master",
       "baseRefOid": "7585f2a1eb526e96e1d8fc8ad8f5735af3f9a88f",
